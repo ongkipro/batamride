@@ -14,7 +14,7 @@ const {
   title,
   subtitle,
   breadcrumbItems = [],
-  bgImage = '/images/hero-zenix.jpg'
+  bgImage = '/images/hero-zenix.webp'
 } = Astro.props;
 ---
 
@@ -26,6 +26,9 @@ const {
     <img 
       src={bgImage} 
       alt={title} 
+      width="1376"
+      height="768"
+      decoding="async"
       class="w-full h-full object-cover"
       loading="eager"
     />

@@ -11,7 +11,7 @@ interface Props {
 const {
   title = "BatamRide | Premium Private Transport & Curated Tours in Batam",
   description = "Private transport in Batam for travelers from Singapore and Malaysia. Guaranteed white Toyota Innova Zenix, professional uniformed drivers, transparent rates, and effortless WhatsApp booking.",
-  image = "/images/hero-zenix.jpg"
+  image = "/images/hero-zenix.webp"
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://batamride.com');
@@ -20,7 +20,7 @@ const globalBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "BatamRide - Premium Private Transport & Tours",
-  "image": "https://batamride.com/images/hero-zenix.jpg",
+  "image": "https://batamride.com/images/hero-zenix.webp",
   "@id": "https://batamride.com",
   "url": "https://batamride.com",
   "telephone": "+628127003708",
@@ -83,8 +83,8 @@ const globalBusinessSchema = {
     
     <slot name="head" />
 
-    <!-- Preload Critical Images -->
-    <link rel="preload" as="image" href="/images/hero-zenix.jpg" />
+    <!-- Preload Critical LCP Hero Image in WebP -->
+    <link rel="preload" as="image" href="/images/hero-zenix.webp" type="image/webp" fetchpriority="high" />
   </head>
   <body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-100 selection:text-amber-900 pb-16 sm:pb-0">
     <slot />

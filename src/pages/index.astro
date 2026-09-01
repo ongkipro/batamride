@@ -13,19 +13,19 @@ import {
 
 const heroBgSlides = [
   {
-    image: '/images/hero-zenix.jpg',
+    image: '/images/hero-zenix.webp',
     title: 'Guaranteed Toyota Innova Zenix'
   },
   {
-    image: '/images/barelang-sunset.jpg',
+    image: '/images/barelang-sunset.webp',
     title: 'Barelang Golden Hour Sunset'
   },
   {
-    image: '/images/zenix-interior.jpg',
+    image: '/images/zenix-interior.webp',
     title: 'Executive Cabin & Dual Climate AC'
   },
   {
-    image: '/images/montigo-resort.jpg',
+    image: '/images/montigo-resort.webp',
     title: 'Nongsa Luxury & Island Escapes'
   }
 ];
@@ -52,6 +52,10 @@ const heroBgSlides = [
             <img 
               src={slide.image} 
               alt={slide.title} 
+              width="1376"
+              height="768"
+              decoding="async"
+              fetchpriority={index === 0 ? "high" : "auto"}
               class="w-full h-full object-cover"
               loading={index === 0 ? "eager" : "lazy"}
             />
@@ -209,6 +213,9 @@ const heroBgSlides = [
                 <img 
                   src={pkg.image} 
                   alt={pkg.name} 
+                  width="600"
+                  height="360"
+                  decoding="async"
                   class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                   loading="lazy"
                 />
@@ -258,8 +265,11 @@ const heroBgSlides = [
           <div class="lg:col-span-6">
             <div class="rounded-2xl overflow-hidden shadow-sm border border-slate-100 bg-slate-950">
               <img 
-                src="/images/zenix-interior.jpg" 
+                src="/images/zenix-interior.webp" 
                 alt="Toyota Innova Zenix Executive Cabin Interior" 
+                width="600"
+                height="400"
+                decoding="async"
                 class="w-full h-64 sm:h-80 object-cover"
                 loading="lazy"
               />
@@ -343,6 +353,9 @@ const heroBgSlides = [
                 <img 
                   src={dest.image} 
                   alt={dest.name} 
+                  width="400"
+                  height="240"
+                  decoding="async"
                   class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                   loading="lazy"
                 />

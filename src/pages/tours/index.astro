@@ -31,7 +31,7 @@ const schemaData = {
 <Layout 
   title="Curated Batam Day Tour Packages (Private Innova Zenix) | BatamRide"
   description="Explore curated Batam day tours: Barelang Sunset, Nagoya Shopping & Spa, Kelong Seafood, and Nongsa Luxury. 100% private with dedicated chauffeur."
-  image="/images/barelang-sunset.jpg"
+  image="/images/barelang-sunset.webp"
 >
   <script type="application/ld+json" set:html={JSON.stringify(schemaData)} slot="head" />
 
@@ -47,7 +47,7 @@ const schemaData = {
       breadcrumbItems={[
         { label: 'Curated Day Tours' }
       ]}
-      bgImage="/images/barelang-sunset.jpg"
+      bgImage="/images/barelang-sunset.webp"
     />
 
     <!-- Tours Grid Section -->
@@ -63,6 +63,9 @@ const schemaData = {
                 <img 
                   src={pkg.image} 
                   alt={pkg.name} 
+                  width="600"
+                  height="360"
+                  decoding="async"
                   class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                   loading="lazy"
                 />

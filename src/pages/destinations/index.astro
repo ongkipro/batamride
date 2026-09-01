@@ -38,7 +38,7 @@ const schemaData = {
 <Layout 
   title="Top Batam Attractions & Places to Visit (Travel Guide) | BatamRide"
   description="Explore the best places to visit in Batam Island: Barelang Bridge, Grand Batam Mall, Wey Wey Seafood, Maitreya Monastery, Spas, and Ranoh Island with private Innova Zenix transport."
-  image="/images/barelang-sunset.jpg"
+  image="/images/barelang-sunset.webp"
 >
   <script type="application/ld+json" set:html={JSON.stringify(schemaData)} slot="head" />
 
@@ -54,7 +54,7 @@ const schemaData = {
       breadcrumbItems={[
         { label: 'Attractions & Travel Guide' }
       ]}
-      bgImage="/images/ranoh-island.jpg"
+      bgImage="/images/ranoh-island.webp"
     />
 
     <!-- Catalog Section -->
@@ -93,6 +93,9 @@ const schemaData = {
                 <img 
                   src={dest.image} 
                   alt={dest.name} 
+                  width="400"
+                  height="240"
+                  decoding="async"
                   class="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500"
                   loading="lazy"
                 />
