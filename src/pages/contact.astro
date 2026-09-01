@@ -1,0 +1,301 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { terminals } from '../data/terminals';
+import { packages } from '../data/packages';
+import { WHATSAPP_DISPLAY, buildWhatsAppLink } from '../utils/whatsapp';
+import { Calculator, MessageSquare, ShieldCheck, CheckCircle2, Phone, Calendar, Users, MapPin } from '@lucide/astro';
+---
+
+<Layout 
+  title="Instant Reservation & Rate Estimator | BatamRide Private Transport"
+  description="Estimate your Batam private car charter or tour package rate and book directly via WhatsApp with zero upfront deposit. Instant confirmation."
+>
+  <Header />
+
+  <main class="bg-slate-50 min-h-screen pb-16">
+    
+    <!-- Page Hero Banner with Background Image -->
+    <PageHeader 
+      badge="Direct Booking Hub"
+      title="Instant Reservation & Rate Estimator"
+      subtitle="Select your travel details below to estimate your rate and submit your reservation directly to our WhatsApp concierge."
+      breadcrumbItems={[
+        { label: 'Reservation & Estimator' }
+      ]}
+      bgImage="/images/hero-zenix.jpg"
+    />
+
+    <!-- Interactive Booking Form Section -->
+    <section class="py-12 sm:py-20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-md p-6 sm:p-10 space-y-8">
+          
+          <div class="space-y-1.5 border-b border-slate-100 pb-5">
+            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider">Step 1 of 2</span>
+            <h2 class="text-xl sm:text-2xl font-bold text-[#0B2348]">
+              Configure Your Batam Trip
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-500">
+              Zero credit card needed. Settle payment directly in SGD, MYR, or IDR on arrival.
+            </p>
+          </div>
+
+          <form id="trip-estimator-form" class="space-y-6">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+              
+              <!-- Service / Tour Package -->
+              <div class="space-y-1.5 md:col-span-2">
+                <label for="service-select" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  Select Service or Tour Package:
+                </label>
+                <select 
+                  id="service-select" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0B2348] cursor-pointer"
+                >
+                  <option value="barelang-sunset-tour" data-sgd="95" data-myr="310" data-idr="1,050,000">Barelang Sunset & Heritage Tour (SGD 95 / MYR 310)</option>
+                  <option value="nagoya-shopping-spa" data-sgd="95" data-myr="310" data-idr="1,050,000">Nagoya Shopping, Food & Spa Haven (SGD 95 / MYR 310)</option>
+                  <option value="kelong-seafood-feast" data-sgd="105" data-myr="340" data-idr="1,150,000">Kelong Ocean Feast & Coastal Trail (SGD 105 / MYR 340)</option>
+                  <option value="nongsa-luxury-island" data-sgd="110" data-myr="360" data-idr="1,200,000">Nongsa Luxury & Island Escape (SGD 110 / MYR 360)</option>
+                  <option value="full-day-charter" data-sgd="95" data-myr="320" data-idr="1,100,000">Custom Full-Day Charter (10-12h) (SGD 95 / MYR 320)</option>
+                  <option value="half-day-charter" data-sgd="65" data-myr="250" data-idr="750,000">Custom Half-Day Charter (4-6h) (SGD 65 / MYR 250)</option>
+                  <option value="ferry-transfer" data-sgd="30" data-myr="100" data-idr="350,000">Point-to-Point Terminal Transfer (SGD 30 / MYR 100)</option>
+                </select>
+              </div>
+
+              <!-- Country of Origin -->
+              <div class="space-y-1.5">
+                <label for="origin-select" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  Guest Country of Origin:
+                </label>
+                <select 
+                  id="origin-select" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0B2348] cursor-pointer"
+                >
+                  <option value="Singapore">Singapore (PayNow / SGD)</option>
+                  <option value="Malaysia">Malaysia (Touch n Go / MYR)</option>
+                  <option value="Indonesia / Other">Indonesia / International</option>
+                </select>
+              </div>
+
+              <!-- Pickup Location -->
+              <div class="space-y-1.5">
+                <label for="pickup-select" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  Arrival Port / Pickup Point:
+                </label>
+                <select 
+                  id="pickup-select" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0B2348] cursor-pointer"
+                >
+                  <option value="Batam Centre Ferry Terminal">Batam Centre Ferry Terminal</option>
+                  <option value="Harbour Bay Ferry Terminal">Harbour Bay Ferry Terminal</option>
+                  <option value="Sekupang Ferry Terminal">Sekupang Ferry Terminal</option>
+                  <option value="Nongsapura Ferry Terminal">Nongsapura Ferry Terminal</option>
+                  <option value="Hang Nadim Airport (BTH)">Hang Nadim Airport (BTH)</option>
+                  <option value="Hotel Pickup in Batam">Hotel in Batam (City Center)</option>
+                </select>
+              </div>
+
+              <!-- Travel Date -->
+              <div class="space-y-1.5">
+                <label for="date-input" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  Planned Travel Date:
+                </label>
+                <input 
+                  type="date" 
+                  id="date-input" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0B2348]"
+                />
+              </div>
+
+              <!-- Number of Passengers -->
+              <div class="space-y-1.5">
+                <label for="pax-select" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  Passenger Group Size:
+                </label>
+                <select 
+                  id="pax-select" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0B2348] cursor-pointer"
+                >
+                  <option value="1 - 2 Adults">1 - 2 Adults</option>
+                  <option value="3 - 4 Adults">3 - 4 Adults</option>
+                  <option value="5 - 6 Adults (Full Innova Zenix)">5 - 6 Adults (Full Innova Zenix)</option>
+                  <option value="Family with Children">Family with Children</option>
+                  <option value="7+ Pax (Multiple Vehicles Needed)">7+ Pax (Multiple Vehicles Needed)</option>
+                </select>
+              </div>
+
+              <!-- Custom Notes -->
+              <div class="space-y-1.5 md:col-span-2">
+                <label for="notes-input" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                  Special Requests / Luggage Notes (Optional):
+                </label>
+                <input 
+                  type="text" 
+                  id="notes-input" 
+                  placeholder="e.g. 4 large suitcases, baby stroller, specific seafood restaurant preference" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0B2348]"
+                />
+              </div>
+
+            </div>
+
+            <!-- Live Calculated Quote Box -->
+            <div class="bg-gradient-to-br from-slate-50 to-amber-50/50 border border-amber-200/80 rounded-2xl p-6 space-y-4 shadow-2xs">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="space-y-0.5">
+                  <span class="text-[10px] font-bold text-[#B88A3B] uppercase tracking-wider">Calculated Fixed Rate</span>
+                  <div class="flex items-baseline gap-2">
+                    <span id="rate-sgd-display" class="text-3xl sm:text-4xl font-black text-[#0B2348]">SGD 95</span>
+                    <span class="text-slate-400">/</span>
+                    <span id="rate-myr-display" class="text-xl sm:text-2xl font-bold text-[#B88A3B]">MYR 310</span>
+                  </div>
+                  <div id="rate-idr-display" class="text-xs text-slate-500 font-medium">Approx. IDR 1,050,000</div>
+                </div>
+
+                <div class="text-xs text-slate-600 space-y-1 sm:text-right">
+                  <div class="font-bold text-slate-800">All-Inclusive Fixed Fare</div>
+                  <div class="text-[11px] text-slate-500">Innova Zenix • Chauffeur • Fuel • Parking</div>
+                </div>
+              </div>
+
+              <!-- Reassurances list -->
+              <div class="grid sm:grid-cols-3 gap-2 text-[11px] text-slate-600 border-t border-amber-200/60 pt-3">
+                <div class="flex items-center gap-1.5">
+                  <ShieldCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <span>Zero Upfront Card Deposit</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <ShieldCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <span>Free Ferry Delay Reschedule</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <ShieldCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <span>Driver with Nameplate</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Single Submit WhatsApp CTA Button -->
+            <div class="pt-2">
+              <a 
+                id="submit-wa-btn"
+                href="https://wa.me/628127003708"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20BA56] active:bg-[#1EAE4B] text-slate-950 font-black py-4 px-6 rounded-2xl text-base shadow-md hover:shadow-xl transition-all duration-200 transform hover:scale-101 active:scale-98 cursor-pointer select-none"
+              >
+                <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+                </svg>
+                <span>Submit Reservation via WhatsApp</span>
+              </a>
+              <p class="text-xs text-center text-slate-500 mt-2 font-medium">
+                Our concierge responds in under 5 minutes • {WHATSAPP_DISPLAY}
+              </p>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const serviceSelect = document.getElementById('service-select') as HTMLSelectElement | null;
+  const originSelect = document.getElementById('origin-select') as HTMLSelectElement | null;
+  const pickupSelect = document.getElementById('pickup-select') as HTMLSelectElement | null;
+  const dateInput = document.getElementById('date-input') as HTMLInputElement | null;
+  const paxSelect = document.getElementById('pax-select') as HTMLSelectElement | null;
+  const notesInput = document.getElementById('notes-input') as HTMLInputElement | null;
+  
+  const sgdDisplay = document.getElementById('rate-sgd-display');
+  const myrDisplay = document.getElementById('rate-myr-display');
+  const idrDisplay = document.getElementById('rate-idr-display');
+  const submitBtn = document.getElementById('submit-wa-btn') as HTMLAnchorElement | null;
+
+  // Pre-fill today + 1 as default date
+  if (dateInput && !dateInput.value) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.value = tomorrow.toISOString().split('T')[0];
+  }
+
+  // Parse URL search params if passed from Estimator Bar
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramTerminal = urlParams.get('terminal');
+  const paramService = urlParams.get('service');
+
+  if (paramTerminal && pickupSelect) {
+    for (let i = 0; i < pickupSelect.options.length; i++) {
+      if (pickupSelect.options[i].value.includes(paramTerminal)) {
+        pickupSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  if (paramService && serviceSelect) {
+    for (let i = 0; i < serviceSelect.options.length; i++) {
+      if (serviceSelect.options[i].text.includes(paramService) || paramService.includes(serviceSelect.options[i].text)) {
+        serviceSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  function updateForm() {
+    if (!serviceSelect || !originSelect || !pickupSelect || !dateInput || !paxSelect || !submitBtn) return;
+
+    const opt = serviceSelect.options[serviceSelect.selectedIndex];
+    const sgd = opt.getAttribute('data-sgd') || '95';
+    const myr = opt.getAttribute('data-myr') || '310';
+    const idr = opt.getAttribute('data-idr') || '1,050,000';
+
+    if (sgdDisplay) sgdDisplay.textContent = `SGD ${sgd}`;
+    if (myrDisplay) myrDisplay.textContent = `MYR ${myr}`;
+    if (idrDisplay) idrDisplay.textContent = `Approx. IDR ${idr}`;
+
+    const serviceName = opt.text;
+    const origin = originSelect.value;
+    const pickup = pickupSelect.value;
+    const date = dateInput.value || 'To be confirmed';
+    const pax = paxSelect.value;
+    const notes = notesInput ? notesInput.value : '';
+
+    let message = `Hello BatamRide, I would like to book a private transfer/tour:\n\n` +
+      `- Service/Tour: ${serviceName}\n` +
+      `- Planned Date: ${date}\n` +
+      `- Pickup Point: ${pickup}\n` +
+      `- Group Size: ${pax}\n` +
+      `- Country of Origin: ${origin}\n` +
+      `- Estimated Rate: SGD ${sgd} / MYR ${myr}`;
+
+    if (notes) {
+      message += `\n- Notes/Requests: ${notes}`;
+    }
+
+    message += `\n\nPlease confirm availability for Toyota Innova Zenix. Thank you!`;
+
+    submitBtn.href = `https://wa.me/628127003708?text=${encodeURIComponent(message)}`;
+  }
+
+  serviceSelect?.addEventListener('change', updateForm);
+  originSelect?.addEventListener('change', updateForm);
+  pickupSelect?.addEventListener('change', updateForm);
+  dateInput?.addEventListener('change', updateForm);
+  paxSelect?.addEventListener('change', updateForm);
+  notesInput?.addEventListener('input', updateForm);
+
+  updateForm();
+</script>

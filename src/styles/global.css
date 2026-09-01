@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-navy: #0B2348;
+    --color-navy-dark: #071730;
+    --color-navy-light: #163768;
+    --color-gold: #B88A3B;
+    --color-gold-champagne: #D2AD68;
+    --color-gold-light: #F4E8D1;
+    --color-slate-bg: #F8FAFC;
+    --color-wa: #25D366;
+  }
+
+  body {
+    background-color: var(--color-slate-bg);
+    color: #1E293B;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.011em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.025em;
+  }
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #D2AD68 0%, #B88A3B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navy-gradient {
+  background: linear-gradient(180deg, #071730 0%, #0B2348 100%);
+}
+
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -12px rgba(11, 35, 72, 0.08);
+}

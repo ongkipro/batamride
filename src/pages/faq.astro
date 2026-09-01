@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { faqs } from '../data/faqs';
+import { WHATSAPP_DISPLAY, buildWhatsAppLink } from '../utils/whatsapp';
+import { HelpCircle, ChevronDown, MessageSquare } from '@lucide/astro';
+
+const waLink = buildWhatsAppLink({ serviceType: 'General Travel & Booking Question' });
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
+---
+
+<Layout 
+  title="Frequently Asked Questions (FAQs) | BatamRide Private Transport"
+  description="Answers to common questions about Batam private car charters: ferry delays, driver meet and greet, PayNow payments, luggage capacity, and all-inclusive pricing."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
+
+  <Header />
+
+  <main class="bg-slate-50 min-h-screen pb-16">
+    
+    <!-- Page Hero Banner with Background Image -->
+    <PageHeader 
+      badge="Travel Logistics"
+      title="Frequently Asked Questions"
+      subtitle="Everything you need to know about our private transport, arrival meet and greet, and payment procedures in Batam."
+      breadcrumbItems={[
+        { label: 'Frequently Asked Questions' }
+      ]}
+      bgImage="/images/driver-uniform.jpg"
+    />
+
+    <!-- FAQ Accordion Section -->
+    <section class="py-12 sm:py-18">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        
+        {faqs.map(item => (
+          <details class="group bg-white rounded-2xl border border-slate-200/80 p-5 sm:p-6 shadow-xs open:border-[#B88A3B]/60 transition-colors">
+            <summary class="flex items-center justify-between cursor-pointer font-bold text-sm sm:text-base text-[#0B2348] group-open:text-[#B88A3B] transition-colors select-none list-none">
+              <span class="pr-4">{item.question}</span>
+              <span class="w-6 h-6 rounded-full bg-slate-100 group-open:bg-amber-50 flex items-center justify-center shrink-0 transition-transform duration-200 group-open:rotate-180">
+                <ChevronDown class="w-3.5 h-3.5 text-slate-600 group-open:text-[#B88A3B]" />
+              </span>
+            </summary>
+            <div class="mt-3.5 pt-3.5 border-t border-slate-100 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p>{item.answer}</p>
+            </div>
+          </details>
+        ))}
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

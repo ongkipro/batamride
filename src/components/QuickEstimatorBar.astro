@@ -1,0 +1,111 @@
+---
+import { terminals } from '../data/terminals';
+import { MapPin, Clock, ArrowRight, ShieldCheck } from '@lucide/astro';
+---
+
+<!-- Modern Minimalist Mobile Web App Estimator Bar -->
+<div class="relative -mt-6 sm:-mt-10 z-20 max-w-5xl mx-auto px-4 sm:px-6">
+  <div class="bg-white rounded-2xl sm:rounded-3xl shadow-lg border border-slate-100 p-4 sm:p-6 space-y-4">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+      
+      <!-- Field 1: Pickup Terminal -->
+      <div class="lg:col-span-5 space-y-1">
+        <label for="estimator-terminal" class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+          Arrival Port / Pickup Point
+        </label>
+        <select 
+          id="estimator-terminal"
+          class="w-full bg-slate-50 border border-slate-200 text-slate-900 font-semibold text-xs sm:text-sm rounded-xl px-3.5 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B2348] transition-colors cursor-pointer"
+        >
+          {terminals.map(t => (
+            <option value={t.name}>{t.name} (from {t.connectedTo[0] || 'SG/MY'})</option>
+          ))}
+        </select>
+      </div>
+
+      <!-- Field 2: Service Type -->
+      <div class="lg:col-span-4 space-y-1">
+        <label for="estimator-service" class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+          Service Type / Tour Scope
+        </label>
+        <select 
+          id="estimator-service"
+          class="w-full bg-slate-50 border border-slate-200 text-slate-900 font-semibold text-xs sm:text-sm rounded-xl px-3.5 py-3 focus:outline-none focus:ring-2 focus:ring-[#0B2348] transition-colors cursor-pointer"
+        >
+          <option value="full-day" data-sgd="SGD 85 - 110" data-myr="MYR 280 - 350" data-idr="IDR 950k - 1.2M">
+            Full-Day Charter (10 - 12h)
+          </option>
+          <option value="half-day" data-sgd="SGD 55 - 75" data-myr="MYR 240 - 260" data-idr="IDR 650k - 800k">
+            Half-Day Charter (4 - 6h)
+          </option>
+          <option value="transfer" data-sgd="SGD 25 - 35" data-myr="MYR 85 - 120" data-idr="IDR 300k - 400k">
+            One-Way Port Transfer
+          </option>
+          <option value="tour-barelang" data-sgd="SGD 95" data-myr="MYR 310" data-idr="IDR 1.05M">
+            Barelang Sunset Tour Package
+          </option>
+          <option value="tour-nagoya" data-sgd="SGD 95" data-myr="MYR 310" data-idr="IDR 1.05M">
+            Nagoya Shopping & Spa Tour
+          </option>
+        </select>
+      </div>
+
+      <!-- Output & Button -->
+      <div class="lg:col-span-3 flex items-center justify-between lg:justify-end gap-4 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-100">
+        <div>
+          <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Estimated Fare</div>
+          <div id="estimator-sgd" class="text-xl sm:text-2xl font-black text-[#0B2348] leading-tight">SGD 85 - 110</div>
+          <div id="estimator-myr" class="text-[11px] font-bold text-[#B88A3B]">MYR 280 - 350</div>
+        </div>
+
+        <a 
+          id="estimator-cta"
+          href="/contact"
+          class="inline-flex items-center justify-center gap-2 bg-[#0B2348] hover:bg-[#163768] text-white font-bold px-5 py-3 rounded-xl text-xs sm:text-sm shadow-sm transition-all duration-200 cursor-pointer select-none shrink-0"
+        >
+          <span>Reserve</span>
+          <ArrowRight class="w-4 h-4" />
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Clean Reassurance Strip -->
+    <div class="pt-2 flex flex-wrap items-center justify-between text-[11px] text-slate-500 gap-2 border-t border-slate-100">
+      <span class="flex items-center gap-1">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        <span>Toyota Innova Zenix Guaranteed</span>
+      </span>
+      <span>Zero Upfront Deposit</span>
+      <span>PayNow & Touch 'n Go Ready</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const serviceSelect = document.getElementById('estimator-service') as HTMLSelectElement | null;
+  const terminalSelect = document.getElementById('estimator-terminal') as HTMLSelectElement | null;
+  const sgdDisplay = document.getElementById('estimator-sgd');
+  const myrDisplay = document.getElementById('estimator-myr');
+  const ctaButton = document.getElementById('estimator-cta') as HTMLAnchorElement | null;
+
+  function updateEstimator() {
+    if (!serviceSelect || !sgdDisplay || !myrDisplay || !ctaButton) return;
+    const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+    const sgd = selectedOption.getAttribute('data-sgd') || 'SGD 85 - 110';
+    const myr = selectedOption.getAttribute('data-myr') || 'MYR 280 - 350';
+    
+    sgdDisplay.textContent = sgd;
+    myrDisplay.textContent = myr;
+
+    const terminalVal = terminalSelect ? terminalSelect.value : 'Batam Centre';
+    const serviceVal = selectedOption.text;
+    ctaButton.href = `/contact?terminal=${encodeURIComponent(terminalVal)}&service=${encodeURIComponent(serviceVal)}`;
+  }
+
+  serviceSelect?.addEventListener('change', updateEstimator);
+  terminalSelect?.addEventListener('change', updateEstimator);
+  updateEstimator();
+</script>

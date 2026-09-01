@@ -1,0 +1,36 @@
+---
+import { WHATSAPP_DISPLAY, buildWhatsAppLink } from '../utils/whatsapp';
+const waLink = buildWhatsAppLink();
+---
+
+<!-- Precision Sticky Floating WhatsApp Concierge Button (Desktop & Mobile) -->
+<aside aria-label="WhatsApp Concierge" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 select-none">
+  <a 
+    href={waLink}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with BatamRide Concierge on WhatsApp"
+    class="group relative inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#20BA56] active:bg-[#1EAE4B] text-slate-950 px-3.5 py-2.5 sm:px-5 sm:py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-103 active:scale-95 border border-white/25 cursor-pointer backdrop-blur-xs"
+  >
+    <!-- Live Status Indicator Ring -->
+    <span class="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-80"></span>
+      <span class="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-white"></span>
+    </span>
+
+    <!-- WhatsApp SVG Icon -->
+    <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current shrink-0" viewBox="0 0 24 24">
+      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
+    </svg>
+
+    <!-- Text Label -->
+    <div class="flex flex-col text-left leading-none">
+      <span class="text-xs sm:text-xs font-black tracking-tight text-slate-950">
+        WhatsApp
+      </span>
+      <span class="hidden sm:inline-block text-[10px] font-semibold text-slate-800 tracking-wide mt-0.5 opacity-90">
+        Instant Reply • {WHATSAPP_DISPLAY}
+      </span>
+    </div>
+  </a>
+</aside>

@@ -1,0 +1,166 @@
+---
+import { WHATSAPP_DISPLAY, buildWhatsAppLink } from '../utils/whatsapp';
+import { 
+  Home, Car, Compass, MapPin, ShieldCheck, HelpCircle, CalendarCheck, 
+  MessageSquare, ChevronRight, Menu, X, Phone
+} from '@lucide/astro';
+
+const pathname = new URL(Astro.request.url).pathname;
+
+const navLinks = [
+  { name: 'Home', href: '/', icon: Home },
+  { name: 'Services', href: '/services', icon: Car },
+  { name: 'Tours', href: '/tours', icon: Compass },
+  { name: 'Attractions', href: '/destinations', icon: MapPin },
+  { name: 'Fleet & Driver', href: '/fleet', icon: ShieldCheck },
+  { name: 'FAQ', href: '/faq', icon: HelpCircle },
+  { name: 'Contact', href: '/contact', icon: CalendarCheck },
+];
+
+const waQuickLink = buildWhatsAppLink();
+---
+
+<!-- Minimalist Clean Header: Pure Text Wordmark & Precision Mobile Navigation -->
+<header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 sm:h-18">
+    
+    <!-- Text-Only Wordmark Logo -->
+    <a href="/" class="group flex flex-col select-none py-1">
+      <span class="text-xl sm:text-2xl font-black tracking-tight text-[#0B2348] group-hover:text-[#163768] transition-colors leading-none">
+        BATAM<span class="text-[#B88A3B]">RIDE</span>
+      </span>
+      <span class="text-[9px] font-bold tracking-[0.22em] text-slate-400 uppercase mt-1">
+        Private Transport & Tours
+      </span>
+    </a>
+
+    <!-- Clean Desktop Navigation Links -->
+    <nav class="hidden md:flex items-center gap-7 text-[13px] font-semibold text-slate-600">
+      {navLinks.map(link => {
+        const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+        return (
+          <a 
+            href={link.href} 
+            class={`py-1.5 transition-colors hover:text-[#0B2348] ${isActive ? 'text-[#0B2348] font-extrabold border-b-2 border-[#B88A3B]' : ''}`}
+          >
+            {link.name}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Precision Mobile Menu Button (44px Minimum Touch Target) -->
+    <button 
+      id="mobile-menu-btn"
+      type="button"
+      aria-label="Toggle navigation menu"
+      class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl text-slate-700 hover:text-[#0B2348] hover:bg-slate-100/80 active:bg-slate-200/80 transition-all border border-slate-200/80 cursor-pointer select-none"
+    >
+      <Menu id="menu-icon" class="w-5 h-5" />
+      <X id="close-icon" class="w-5 h-5 hidden" />
+    </button>
+
+  </div>
+
+  <!-- Redesigned Luxury Mobile Slide-Down Drawer -->
+  <div 
+    id="mobile-menu" 
+    class="hidden md:hidden fixed inset-x-0 top-16 sm:top-18 bg-white/98 backdrop-blur-xl border-b border-slate-200 shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all duration-300 z-50"
+  >
+    <div class="px-4 py-5 space-y-4 max-w-lg mx-auto">
+      
+      <!-- Navigation Links List with Icons -->
+      <div class="space-y-1">
+        <div class="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+          Navigation Menu
+        </div>
+        
+        {navLinks.map(link => {
+          const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+          const IconComponent = link.icon;
+          return (
+            <a 
+              href={link.href} 
+              class={`flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition-all ${
+                isActive 
+                  ? 'bg-amber-50/90 text-[#0B2348] font-bold border border-amber-200/70 shadow-2xs' 
+                  : 'text-slate-700 hover:bg-slate-50 active:bg-slate-100'
+              }`}
+            >
+              <div class="flex items-center gap-3">
+                <span class={`p-1.5 rounded-lg ${isActive ? 'bg-[#0B2348] text-[#D2AD68]' : 'bg-slate-100 text-slate-600'}`}>
+                  <IconComponent class="w-4 h-4" />
+                </span>
+                <span>{link.name}</span>
+              </div>
+              <ChevronRight class={`w-4 h-4 ${isActive ? 'text-[#B88A3B]' : 'text-slate-400'}`} />
+            </a>
+          );
+        })}
+      </div>
+
+      <!-- Mobile Concierge Support Card -->
+      <div class="pt-2 border-t border-slate-100">
+        <div class="bg-gradient-to-br from-slate-50 to-amber-50/40 rounded-2xl p-4 border border-slate-200/80 space-y-3 shadow-xs">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-extrabold text-[#0B2348] uppercase tracking-wider">
+              Concierge Desk
+            </span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Available Daily</span>
+            </span>
+          </div>
+
+          <p class="text-xs text-slate-600">
+            Need customized tour planning or quick arrival pickup confirmation?
+          </p>
+
+          <a 
+            href={waQuickLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA56] text-slate-950 font-black py-3 px-4 rounded-xl text-xs shadow-sm transition-all"
+          >
+            <MessageSquare class="w-4 h-4 fill-current" />
+            <span>Chat Concierge ({WHATSAPP_DISPLAY})</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  btn?.addEventListener('click', () => {
+    const isHidden = menu?.classList.contains('hidden');
+    if (isHidden) {
+      menu?.classList.remove('hidden');
+      menuIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    } else {
+      menu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Close menu when navigating
+  const links = menu?.querySelectorAll('a');
+  links?.forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      document.body.style.overflow = '';
+    });
+  });
+</script>

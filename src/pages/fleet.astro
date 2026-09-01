@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { Car, Users, Wind, ShieldCheck, CheckCircle2, Luggage, Sparkles, Check } from '@lucide/astro';
+---
+
+<Layout 
+  title="Fleet & Chauffeur Standards | BatamRide Private Transport"
+  description="Learn about our guaranteed white Toyota Innova Zenix MPVs and professional uniformed chauffeurs in Batam. 6-seater comfort, dual AC, and arrival gate meet & greet."
+  image="/images/zenix-interior.jpg"
+>
+  <Header />
+
+  <main class="bg-slate-50 min-h-screen pb-16">
+    
+    <!-- Page Hero Banner with Background Image -->
+    <PageHeader 
+      badge="Quality Assurance"
+      title="Executive Fleet & Chauffeur Standards"
+      subtitle="We believe premium travel starts with vehicle transparency and professional drivers. Guaranteed white Toyota Innova Zenix for every guest."
+      breadcrumbItems={[
+        { label: 'Fleet & Driver Standards' }
+      ]}
+      bgImage="/images/zenix-interior.jpg"
+    />
+
+    <!-- Fleet Vehicle Section -->
+    <section class="py-12 sm:py-18">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+        
+        <!-- Part 1: Toyota Innova Zenix Showcase -->
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <div class="lg:col-span-6 space-y-4">
+            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">
+              Primary Fleet Standard
+            </span>
+
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B2348] tracking-tight">
+              Toyota Innova Zenix (White Edition)
+            </h2>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              The latest generation Toyota Innova Zenix redefines MPV comfort with smooth suspension, quiet cabin acoustics, and executive captain seats. Clean, odorless, and maintained in showroom condition.
+            </p>
+
+            <div class="grid grid-cols-2 gap-3 text-xs pt-2">
+              <div class="bg-white border border-slate-200/80 rounded-xl p-3.5 space-y-0.5 shadow-2xs">
+                <Users class="w-4 h-4 text-[#B88A3B]" />
+                <div class="font-bold text-slate-900">Up to 6 Adults</div>
+                <div class="text-slate-500 text-[11px]">Spacious 3-row legroom</div>
+              </div>
+
+              <div class="bg-white border border-slate-200/80 rounded-xl p-3.5 space-y-0.5 shadow-2xs">
+                <Wind class="w-4 h-4 text-[#B88A3B]" />
+                <div class="font-bold text-slate-900">Multi-Zone Cold AC</div>
+                <div class="text-slate-500 text-[11px]">Rear ceiling climate control</div>
+              </div>
+
+              <div class="bg-white border border-slate-200/80 rounded-xl p-3.5 space-y-0.5 shadow-2xs">
+                <Luggage class="w-4 h-4 text-[#B88A3B]" />
+                <div class="font-bold text-slate-900">5 Large Suitcases</div>
+                <div class="text-slate-500 text-[11px]">Deep luggage boot capacity</div>
+              </div>
+
+              <div class="bg-white border border-slate-200/80 rounded-xl p-3.5 space-y-0.5 shadow-2xs">
+                <Sparkles class="w-4 h-4 text-[#B88A3B]" />
+                <div class="font-bold text-slate-900">Fast USB Charging</div>
+                <div class="text-slate-500 text-[11px]">Power for phones & tablets</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vehicle Image Card -->
+          <div class="lg:col-span-6">
+            <div class="rounded-2xl overflow-hidden shadow-xs border border-slate-200/80 bg-white">
+              <img 
+                src="/images/zenix-interior.jpg" 
+                alt="Executive Toyota Innova Zenix Cabin Interior" 
+                class="w-full h-72 sm:h-80 object-cover"
+              />
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Part 2: Chauffeur & Driver Standards -->
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-8 border-t border-slate-200">
+          
+          <!-- Driver Image Card -->
+          <div class="lg:col-span-6 order-2 lg:order-1">
+            <div class="rounded-2xl overflow-hidden shadow-xs border border-slate-200/80 bg-white">
+              <img 
+                src="/images/driver-uniform.jpg" 
+                alt="Professional Uniformed Batam Chauffeur" 
+                class="w-full h-72 sm:h-80 object-cover"
+              />
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 space-y-4 order-1 lg:order-2">
+            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">
+              Driver Code of Conduct
+            </span>
+
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B2348] tracking-tight">
+              Verified Full-Time Chauffeurs
+            </h2>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              We never outsource your trip to random freelance rideshares. Every driver is a trained, full-time employee committed to hospitality, safety, and discretion.
+            </p>
+
+            <div class="space-y-2 text-xs sm:text-sm text-slate-700 pt-1">
+              <div class="flex items-start gap-2.5">
+                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>Personalized signboard greet at the terminal arrival gate</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>Zero unsolicited commercial stops or commission store diversions</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>Strict smoke-free vehicle policy before and during guest trips</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>Luggage loading and unloading assistance at all stops</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Part 3: What Makes BatamRide Different -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 space-y-4 shadow-xs">
+          <div class="space-y-1">
+            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">Comparison</span>
+            <h3 class="text-xl font-bold text-[#0B2348]">
+              Why Travelers Choose BatamRide Over Unverified Taxis
+            </h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-slate-600">
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1.5">
+              <div class="font-bold text-[#0B2348] text-sm">BatamRide Executive Standard</div>
+              <p class="leading-relaxed">
+                Guaranteed white Innova Zenix, locked fixed pricing in SGD/MYR, chauffeur on standby at every stop, and zero shopping pressure.
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1.5">
+              <div class="font-bold text-slate-500 text-sm">Unverified Port Taxis / Ride-Hail</div>
+              <p class="leading-relaxed">
+                Random older vehicles, unpredictable driver availability during peak hours, and risk of aggressive sales stops at unsolicited souvenir shops.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

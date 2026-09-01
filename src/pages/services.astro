@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { charterServices } from '../data/packages';
+import { terminals } from '../data/terminals';
+import { CheckCircle2, ShieldCheck, Car, Clock, Navigation, MapPin } from '@lucide/astro';
+---
+
+<Layout 
+  title="Batam Private Car Charters & Ferry Transfers | BatamRide"
+  description="Private car charters and ferry terminal transfers in Batam. Guaranteed white Toyota Innova Zenix with dedicated driver. Half-day, full-day, and airport pickups."
+>
+  <Header />
+
+  <main class="bg-slate-50 min-h-screen pb-16">
+    
+    <!-- Page Hero Banner with Background Image -->
+    <PageHeader 
+      badge="Private Mobility Services"
+      title="Private Charters & Transfers in Batam"
+      subtitle="Executive transportation tailored to your schedule. 100% private, all-inclusive rates, and dedicated chauffeur on standby."
+      breadcrumbItems={[
+        { label: 'Services & Charters' }
+      ]}
+      bgImage="/images/hero-zenix.jpg"
+    />
+
+    <!-- Main Service Packages Section -->
+    <section class="py-12 sm:py-18">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {charterServices.map(service => (
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-7 shadow-xs flex flex-col justify-between space-y-5">
+              
+              <div class="space-y-3.5">
+                <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">
+                  {service.duration}
+                </span>
+
+                <h2 class="text-xl font-bold text-[#0B2348]">
+                  {service.title}
+                </h2>
+
+                <!-- Pricing Display -->
+                <div class="pt-1">
+                  <div class="text-2xl font-black text-[#0B2348]">{service.rateSgd}</div>
+                  <div class="text-xs font-bold text-[#B88A3B]">{service.rateMyr} <span class="text-slate-400 font-normal">({service.rateIdr})</span></div>
+                </div>
+
+                <p class="text-xs text-slate-600 leading-relaxed pt-1">
+                  {service.description}
+                </p>
+
+                <!-- Features List -->
+                <div class="space-y-2 pt-3 border-t border-slate-100">
+                  <span class="text-xs font-bold text-slate-900 block">Includes:</span>
+                  {service.features.map(f => (
+                    <div class="flex items-start gap-2 text-xs text-slate-600">
+                      <CheckCircle2 class="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                      <span>{f}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Value Reassurance Notice -->
+              <div class="pt-2 text-[11px] text-slate-500 border-t border-slate-100">
+                White Innova Zenix • Fuel • Parking • Chauffeur Included
+              </div>
+
+            </div>
+          ))}
+        </div>
+
+        <!-- Transparent Rate Comparison Matrix -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-xs space-y-5">
+          <div class="max-w-xl space-y-1">
+            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">Fare Transparency</span>
+            <h3 class="text-xl font-bold text-[#0B2348]">
+              Comprehensive Charter Rate Matrix
+            </h3>
+            <p class="text-xs text-slate-600">
+              Clear, fixed pricing in your preferred currency. Zero surprise extras on the day of travel.
+            </p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs sm:text-sm text-slate-600">
+              <thead class="bg-slate-50 border-b border-slate-200 text-[#0B2348] font-bold text-xs uppercase">
+                <tr>
+                  <th class="py-3 px-4">Service Type</th>
+                  <th class="py-3 px-4">Duration</th>
+                  <th class="py-3 px-4">Singapore (SGD)</th>
+                  <th class="py-3 px-4">Malaysia (MYR)</th>
+                  <th class="py-3 px-4">Indonesia (IDR)</th>
+                  <th class="py-3 px-4">Included Mileage</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-slate-50/60">
+                  <td class="py-3.5 px-4 font-bold text-slate-900">Full-Day Private Charter</td>
+                  <td class="py-3.5 px-4">10 - 12 Hours</td>
+                  <td class="py-3.5 px-4 font-black text-[#0B2348]">SGD 95 - 110</td>
+                  <td class="py-3.5 px-4 font-bold text-[#B88A3B]">MYR 320 - 350</td>
+                  <td class="py-3.5 px-4">IDR 1,100,000</td>
+                  <td class="py-3.5 px-4">All Batam Island (Barelang to Nongsa)</td>
+                </tr>
+                <tr class="hover:bg-slate-50/60">
+                  <td class="py-3.5 px-4 font-bold text-slate-900">Half-Day City Charter</td>
+                  <td class="py-3.5 px-4">4 - 6 Hours</td>
+                  <td class="py-3.5 px-4 font-black text-[#0B2348]">SGD 65 - 75</td>
+                  <td class="py-3.5 px-4 font-bold text-[#B88A3B]">MYR 250 - 260</td>
+                  <td class="py-3.5 px-4">IDR 750,000</td>
+                  <td class="py-3.5 px-4">Nagoya, Batam Centre, Harbour Bay</td>
+                </tr>
+                <tr class="hover:bg-slate-50/60">
+                  <td class="py-3.5 px-4 font-bold text-slate-900">One-Way Terminal Transfer</td>
+                  <td class="py-3.5 px-4">Point-to-Point</td>
+                  <td class="py-3.5 px-4 font-black text-[#0B2348]">SGD 30 - 35</td>
+                  <td class="py-3.5 px-4 font-bold text-[#B88A3B]">MYR 100 - 120</td>
+                  <td class="py-3.5 px-4">IDR 350,000</td>
+                  <td class="py-3.5 px-4">Direct Port to Hotel / Vice Versa</td>
+                </tr>
+                <tr class="hover:bg-slate-50/60">
+                  <td class="py-3.5 px-4 font-bold text-slate-900">Airport (BTH) Transfer</td>
+                  <td class="py-3.5 px-4">Flight Connection</td>
+                  <td class="py-3.5 px-4 font-black text-[#0B2348]">SGD 35</td>
+                  <td class="py-3.5 px-4 font-bold text-[#B88A3B]">MYR 120</td>
+                  <td class="py-3.5 px-4">IDR 400,000</td>
+                  <td class="py-3.5 px-4">Hang Nadim to Any Batam Hotel</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Ferry Terminal Pickup Coverage -->
+        <div class="space-y-4">
+          <div class="space-y-1">
+            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">Arrival Ports</span>
+            <h3 class="text-xl font-bold text-[#0B2348]">
+              Seamless Meet & Greet at All Batam Ports
+            </h3>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {terminals.map(terminal => (
+              <div class="bg-white rounded-xl border border-slate-200/80 p-4 space-y-2 shadow-2xs">
+                <div class="font-bold text-slate-900 text-sm">{terminal.name}</div>
+                <div class="text-slate-500 text-xs">{terminal.type}</div>
+                <div class="text-[11px] text-slate-600 pt-1 border-t border-slate-100">
+                  <span class="font-semibold text-slate-800">Connected: </span>
+                  {terminal.connectedTo.join(', ')}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

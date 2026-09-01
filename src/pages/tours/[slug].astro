@@ -1,0 +1,290 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { packages, type TourPackage } from '../../data/packages';
+import { WHATSAPP_DISPLAY, buildWhatsAppTourLink } from '../../utils/whatsapp';
+import { 
+  Clock, MapPin, CheckCircle2, ShieldCheck, Car, Users, ArrowRight,
+  MessageSquare, Star, Sparkles
+} from '@lucide/astro';
+
+export function getStaticPaths() {
+  return packages.map(pkg => ({
+    params: { slug: pkg.id },
+    props: { pkg }
+  }));
+}
+
+interface Props {
+  pkg: TourPackage;
+}
+
+const { pkg } = Astro.props;
+const otherPackages = packages.filter(p => p.id !== pkg.id);
+const waBookingLink = buildWhatsAppTourLink(pkg.name);
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "TouristTrip",
+  "name": `${pkg.name} (Private Batam Tour)`,
+  "description": pkg.description,
+  "touristType": ["Families", "Couples", "Small Groups", "Singapore Travelers", "Malaysia Travelers"],
+  "offers": {
+    "@type": "Offer",
+    "price": pkg.rateSgd.replace(/[^0-9]/g, '') || "95",
+    "priceCurrency": "SGD",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "2025-01-01"
+  }
+};
+---
+
+<Layout 
+  title={`${pkg.name} | Private Day Tour Batam | BatamRide`}
+  description={`${pkg.name}: ${pkg.tagline}. 100% private Toyota Innova Zenix charter, customized itinerary, and uniformed driver.`}
+  image={pkg.image}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} slot="head" />
+
+  <Header />
+
+  <main class="bg-slate-50 min-h-screen pb-16">
+    
+    <!-- Hero Banner with Scenic Image Background -->
+    <div class="relative bg-[#051326] text-white py-12 lg:py-16 overflow-hidden border-b border-slate-800">
+      
+      <div class="absolute inset-0 z-0">
+        <img 
+          src={pkg.image} 
+          alt={pkg.name} 
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#051326]/95 via-[#051326]/85 to-[#051326]/75"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#051326] via-transparent to-black/30"></div>
+      </div>
+      
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 space-y-4">
+        
+        <!-- Breadcrumb Navigation -->
+        <div>
+          <Breadcrumb 
+            items={[
+              { label: 'Curated Day Tours', href: '/tours' },
+              { label: pkg.name }
+            ]}
+          />
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-end">
+          <div class="lg:col-span-8 space-y-3">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-[#D2AD68] block">
+              {pkg.badge} • Duration: {pkg.duration}
+            </span>
+
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
+              {pkg.name}
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-300 italic max-w-2xl leading-relaxed">
+              "{pkg.tagline}"
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 text-xs text-slate-300 pt-1">
+              <span class="flex items-center gap-1.5">
+                <Car class="w-4 h-4 text-[#D2AD68]" />
+                <span>Toyota Innova Zenix Guaranteed</span>
+              </span>
+              <span class="flex items-center gap-1.5">
+                <MapPin class="w-4 h-4 text-[#D2AD68]" />
+                <span>Terminal / Hotel Meet & Greet</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Rate Overview Box in Hero -->
+          <div class="lg:col-span-4 bg-white/10 border border-white/20 p-5 sm:p-6 rounded-2xl backdrop-blur-md text-center space-y-3">
+            <div class="space-y-0.5">
+              <span class="text-xs text-slate-300 uppercase tracking-wider font-semibold block">
+                All-Inclusive Package Rate
+              </span>
+              <div class="flex items-baseline justify-center gap-2">
+                <span class="text-3xl sm:text-4xl font-black text-white">{pkg.rateSgd}</span>
+                <span class="text-slate-400 font-normal">/</span>
+                <span class="text-xl sm:text-2xl font-bold text-[#D2AD68]">{pkg.rateMyr}</span>
+              </div>
+              <p class="text-[11px] text-slate-300">
+                Fixed rate per vehicle (up to 6 passengers)
+              </p>
+            </div>
+
+            <a 
+              href={waBookingLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA56] text-slate-950 font-bold py-3.5 px-5 rounded-xl text-sm shadow-md transition-all cursor-pointer select-none"
+            >
+              <span>Book This Tour via WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Main Content Body -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <div class="grid lg:grid-cols-12 gap-8">
+        
+        <!-- Left 8 Columns: Timeline Itinerary & Inclusions -->
+        <div class="lg:col-span-8 space-y-6 sm:space-y-8">
+          
+          <!-- Image Card -->
+          <div class="rounded-2xl overflow-hidden shadow-xs border border-slate-200/80 bg-white">
+            <img 
+              src={pkg.image} 
+              alt={pkg.name} 
+              class="w-full h-72 sm:h-96 object-cover"
+            />
+          </div>
+
+          <!-- Step-by-Step Timeline -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 space-y-6 shadow-xs">
+            <div class="border-b border-slate-100 pb-3">
+              <h2 class="text-xl font-bold text-[#0B2348] tracking-tight">
+                Detailed Itinerary Timeline
+              </h2>
+              <p class="text-xs text-slate-500 mt-0.5">Flexible pacing: your driver accommodates your timing on the day.</p>
+            </div>
+
+            <!-- Timeline Steps -->
+            <div class="relative border-l-2 border-slate-200 ml-3 space-y-5 py-1">
+              {pkg.itinerary.map(step => (
+                <div class="relative pl-6">
+                  <div class="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-white border-2 border-[#0B2348]"></div>
+                  
+                  <div class="space-y-0.5">
+                    <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">
+                      {step.time}
+                    </span>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-800 leading-snug">
+                      {step.activity}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Inclusions & Vehicle Specs -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 space-y-5 shadow-xs">
+            <h3 class="text-lg font-bold text-[#0B2348] tracking-tight">
+              What is Included in This Package
+            </h3>
+
+            <div class="grid sm:grid-cols-2 gap-2.5">
+              {pkg.inclusions.map(inc => (
+                <div class="flex items-start gap-2 bg-slate-50 border border-slate-100 rounded-xl p-3 text-xs text-slate-700">
+                  <CheckCircle2 class="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                  <span>{inc}</span>
+                </div>
+              ))}
+            </div>
+
+            <div class="text-xs text-slate-500 pt-1">
+              Meals and personal shopping are paid directly at venue. Route can be modified on the day at no extra charge.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right 4 Columns: Reservation Console & Related Tours -->
+        <div class="lg:col-span-4 space-y-6">
+          
+          <!-- Master Reservation Console -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 space-y-5 shadow-xs">
+            
+            <div class="space-y-1">
+              <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">
+                Tour Summary
+              </span>
+              <h3 class="text-lg font-bold text-[#0B2348]">{pkg.name}</h3>
+              <p class="text-xs text-slate-500">Private chauffeur & Innova Zenix guaranteed.</p>
+            </div>
+
+            <div class="space-y-2 border-y border-slate-100 py-3 text-xs">
+              <div class="flex justify-between">
+                <span class="text-slate-500">Duration:</span>
+                <strong class="text-slate-900 font-bold">{pkg.duration}</strong>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Vehicle:</span>
+                <strong class="text-slate-900 font-bold">Toyota Innova Zenix</strong>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Capacity:</span>
+                <strong class="text-slate-900 font-bold">Up to 6 Passengers</strong>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Pickup:</span>
+                <strong class="text-slate-900 font-bold">Ferry Terminal / Hotel</strong>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Deposit:</span>
+                <strong class="text-emerald-700 font-bold">Zero ($0 Upfront)</strong>
+              </div>
+            </div>
+
+            <!-- Total Price Display -->
+            <div class="bg-slate-50 rounded-xl p-3.5 space-y-0.5 text-center">
+              <div class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Locked Package Rate</div>
+              <div class="text-2xl font-black text-[#0B2348]">{pkg.rateSgd}</div>
+              <div class="text-xs font-bold text-[#B88A3B]">{pkg.rateMyr} • {pkg.rateIdr}</div>
+            </div>
+
+            <a 
+              href={waBookingLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA56] text-slate-950 font-bold py-3.5 px-4 rounded-xl text-xs sm:text-sm shadow-sm transition-all cursor-pointer select-none"
+            >
+              <MessageSquare class="w-4 h-4 fill-current" />
+              <span>Confirm via WhatsApp</span>
+            </a>
+
+            <div class="text-[11px] text-slate-400 text-center">
+              Concierge hotline: {WHATSAPP_DISPLAY}
+            </div>
+
+          </div>
+
+          <!-- Other Recommended Tours -->
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-5 space-y-3 shadow-xs">
+            <h4 class="text-xs font-bold text-[#0B2348] uppercase tracking-wider">
+              Other Curated Tours
+            </h4>
+            
+            <div class="space-y-2">
+              {otherPackages.slice(0, 3).map(other => (
+                <a href={`/tours/${other.id}`} class="block p-2.5 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-200">
+                  <div class="font-bold text-xs text-slate-800 hover:text-[#B88A3B]">{other.name}</div>
+                  <div class="text-[11px] text-slate-500 flex justify-between mt-0.5">
+                    <span>{other.duration}</span>
+                    <strong class="text-[#0B2348]">{other.rateSgd}</strong>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Layout>

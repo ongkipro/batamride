@@ -1,0 +1,461 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import QuickEstimatorBar from '../components/QuickEstimatorBar.astro';
+import { packages } from '../data/packages';
+import { destinations } from '../data/destinations';
+import { charterServices } from '../data/packages';
+import { 
+  ShieldCheck, Users, Car, Clock, ArrowRight, Star, MapPin, 
+  CheckCircle2, Sparkles, MessageSquare, Compass, Award, CalendarCheck, Check
+} from '@lucide/astro';
+
+const heroBgSlides = [
+  {
+    image: '/images/hero-zenix.jpg',
+    title: 'Guaranteed Toyota Innova Zenix'
+  },
+  {
+    image: '/images/barelang-sunset.jpg',
+    title: 'Barelang Golden Hour Sunset'
+  },
+  {
+    image: '/images/zenix-interior.jpg',
+    title: 'Executive Cabin & Dual Climate AC'
+  },
+  {
+    image: '/images/montigo-resort.jpg',
+    title: 'Nongsa Luxury & Island Escapes'
+  }
+];
+---
+
+<Layout 
+  title="BatamRide | Premium Private Transport & Curated Tours in Batam"
+  description="100% Private transport in Batam for Singapore & Malaysia travelers. Guaranteed white Toyota Innova Zenix, uniformed chauffeurs, transparent rates, and direct WhatsApp reservation."
+>
+  <Header />
+
+  <main class="space-y-0">
+    
+    <!-- Section 1: Clean, Borderless Full-Bleed Hero (Mobile Web App Style) -->
+    <section id="homepage-hero" class="relative bg-[#051326] text-white pt-14 pb-20 sm:pt-20 sm:pb-28 overflow-hidden select-none">
+      
+      <!-- Full-Bleed Background Image Slides -->
+      <div class="absolute inset-0 z-0 overflow-hidden">
+        {heroBgSlides.map((slide, index) => (
+          <div 
+            class={`hero-bg-slide absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+            data-bg-index={index}
+          >
+            <img 
+              src={slide.image} 
+              alt={slide.title} 
+              class="w-full h-full object-cover"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          </div>
+        ))}
+        
+        <!-- Clean Dark Gradient Overlays (Text Readability) -->
+        <div class="absolute inset-0 z-20 bg-gradient-to-r from-[#051326]/95 via-[#051326]/85 to-[#051326]/60"></div>
+        <div class="absolute inset-0 z-20 bg-gradient-to-t from-[#051326] via-transparent to-black/30"></div>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-30">
+        <div class="max-w-3xl space-y-6 text-center lg:text-left">
+          
+          <!-- Clean Minimalist Eyebrow -->
+          <div class="space-y-1">
+            <span class="text-xs font-extrabold uppercase tracking-widest text-[#D2AD68] block">
+              Singapore & Malaysia Private Travel
+            </span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12]">
+            Batam Private Transport <br />
+            <span class="text-[#D2AD68]">Simple, Private & Comfortable</span>
+          </h1>
+
+          <p class="text-sm sm:text-base lg:text-lg text-slate-200 leading-relaxed max-w-2xl">
+            Travel across Batam in a guaranteed white Toyota Innova Zenix with a professional chauffeur. Direct ferry terminal meet & greet with transparent fixed rates.
+          </p>
+
+          <!-- Minimalist Inline Trust Points (No Bulky Cards) -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs sm:text-sm text-slate-200 pt-1">
+            <div class="flex items-center gap-1.5">
+              <CheckCircle2 class="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>100% Private MPV</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <CheckCircle2 class="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>Toyota Innova Zenix</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <CheckCircle2 class="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>Ferry Meet & Greet</span>
+            </div>
+          </div>
+
+          <!-- Clean Action Buttons -->
+          <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+            <a 
+              href="/tours"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#B88A3B] hover:bg-[#A37830] text-white font-bold px-7 py-3.5 rounded-xl text-sm shadow-md transition-all cursor-pointer select-none"
+            >
+              <span>Explore Curated Tours</span>
+              <ArrowRight class="w-4 h-4" />
+            </a>
+            <a 
+              href="/services"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white font-semibold px-7 py-3.5 rounded-xl text-sm backdrop-blur-md transition-all cursor-pointer select-none"
+            >
+              <span>View Hourly Charters</span>
+            </a>
+          </div>
+
+          <!-- Discreet Slide Indicators -->
+          <div class="pt-4 flex items-center justify-center lg:justify-start gap-2">
+            {heroBgSlides.map((_, idx) => (
+              <button 
+                class={`hero-dot h-1.5 rounded-full transition-all cursor-pointer ${idx === 0 ? 'bg-[#D2AD68] w-6' : 'bg-white/40 w-2'}`}
+                data-dot-index={idx}
+                aria-label={`Slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Mobile Web App Quick Estimator Bar -->
+    <section class="bg-slate-50 pb-12 sm:pb-16">
+      <QuickEstimatorBar />
+    </section>
+
+    <!-- Section 3: How It Works (Clean 3-Step Journey) -->
+    <section class="py-14 sm:py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="max-w-xl mx-auto text-center space-y-1.5 mb-10 sm:mb-14">
+          <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">Seamless Logistics</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B2348] tracking-tight">
+            How Your Trip Works in 3 Steps
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Step 1 -->
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 space-y-3">
+            <div class="text-xs font-black text-[#B88A3B] tracking-wider uppercase">Step 01</div>
+            <h3 class="text-lg font-bold text-[#0B2348]">Book via WhatsApp</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Choose your tour package or charter duration. Get instant confirmation with zero credit card deposit.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 space-y-3">
+            <div class="text-xs font-black text-[#B88A3B] tracking-wider uppercase">Step 02</div>
+            <h3 class="text-lg font-bold text-[#0B2348]">Terminal Meet & Greet</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Your chauffeur waits at the arrival exit hall holding a personalized signboard with your name.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 space-y-3">
+            <div class="text-xs font-black text-[#B88A3B] tracking-wider uppercase">Step 03</div>
+            <h3 class="text-lg font-bold text-[#0B2348]">Relax in Private Comfort</h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Enjoy all-day Innova Zenix comfort. Settle payment directly in SGD, MYR, or IDR on arrival.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 4: Curated Tour Packages (Clean Travel App Cards) -->
+    <section class="py-14 sm:py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
+          <div class="space-y-1 max-w-xl">
+            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">Curated Day Tours</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B2348] tracking-tight">
+              Featured Batam Tour Packages
+            </h2>
+          </div>
+          <div>
+            <a 
+              href="/tours" 
+              class="inline-flex items-center gap-1 text-xs font-bold text-[#0B2348] hover:text-[#B88A3B] transition-colors"
+            >
+              <span>View All 4 Packages</span>
+              <ArrowRight class="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {packages.map(pkg => (
+            <a href={`/tours/${pkg.id}`} class="group block rounded-2xl bg-white border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-md transition-all">
+              <div class="relative h-52 sm:h-60 overflow-hidden bg-slate-900">
+                <img 
+                  src={pkg.image} 
+                  alt={pkg.name} 
+                  class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-slate-950/80 text-white backdrop-blur-xs">
+                    {pkg.badge}
+                  </span>
+                </div>
+                <div class="absolute bottom-3 inset-x-3 flex items-end justify-between text-white">
+                  <div>
+                    <h3 class="text-base sm:text-lg font-bold text-white group-hover:text-[#D2AD68] transition-colors">
+                      {pkg.name}
+                    </h3>
+                  </div>
+                  <div class="text-right shrink-0 bg-black/60 px-2.5 py-1 rounded-md text-xs font-bold text-[#D2AD68]">
+                    {pkg.rateSgd}
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-5 space-y-3">
+                <p class="text-xs text-slate-600 leading-relaxed italic">
+                  "{pkg.tagline}"
+                </p>
+                <div class="flex items-center justify-between text-xs font-bold text-[#0B2348] pt-2 border-t border-slate-100">
+                  <span class="text-slate-500 font-medium">Duration: {pkg.duration}</span>
+                  <span class="text-[#B88A3B] flex items-center gap-1">
+                    <span>Full Itinerary</span>
+                    <ArrowRight class="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 5: Fleet & Chauffeur Showcase (Clean & Airy) -->
+    <section class="py-14 sm:py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <div class="lg:col-span-6">
+            <div class="rounded-2xl overflow-hidden shadow-sm border border-slate-100 bg-slate-950">
+              <img 
+                src="/images/zenix-interior.jpg" 
+                alt="Toyota Innova Zenix Executive Cabin Interior" 
+                class="w-full h-64 sm:h-80 object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 space-y-4">
+            <div class="space-y-1">
+              <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">Guaranteed Fleet</span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B2348] tracking-tight">
+                White Toyota Innova Zenix & Uniformed Chauffeurs
+              </h2>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Every booking is fulfilled by our guaranteed Innova Zenix fleet with trained, respectful chauffeurs.
+            </p>
+
+            <div class="space-y-2.5 text-xs sm:text-sm text-slate-700 pt-1">
+              <div class="flex items-start gap-2.5">
+                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>Executive captain seats with independent multi-zone rear air conditioning</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>Personalized signboard greeting at the ferry arrival hall</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>Free rescheduling if your ferry is delayed by sea conditions</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <span>Zero unrequested tourist stops or kickback store visits</span>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <a 
+                href="/fleet"
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-[#0B2348] hover:text-[#B88A3B] transition-colors"
+              >
+                <span>Learn More About Our Standards</span>
+                <ArrowRight class="w-4 h-4" />
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 6: Top Batam Attractions (Clean Grid) -->
+    <section class="py-14 sm:py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
+          <div class="space-y-1 max-w-xl">
+            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">Batam Travel Guide</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B2348] tracking-tight">
+              Top Places to Visit in Batam
+            </h2>
+          </div>
+          <div>
+            <a 
+              href="/destinations" 
+              class="inline-flex items-center gap-1 text-xs font-bold text-[#0B2348] hover:text-[#B88A3B] transition-colors"
+            >
+              <span>Explore All 7 Spots</span>
+              <ArrowRight class="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {destinations.slice(0, 3).map(dest => (
+            <a href={`/destinations/${dest.id}`} class="group block rounded-2xl bg-white border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-md transition-all">
+              <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-900">
+                <img 
+                  src={dest.image} 
+                  alt={dest.name} 
+                  class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                <div class="absolute top-2.5 left-2.5">
+                  <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-950/80 text-white">
+                    {dest.categoryLabel}
+                  </span>
+                </div>
+                <div class="absolute bottom-2.5 inset-x-2.5 flex items-center justify-between text-white text-xs font-semibold">
+                  <span class="truncate">{dest.location}</span>
+                  <span class="text-amber-400 font-bold shrink-0 flex items-center gap-1">
+                    <Star class="w-3 h-3 fill-current" />
+                    <span>{dest.rating}</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-4 space-y-2">
+                <h3 class="text-base font-bold text-[#0B2348] group-hover:text-[#B88A3B] transition-colors">
+                  {dest.name}
+                </h3>
+                <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                  {dest.description}
+                </p>
+                <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-[#0B2348] font-bold">
+                  <span class="text-slate-400 font-normal">Duration: {dest.suggestedDuration}</span>
+                  <span class="text-[#B88A3B]">View Guide →</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 7: Cross-Border Reassurance (Minimalist Line Strip) -->
+    <section class="bg-white py-10 border-t border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div class="space-y-0.5">
+            <div class="text-xs font-bold text-slate-900">Singapore PayNow</div>
+            <div class="text-[11px] text-slate-500">Pay in SGD on arrival</div>
+          </div>
+          <div class="space-y-0.5">
+            <div class="text-xs font-bold text-slate-900">Touch n Go / MYR</div>
+            <div class="text-[11px] text-slate-500">Instant QR settlement</div>
+          </div>
+          <div class="space-y-0.5">
+            <div class="text-xs font-bold text-slate-900">Delay Shield</div>
+            <div class="text-[11px] text-slate-500">Free delay rescheduling</div>
+          </div>
+          <div class="space-y-0.5">
+            <div class="text-xs font-bold text-slate-900">Fixed Rates</div>
+            <div class="text-[11px] text-slate-500">Fuel & parking included</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  let currentBg = 0;
+  const bgSlides = document.querySelectorAll('.hero-bg-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  let autoPlayTimer: ReturnType<typeof setInterval> | null = null;
+
+  function setHeroSlide(index: number) {
+    bgSlides.forEach((slide, i) => {
+      if (i === index) {
+        slide.classList.remove('opacity-0', 'z-0');
+        slide.classList.add('opacity-100', 'z-10');
+      } else {
+        slide.classList.remove('opacity-100', 'z-10');
+        slide.classList.add('opacity-0', 'z-0');
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.classList.remove('bg-white/40', 'w-2');
+        dot.classList.add('bg-[#D2AD68]', 'w-6');
+      } else {
+        dot.classList.remove('bg-[#D2AD68]', 'w-6');
+        dot.classList.add('bg-white/40', 'w-2');
+      }
+    });
+
+    currentBg = index;
+  }
+
+  function nextHeroSlide() {
+    const next = (currentBg + 1) % bgSlides.length;
+    setHeroSlide(next);
+  }
+
+  function startHeroAutoPlay() {
+    if (autoPlayTimer) clearInterval(autoPlayTimer);
+    autoPlayTimer = setInterval(nextHeroSlide, 5000);
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.getAttribute('data-dot-index') || '0', 10);
+      setHeroSlide(idx);
+      startHeroAutoPlay();
+    });
+  });
+
+  startHeroAutoPlay();
+</script>
