@@ -6,12 +6,33 @@ import PageHeader from '../components/PageHeader.astro';
 import { charterServices } from '../data/packages';
 import { terminals } from '../data/terminals';
 import { CheckCircle2, ShieldCheck, Car, Clock, Navigation, MapPin } from '@lucide/astro';
+
+const servicesSchema = {
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  "name": "Batam Private Car Charters and Ferry Transfers",
+  "description": "Private chauffeured car rental and ferry port transfers in Batam with guaranteed Toyota Innova Zenix MPVs.",
+  "itemListElement": charterServices.map((s, idx) => ({
+    "@type": "Offer",
+    "position": idx + 1,
+    "itemOffered": {
+      "@type": "Service",
+      "name": s.title,
+      "description": s.description
+    },
+    "price": s.rateSgd.replace(/[^0-9]/g, '') || "55",
+    "priceCurrency": "SGD"
+  }))
+};
 ---
 
 <Layout 
   title="Batam Private Car Charters & Ferry Transfers | BatamRide"
   description="Private car charters and ferry terminal transfers in Batam. Guaranteed white Toyota Innova Zenix with dedicated driver. Half-day, full-day, and airport pickups."
+  image="/images/hero-zenix.webp"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(servicesSchema)} slot="head" />
+
   <Header />
 
   <main class="bg-slate-50 min-h-screen pb-16">

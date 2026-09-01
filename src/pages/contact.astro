@@ -7,12 +7,26 @@ import { terminals } from '../data/terminals';
 import { packages } from '../data/packages';
 import { WHATSAPP_DISPLAY, buildWhatsAppLink } from '../utils/whatsapp';
 import { Calculator, MessageSquare, ShieldCheck, CheckCircle2, Phone, Calendar, Users, MapPin } from '@lucide/astro';
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "BatamRide Instant Reservation & Rate Estimator",
+  "description": "Calculate and reserve private car charters and curated tours in Batam via WhatsApp.",
+  "mainEntity": {
+    "@type": "LocalBusiness",
+    "name": "BatamRide",
+    "telephone": "+628127003708",
+    "url": "https://batamride.com"
+  }
+};
 ---
 
 <Layout 
   title="Instant Reservation & Rate Estimator | BatamRide Private Transport"
   description="Estimate your Batam private car charter or tour package rate and book directly via WhatsApp with zero upfront deposit. Instant confirmation."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} slot="head" />
   <Header />
 
   <main class="bg-slate-50 min-h-screen pb-16">
