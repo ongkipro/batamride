@@ -1,88 +1,144 @@
 ---
-import { WHATSAPP_DISPLAY } from '../utils/whatsapp';
+const currentYear = new Date().getFullYear();
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 ---
 
-<footer class="bg-[#071730] text-slate-400 text-xs border-t border-slate-800/80">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-      
-      <!-- Col 1: Brand & Tagline -->
-      <div class="space-y-4">
-        <div class="flex flex-col">
-          <span class="text-xl font-black tracking-tight text-white leading-none">
-            BATAM<span class="text-[#B88A3B]">RIDE</span>
-          </span>
-          <span class="text-[9px] font-bold tracking-[0.22em] text-slate-400 uppercase mt-1">
-            Private Transport & Tours
-          </span>
-        </div>
-        <p class="text-slate-400 leading-relaxed text-xs">
-          Executive private transportation in Batam Island designed for Singapore and Malaysia travelers. Guaranteed white Toyota Innova Zenix MPVs and professional uniformed chauffeurs.
-        </p>
-        <div class="pt-1 text-slate-300 font-medium space-y-0.5">
-          <div class="text-xs">Direct Concierge: <strong class="text-white font-bold">{WHATSAPP_DISPLAY}</strong></div>
-          <div class="text-[11px] text-slate-500">Service Hours: 06:00 - 23:00 (WIB)</div>
-        </div>
+<footer class="site-footer">
+  <div class="shell footer-main-grid">
+    <!-- Col 1: Corporate Profile -->
+    <div class="footer-col footer-brand-col">
+      <a class="footer-brand" href="/" aria-label="BatamRide Home">
+        <img 
+          class="brand-logo" 
+          src="/assets/batamride-logo.webp" 
+          alt="BatamRide — Your Trusted Batam Travel Partner" 
+          width="170" 
+          height="30"
+          loading="lazy"
+        />
+      </a>
+      <p class="footer-desc">
+        Premier executive private transport & chauffeur services in Batam Island. Tailored for corporate travelers, golfers, and families arriving from Singapore and Malaysia.
+      </p>
+      <div class="footer-badges">
+        <span class="footer-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Strict Smoke-Free Fleet
+        </span>
+        <span class="footer-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          Transparent S$70/Day Rates
+        </span>
       </div>
-
-      <!-- Col 2: Navigation Directory -->
-      <div class="space-y-3">
-        <div class="text-xs font-bold text-white uppercase tracking-wider">
-          Explore BatamRide
-        </div>
-        <ul class="space-y-2 text-slate-300">
-          <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
-          <li><a href="/services" class="hover:text-white transition-colors">Services & Hourly Charters</a></li>
-          <li><a href="/tours" class="hover:text-white transition-colors">Curated Day Tour Packages</a></li>
-          <li><a href="/destinations" class="hover:text-white transition-colors">Top Batam Attractions Guide</a></li>
-          <li><a href="/fleet" class="hover:text-white transition-colors">Innova Zenix & Chauffeur Standards</a></li>
-          <li><a href="/faq" class="hover:text-white transition-colors">Travel Logistics FAQs</a></li>
-          <li><a href="/contact" class="hover:text-white transition-colors">Contact & Reservation</a></li>
-        </ul>
-      </div>
-
-      <!-- Col 3: Supported Arrival Ports -->
-      <div class="space-y-3">
-        <div class="text-xs font-bold text-white uppercase tracking-wider">
-          Arrival Terminals
-        </div>
-        <ul class="space-y-2 text-slate-400">
-          <li>Batam Centre Ferry Terminal</li>
-          <li>Harbour Bay Ferry Terminal</li>
-          <li>Sekupang Ferry Terminal</li>
-          <li>Nongsapura Ferry Terminal</li>
-          <li>Hang Nadim International Airport (BTH)</li>
-        </ul>
-      </div>
-
-      <!-- Col 4: Payment Methods & Reassurance -->
-      <div class="space-y-3">
-        <div class="text-xs font-bold text-white uppercase tracking-wider">
-          Cross-Border Payments
-        </div>
-        <p class="text-slate-400 text-xs leading-relaxed">
-          Pay conveniently with zero currency exchange headaches on arrival:
-        </p>
-        <div class="flex flex-wrap gap-1.5 pt-1">
-          <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 text-[11px] font-semibold border border-white/10">PayNow (SG)</span>
-          <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 text-[11px] font-semibold border border-white/10">Touch n Go (MY)</span>
-          <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 text-[11px] font-semibold border border-white/10">SenangPay</span>
-          <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 text-[11px] font-semibold border border-white/10">Visa / Mastercard</span>
-          <span class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300 text-[11px] font-semibold border border-white/10">IDR Cash</span>
-        </div>
-      </div>
-
     </div>
 
-    <!-- Bottom Copyright -->
-    <div class="mt-12 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-      <div>
-        © {new Date().getFullYear()} BatamRide. All rights reserved. Premium private transport in Batam.
+    <!-- Col 2: Executive Services -->
+    <div class="footer-col">
+      <h3 class="footer-heading">Executive Services</h3>
+      <ul class="footer-links" role="list">
+        <li><a href="/batam-private-driver/">Full-Day Private Driver</a></li>
+        <li><a href="/batam-ferry-terminal-transfer/">Ferry Terminal Transfer</a></li>
+        <li><a href="/batam-airport-transfer/">Airport Transfer (BTH)</a></li>
+        <li><a href="/services/">All Chauffeur Services</a></li>
+        <li><a href="/singapore-to-batam/">Singapore to Batam Route Guide</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Company & Fleet -->
+    <div class="footer-col">
+      <h3 class="footer-heading">Company & Fleet</h3>
+      <ul class="footer-links" role="list">
+        <li><a href="/about/">About BatamRide</a></li>
+        <li><a href="/fleet/">Executive Fleet (Zenix & Reborn)</a></li>
+        <li><a href="/faq/">Frequently Asked Questions</a></li>
+        <li><a href="/contact/">Corporate Contact & Dispatch</a></li>
+        <li><a href="/booking-terms/">Booking Terms & Conditions</a></li>
+        <li><a href="/privacy-policy/">Privacy & Data Protection</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4: Dispatch Desks & Payment -->
+    <div class="footer-col">
+      <h3 class="footer-heading">Dispatch & Enquiries</h3>
+      <div class="footer-dispatch-card">
+        <div class="dispatch-entry">
+          <span class="dispatch-label">Singapore Dispatch:</span>
+          <a href="https://wa.me/6580900928" target="_blank" rel="noopener noreferrer" class="dispatch-phone">
+            <strong>+65 8090 0928</strong>
+          </a>
+        </div>
+        <div class="dispatch-entry">
+          <span class="dispatch-label">Malaysia Dispatch:</span>
+          <a href="https://wa.me/60189028790" target="_blank" rel="noopener noreferrer" class="dispatch-phone">
+            <strong>+60 18-902 8790</strong>
+          </a>
+        </div>
+        <p class="dispatch-hours">Operating daily: 06:00 – 23:00 SGT</p>
       </div>
-      <div class="flex items-center gap-6 text-slate-400">
-        <a href="/faq" class="hover:text-white transition-colors">Booking Policies</a>
-        <a href="/contact" class="hover:text-white transition-colors">Customer Support</a>
+
+      <div class="footer-payments">
+        <span class="payment-title">Accepted Payment Systems:</span>
+        <div class="payment-row">
+          <img src="/assets/paynow-logo.webp" alt="PayNow Singapore" width="56" height="20" loading="lazy" />
+          <img src="/assets/tng-ewallet-logo.svg" alt="Touch 'n Go eWallet Malaysia" width="40" height="20" loading="lazy" />
+          <img src="/assets/visa-logo.svg" alt="Visa International" width="34" height="12" loading="lazy" />
+          <img src="/assets/mastercard-logo.jpg" alt="Mastercard International" width="30" height="18" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Legal Row -->
+  <div class="footer-bottom">
+    <div class="shell footer-bottom-inner">
+      <p>© {currentYear} BatamRide. All rights reserved. Private passenger transport & corporate chauffeur services in Batam, Riau Islands, Indonesia.</p>
+      <div class="footer-bottom-links">
+        <a href="/booking-terms/">Terms</a>
+        <span class="dot-sep" aria-hidden="true">•</span>
+        <a href="/privacy-policy/">Privacy</a>
+        <span class="dot-sep" aria-hidden="true">•</span>
+        <a href="/contact/">Support</a>
       </div>
     </div>
   </div>
 </footer>
+
+{isHome && (
+  <>
+    <a class="button button-gold mobile-book" href="#booking">Book your ride</a>
+
+    <script>
+      // Smart mobile booking floating button visibility
+      (() => {
+        const mobileBookBtn = document.querySelector(".mobile-book");
+        if (!mobileBookBtn) return;
+
+        const handleScroll = () => {
+          const scrollY = window.scrollY || document.documentElement.scrollTop;
+          const hero = document.querySelector(".hero");
+          const booking = document.querySelector("#booking");
+          const footer = document.querySelector("footer");
+          const vh = window.innerHeight;
+
+          const heroBottom = hero ? hero.getBoundingClientRect().bottom : -1;
+          const bookingRect = booking ? booking.getBoundingClientRect() : null;
+          const inBooking = bookingRect && bookingRect.top < vh - 40 && bookingRect.bottom > 60;
+
+          const footerRect = footer ? footer.getBoundingClientRect() : null;
+          const nearFooter = footerRect && footerRect.top < vh - 20;
+
+          // Show only when user has scrolled past hero and is NOT in booking form or touching footer
+          if (scrollY > 280 && heroBottom <= 40 && !inBooking && !nearFooter) {
+            mobileBookBtn.classList.add("is-visible");
+          } else {
+            mobileBookBtn.classList.remove("is-visible");
+          }
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener("resize", handleScroll, { passive: true });
+        handleScroll();
+      })();
+    </script>
+  </>
+)}

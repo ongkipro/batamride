@@ -1,315 +1,195 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import { terminals } from '../data/terminals';
-import { packages } from '../data/packages';
-import { WHATSAPP_DISPLAY, buildWhatsAppLink } from '../utils/whatsapp';
-import { Calculator, MessageSquare, ShieldCheck, CheckCircle2, Phone, Calendar, Users, MapPin } from '@lucide/astro';
 
-const contactSchema = {
+const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ContactPage",
-  "name": "BatamRide Instant Reservation & Rate Estimator",
-  "description": "Calculate and reserve private car charters and curated tours in Batam via WhatsApp.",
-  "mainEntity": {
-    "@type": "LocalBusiness",
-    "name": "BatamRide",
-    "telephone": "+628127003708",
-    "url": "https://batamride.com"
-  }
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "name": "Contact BatamRide Corporate Dispatch & Enquiries",
+      "url": "https://batamride.com/contact/",
+      "description": "Direct Singapore and Malaysia WhatsApp dispatch desks for BatamRide private driver bookings, corporate charters, and ferry terminal transfers."
+    },
+    {
+      "@type": "LocalBusiness",
+      "name": "BatamRide Dispatch Centre",
+      "telephone": ["+6580900928", "+60189028790"],
+      "openingHours": "Mo-Su 06:00-23:00",
+      "url": "https://batamride.com/"
+    }
+  ]
 };
 ---
 
-<Layout 
-  title="Instant Reservation & Rate Estimator | BatamRide Private Transport"
-  description="Estimate your Batam private car charter or tour package rate and book directly via WhatsApp with zero upfront deposit. Instant confirmation."
+<Layout
+  title="Contact & Dispatch | Singapore & Malaysia Desks | BatamRide"
+  description="Connect with BatamRide's cross-border dispatch desks. Instant WhatsApp support for Singapore (+65 8090 0928) and Malaysia (+60 18-902 8790). Operating daily 06:00–23:00 SGT."
+  canonical="/contact/"
+  jsonLd={jsonLd}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} slot="head" />
-  <Header />
-
-  <main class="bg-slate-50 min-h-screen pb-16">
-    
-    <!-- Page Hero Banner with Background Image -->
-    <PageHeader 
-      badge="Direct Booking Hub"
-      title="Instant Reservation & Rate Estimator"
-      subtitle="Select your travel details below to estimate your rate and submit your reservation directly to our WhatsApp concierge."
-      breadcrumbItems={[
-        { label: 'Reservation & Estimator' }
-      ]}
-      bgImage="/images/hero-zenix.webp"
-    />
-
-    <!-- Interactive Booking Form Section -->
-    <section class="py-12 sm:py-20">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/90 shadow-md p-6 sm:p-10 space-y-8">
-          
-          <div class="space-y-1.5 border-b border-slate-100 pb-5">
-            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider">Step 1 of 2</span>
-            <h2 class="text-xl sm:text-2xl font-bold text-[#0B2348]">
-              Configure Your Batam Trip
-            </h2>
-            <p class="text-xs sm:text-sm text-slate-500">
-              Zero credit card needed. Settle payment directly in SGD, MYR, or IDR on arrival.
-            </p>
+  <main id="main">
+    <!-- Contact Hero Banner -->
+    <section class="corp-hero">
+      <div class="shell corp-hero-grid">
+        <div class="corp-hero-content">
+          <p class="section-label">Cross-Border Operations</p>
+          <h1>Direct Dispatch & <span>Customer Concierge</span></h1>
+          <p class="lede">
+            Our operations team bridges Singapore and Malaysia with Batam Island. Connect directly with our live dispatch desks for urgent quotes, flight/ferry updates, corporate invoicing, and custom itineraries.
+          </p>
+          <div class="corp-hero-actions">
+            <a class="button button-gold" href="https://wa.me/6580900928" target="_blank" rel="noopener noreferrer">Singapore Desk WhatsApp</a>
+            <a class="button button-outline" href="https://wa.me/60189028790" target="_blank" rel="noopener noreferrer">Malaysia Desk WhatsApp</a>
           </div>
-
-          <form id="trip-estimator-form" class="space-y-6">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-              
-              <!-- Service / Tour Package -->
-              <div class="space-y-1.5 md:col-span-2">
-                <label for="service-select" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
-                  Select Service or Tour Package:
-                </label>
-                <select 
-                  id="service-select" 
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0B2348] cursor-pointer"
-                >
-                  <option value="barelang-sunset-tour" data-sgd="95" data-myr="310" data-idr="1,050,000">Barelang Sunset & Heritage Tour (SGD 95 / MYR 310)</option>
-                  <option value="nagoya-shopping-spa" data-sgd="95" data-myr="310" data-idr="1,050,000">Nagoya Shopping, Food & Spa Haven (SGD 95 / MYR 310)</option>
-                  <option value="kelong-seafood-feast" data-sgd="105" data-myr="340" data-idr="1,150,000">Kelong Ocean Feast & Coastal Trail (SGD 105 / MYR 340)</option>
-                  <option value="nongsa-luxury-island" data-sgd="110" data-myr="360" data-idr="1,200,000">Nongsa Luxury & Island Escape (SGD 110 / MYR 360)</option>
-                  <option value="full-day-charter" data-sgd="95" data-myr="320" data-idr="1,100,000">Custom Full-Day Charter (10-12h) (SGD 95 / MYR 320)</option>
-                  <option value="half-day-charter" data-sgd="65" data-myr="250" data-idr="750,000">Custom Half-Day Charter (4-6h) (SGD 65 / MYR 250)</option>
-                  <option value="ferry-transfer" data-sgd="30" data-myr="100" data-idr="350,000">Point-to-Point Terminal Transfer (SGD 30 / MYR 100)</option>
-                </select>
-              </div>
-
-              <!-- Country of Origin -->
-              <div class="space-y-1.5">
-                <label for="origin-select" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
-                  Guest Country of Origin:
-                </label>
-                <select 
-                  id="origin-select" 
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0B2348] cursor-pointer"
-                >
-                  <option value="Singapore">Singapore (PayNow / SGD)</option>
-                  <option value="Malaysia">Malaysia (Touch n Go / MYR)</option>
-                  <option value="Indonesia / Other">Indonesia / International</option>
-                </select>
-              </div>
-
-              <!-- Pickup Location -->
-              <div class="space-y-1.5">
-                <label for="pickup-select" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
-                  Arrival Port / Pickup Point:
-                </label>
-                <select 
-                  id="pickup-select" 
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0B2348] cursor-pointer"
-                >
-                  <option value="Batam Centre Ferry Terminal">Batam Centre Ferry Terminal</option>
-                  <option value="Harbour Bay Ferry Terminal">Harbour Bay Ferry Terminal</option>
-                  <option value="Sekupang Ferry Terminal">Sekupang Ferry Terminal</option>
-                  <option value="Nongsapura Ferry Terminal">Nongsapura Ferry Terminal</option>
-                  <option value="Hang Nadim Airport (BTH)">Hang Nadim Airport (BTH)</option>
-                  <option value="Hotel Pickup in Batam">Hotel in Batam (City Center)</option>
-                </select>
-              </div>
-
-              <!-- Travel Date -->
-              <div class="space-y-1.5">
-                <label for="date-input" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
-                  Planned Travel Date:
-                </label>
-                <input 
-                  type="date" 
-                  id="date-input" 
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0B2348]"
-                />
-              </div>
-
-              <!-- Number of Passengers -->
-              <div class="space-y-1.5">
-                <label for="pax-select" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
-                  Passenger Group Size:
-                </label>
-                <select 
-                  id="pax-select" 
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#0B2348] cursor-pointer"
-                >
-                  <option value="1 - 2 Adults">1 - 2 Adults</option>
-                  <option value="3 - 4 Adults">3 - 4 Adults</option>
-                  <option value="5 - 6 Adults (Full Innova Zenix)">5 - 6 Adults (Full Innova Zenix)</option>
-                  <option value="Family with Children">Family with Children</option>
-                  <option value="7+ Pax (Multiple Vehicles Needed)">7+ Pax (Multiple Vehicles Needed)</option>
-                </select>
-              </div>
-
-              <!-- Custom Notes -->
-              <div class="space-y-1.5 md:col-span-2">
-                <label for="notes-input" class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
-                  Special Requests / Luggage Notes (Optional):
-                </label>
-                <input 
-                  type="text" 
-                  id="notes-input" 
-                  placeholder="e.g. 4 large suitcases, baby stroller, specific seafood restaurant preference" 
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0B2348]"
-                />
-              </div>
-
-            </div>
-
-            <!-- Live Calculated Quote Box -->
-            <div class="bg-gradient-to-br from-slate-50 to-amber-50/50 border border-amber-200/80 rounded-2xl p-6 space-y-4 shadow-2xs">
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div class="space-y-0.5">
-                  <span class="text-[10px] font-bold text-[#B88A3B] uppercase tracking-wider">Calculated Fixed Rate</span>
-                  <div class="flex items-baseline gap-2">
-                    <span id="rate-sgd-display" class="text-3xl sm:text-4xl font-black text-[#0B2348]">SGD 95</span>
-                    <span class="text-slate-400">/</span>
-                    <span id="rate-myr-display" class="text-xl sm:text-2xl font-bold text-[#B88A3B]">MYR 310</span>
-                  </div>
-                  <div id="rate-idr-display" class="text-xs text-slate-500 font-medium">Approx. IDR 1,050,000</div>
-                </div>
-
-                <div class="text-xs text-slate-600 space-y-1 sm:text-right">
-                  <div class="font-bold text-slate-800">All-Inclusive Fixed Fare</div>
-                  <div class="text-[11px] text-slate-500">Innova Zenix • Chauffeur • Fuel • Parking</div>
-                </div>
-              </div>
-
-              <!-- Reassurances list -->
-              <div class="grid sm:grid-cols-3 gap-2 text-[11px] text-slate-600 border-t border-amber-200/60 pt-3">
-                <div class="flex items-center gap-1.5">
-                  <ShieldCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>Zero Upfront Card Deposit</span>
-                </div>
-                <div class="flex items-center gap-1.5">
-                  <ShieldCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>Free Ferry Delay Reschedule</span>
-                </div>
-                <div class="flex items-center gap-1.5">
-                  <ShieldCheck class="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>Driver with Nameplate</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Single Submit WhatsApp CTA Button -->
-            <div class="pt-2">
-              <a 
-                id="submit-wa-btn"
-                href="https://wa.me/628127003708"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="w-full inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20BA56] active:bg-[#1EAE4B] text-slate-950 font-black py-4 px-6 rounded-2xl text-base shadow-md hover:shadow-xl transition-all duration-200 transform hover:scale-101 active:scale-98 cursor-pointer select-none"
-              >
-                <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
-                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z"/>
-                </svg>
-                <span>Submit Reservation via WhatsApp</span>
-              </a>
-              <p class="text-xs text-center text-slate-500 mt-2 font-medium">
-                Our concierge responds in under 5 minutes • {WHATSAPP_DISPLAY}
-              </p>
-            </div>
-
-          </form>
-
         </div>
 
+        <aside class="corp-hero-badge-card">
+          <p class="card-heading">Dispatch Operations Hours</p>
+          <p style="color: rgba(255,255,255,0.85); font-size: 14.5px; line-height: 1.6; margin: 0 0 16px;">
+            Our dispatch coordinators monitor incoming ferry docks and airport runways continuously throughout the day.
+          </p>
+          <div class="corp-stat-row">
+            <div class="corp-stat-item">
+              <strong>06:00–23:00</strong>
+              <span>Daily Operating Hours (SGT)</span>
+            </div>
+            <div class="corp-stat-item">
+              <strong>&lt; 15 Mins</strong>
+              <span>Average Response SLA</span>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
+    <!-- Dispatch Desks Cards -->
+    <section class="corp-section bg-white">
+      <div class="shell">
+        <div class="section-intro-center">
+          <p class="section-label">Dedicated Country Desks</p>
+          <h2>Choose Your Preferred WhatsApp Channel</h2>
+          <p>
+            Connect instantly with a specialist fluent in your preferred regional payment systems and travel requirements.
+          </p>
+        </div>
+
+        <div class="contact-desks-grid">
+          <!-- Singapore Desk -->
+          <article class="contact-desk-card">
+            <div class="desk-badge-row">
+              <span class="desk-region-badge">Singapore Desk</span>
+              <span style="font-size: 12px; color: #166647; font-weight: 700;">● Online Now</span>
+            </div>
+            <h3>Singapore Travelers & Corporate</h3>
+            <span class="desk-phone-display">+65 8090 0928</span>
+            <p>
+              Dedicated channel for travelers departing from HarbourFront Centre or Tanah Merah Ferry Terminal. Supports PayNow QR payments in SGD and corporate invoicing.
+            </p>
+
+            <div class="desk-info-list">
+              <div class="desk-info-item">
+                <span>Response Time:</span>
+                <strong>Within 10 minutes</strong>
+              </div>
+              <div class="desk-info-item">
+                <span>Payment Accepted:</span>
+                <strong>PayNow, SGD, Visa/Mastercard</strong>
+              </div>
+              <div class="desk-info-item">
+                <span>Languages:</span>
+                <strong>English, Mandarin, Teochew, Hokkien</strong>
+              </div>
+            </div>
+
+            <a class="button button-gold" style="width: 100%; margin-top: auto;" href="https://wa.me/6580900928" target="_blank" rel="noopener noreferrer">
+              Chat on Singapore WhatsApp
+            </a>
+          </article>
+
+          <!-- Malaysia Desk -->
+          <article class="contact-desk-card">
+            <div class="desk-badge-row">
+              <span class="desk-region-badge" style="background: #123a6c;">Malaysia Desk</span>
+              <span style="font-size: 12px; color: #166647; font-weight: 700;">● Online Now</span>
+            </div>
+            <h3>Malaysia Travelers & Corporate</h3>
+            <span class="desk-phone-display">+60 18-902 8790</span>
+            <p>
+              Dedicated channel for travelers departing from Stulang Laut (Berjaya Waterfront JB) or Pasir Gudang ferry terminals. Supports Touch ’n Go eWallet and DuitNow MYR.
+            </p>
+
+            <div class="desk-info-list">
+              <div class="desk-info-item">
+                <span>Response Time:</span>
+                <strong>Within 10 minutes</strong>
+              </div>
+              <div class="desk-info-item">
+                <span>Payment Accepted:</span>
+                <strong>Touch ’n Go, DuitNow, MYR Cash</strong>
+              </div>
+              <div class="desk-info-item">
+                <span>Languages:</span>
+                <strong>Bahasa Melayu, Mandarin, English</strong>
+              </div>
+            </div>
+
+            <a class="button button-navy" style="width: 100%; margin-top: auto;" href="https://wa.me/60189028790" target="_blank" rel="noopener noreferrer">
+              Chat on Malaysia WhatsApp
+            </a>
+          </article>
+        </div>
+
+        <!-- Terminal & Meeting Points Guide -->
+        <div class="section-intro-center" style="margin-top: 24px;">
+          <p class="section-label">Arrival Meeting Points</p>
+          <h2>Where Your Chauffeur Meets You</h2>
+          <p>
+            Zero wandering or confusion. Your driver greets you right outside immigration at each port of entry.
+          </p>
+        </div>
+
+        <div class="terminal-guides-grid">
+          <div class="terminal-guide-card">
+            <h4>Harbour Bay Ferry Terminal</h4>
+            <p>
+              Driver greets you right outside the glass automatic doors of the international arrival hall, near the taxi foyer.
+            </p>
+          </div>
+
+          <div class="terminal-guide-card">
+            <h4>Batam Centre Ferry Terminal</h4>
+            <p>
+              Meet at Level 1 Arrival Pick-Up Bay, right underneath the pedestrian link bridge connecting to Mega Mall.
+            </p>
+          </div>
+
+          <div class="terminal-guide-card">
+            <h4>Nongsapura Ferry Terminal</h4>
+            <p>
+              Driver greets you immediately past the luggage scanner at the resort arrival gate, ready for Nongsa resort transfers.
+            </p>
+          </div>
+
+          <div class="terminal-guide-card">
+            <h4>Hang Nadim Airport (BTH)</h4>
+            <p>
+              Chauffeur stands outside the Domestic/International arrival hall with a personalized BatamRide name placard.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Form Booking Anchor Section -->
+    <section class="corp-section bg-cream">
+      <div class="shell" style="text-align: center; max-width: 680px;">
+        <p class="section-label">Direct Online Request</p>
+        <h2>Prefer to Request a Quote Online?</h2>
+        <p style="color: var(--muted); font-size: 16px; line-height: 1.6; margin-bottom: 28px;">
+          Use our interactive reservation builder on the homepage to configure your pickup time, passenger count, and preferred vehicle tier.
+        </p>
+        <a class="button button-gold" href="/#booking">Open Reservation Builder</a>
+      </div>
+    </section>
   </main>
-
-  <Footer />
 </Layout>
-
-<script>
-  const serviceSelect = document.getElementById('service-select') as HTMLSelectElement | null;
-  const originSelect = document.getElementById('origin-select') as HTMLSelectElement | null;
-  const pickupSelect = document.getElementById('pickup-select') as HTMLSelectElement | null;
-  const dateInput = document.getElementById('date-input') as HTMLInputElement | null;
-  const paxSelect = document.getElementById('pax-select') as HTMLSelectElement | null;
-  const notesInput = document.getElementById('notes-input') as HTMLInputElement | null;
-  
-  const sgdDisplay = document.getElementById('rate-sgd-display');
-  const myrDisplay = document.getElementById('rate-myr-display');
-  const idrDisplay = document.getElementById('rate-idr-display');
-  const submitBtn = document.getElementById('submit-wa-btn') as HTMLAnchorElement | null;
-
-  // Pre-fill today + 1 as default date
-  if (dateInput && !dateInput.value) {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    dateInput.value = tomorrow.toISOString().split('T')[0];
-  }
-
-  // Parse URL search params if passed from Estimator Bar
-  const urlParams = new URLSearchParams(window.location.search);
-  const paramTerminal = urlParams.get('terminal');
-  const paramService = urlParams.get('service');
-
-  if (paramTerminal && pickupSelect) {
-    for (let i = 0; i < pickupSelect.options.length; i++) {
-      if (pickupSelect.options[i].value.includes(paramTerminal)) {
-        pickupSelect.selectedIndex = i;
-        break;
-      }
-    }
-  }
-
-  if (paramService && serviceSelect) {
-    for (let i = 0; i < serviceSelect.options.length; i++) {
-      if (serviceSelect.options[i].text.includes(paramService) || paramService.includes(serviceSelect.options[i].text)) {
-        serviceSelect.selectedIndex = i;
-        break;
-      }
-    }
-  }
-
-  function updateForm() {
-    if (!serviceSelect || !originSelect || !pickupSelect || !dateInput || !paxSelect || !submitBtn) return;
-
-    const opt = serviceSelect.options[serviceSelect.selectedIndex];
-    const sgd = opt.getAttribute('data-sgd') || '95';
-    const myr = opt.getAttribute('data-myr') || '310';
-    const idr = opt.getAttribute('data-idr') || '1,050,000';
-
-    if (sgdDisplay) sgdDisplay.textContent = `SGD ${sgd}`;
-    if (myrDisplay) myrDisplay.textContent = `MYR ${myr}`;
-    if (idrDisplay) idrDisplay.textContent = `Approx. IDR ${idr}`;
-
-    const serviceName = opt.text;
-    const origin = originSelect.value;
-    const pickup = pickupSelect.value;
-    const date = dateInput.value || 'To be confirmed';
-    const pax = paxSelect.value;
-    const notes = notesInput ? notesInput.value : '';
-
-    let message = `Hello BatamRide, I would like to book a private transfer/tour:\n\n` +
-      `- Service/Tour: ${serviceName}\n` +
-      `- Planned Date: ${date}\n` +
-      `- Pickup Point: ${pickup}\n` +
-      `- Group Size: ${pax}\n` +
-      `- Country of Origin: ${origin}\n` +
-      `- Estimated Rate: SGD ${sgd} / MYR ${myr}`;
-
-    if (notes) {
-      message += `\n- Notes/Requests: ${notes}`;
-    }
-
-    message += `\n\nPlease confirm availability for Toyota Innova Zenix. Thank you!`;
-
-    submitBtn.href = `https://wa.me/628127003708?text=${encodeURIComponent(message)}`;
-  }
-
-  serviceSelect?.addEventListener('change', updateForm);
-  originSelect?.addEventListener('change', updateForm);
-  pickupSelect?.addEventListener('change', updateForm);
-  dateInput?.addEventListener('change', updateForm);
-  paxSelect?.addEventListener('change', updateForm);
-  notesInput?.addEventListener('input', updateForm);
-
-  updateForm();
-</script>

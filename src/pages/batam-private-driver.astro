@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Batam Private Driver and Car Hire",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "BatamRide",
+        "url": "https://batamride.com/"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Batam"
+      },
+      "description": "Private car with a professional driver in Batam for up to 12 hours.",
+      "offers": {
+        "@type": "Offer",
+        "price": "70",
+        "priceCurrency": "SGD",
+        "description": "Full-day private transport for up to 12 hours. Fuel and ordinary parking included."
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much is a private driver in Batam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "BatamRide's published full-day rate starts at S$70 for up to 12 hours. The final quotation confirms the service, vehicle and any special requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The confirmed private vehicle, professional driver, fuel, ordinary parking and agreed pickup and drop-off are included."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a specific vehicle guaranteed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. BatamRide confirms the exact vehicle and photo with you before any deposit is requested."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Batam Private Driver & Car Hire | BatamRide"
+  description="Book a private car with driver in Batam from S$70 per day for up to 12 hours. Fuel and ordinary parking included, with a professional BatamRide driver."
+  canonical="/batam-private-driver/"
+  jsonLd={jsonLd}
+>
+  <main id="main">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Private car hire with driver</p>
+          <h1>Private Driver in Batam — <span>Your Day, Your Way</span></h1>
+          <p class="lede">Keep one private vehicle and a professional, uniformed BatamRide driver for your group. Plan shopping, meals, appointments, family time or sightseeing around your own schedule.</p>
+          <div class="actions">
+            <a class="button button-gold" href="/#booking">Book Your BatamRide</a>
+            <a class="button button-outline" href="#included">See what’s included</a>
+          </div>
+        </div>
+        <aside class="price-card">
+          <small>Full-day private transport</small>
+          <strong>S$70/day</strong>
+          <p>Maximum 12 hours. Final service time, vehicle and total price are confirmed through official BatamRide WhatsApp before booking.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <div class="intro">
+          <div>
+            <p class="section-label">Private and flexible</p>
+            <h2>One driver for the plans that matter.</h2>
+          </div>
+          <div class="copy">
+            <p>Your driver follows the route agreed with BatamRide and can help keep a practical pace throughout the day. Recommendations for attractions, shops, restaurants and massage places are available when useful, while any unplanned stop requires your approval.</p>
+            <p>All drivers speak Bahasa Indonesia and Mandarin. Each driver also speaks either Teochew or Hokkien. An English-speaking driver may be requested in advance, subject to availability.</p>
+            <p>The exact vehicle depends on your group size, luggage and availability. BatamRide will share the exact vehicle and photo for your approval before any deposit.</p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="card">
+            <span class="check">✓</span>
+            <h3>Your group only</h3>
+            <p>Private transport without sharing the vehicle with unrelated passengers.</p>
+          </article>
+          <article class="card">
+            <span class="check">✓</span>
+            <h3>Professional presentation</h3>
+            <p>A confirmed driver in the official light grey BatamRide uniform.</p>
+          </article>
+          <article class="card">
+            <span class="check">✓</span>
+            <h3>Practical planning</h3>
+            <p>BatamRide may prepare an itinerary around your interests and available time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="included">
+      <div class="shell">
+        <p class="section-label">Clear before confirmation</p>
+        <h2>What the S$70 day service covers.</h2>
+        <div class="two-col">
+          <article class="list-card">
+            <h3>Included</h3>
+            <ul>
+              <li>Private vehicle and professional driver</li>
+              <li>Fuel and ordinary parking</li>
+              <li>Agreed pickup and final drop-off</li>
+              <li>Up to 12 hours of confirmed service</li>
+            </ul>
+          </article>
+          <article class="list-card excluded">
+            <h3>Not automatically included</h3>
+            <ul>
+              <li>Meals and accommodation</li>
+              <li>Ferry or flight tickets</li>
+              <li>Attraction, activity or spa tickets</li>
+              <li>Personal purchases and other personal expenses</li>
+            </ul>
+          </article>
+        </div>
+        <p class="notice">Any overtime fee or special cost will be quoted before confirmation. Availability and the exact vehicle are always checked for your travel date.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <p class="section-label">Simple booking</p>
+        <h2>Confirm the right ride in three steps.</h2>
+        <div class="steps">
+          <article class="step">
+            <h3>Send your details</h3>
+            <p>Share your date, pickup time, final drop-off, group size and luggage through the booking form.</p>
+          </article>
+          <article class="step">
+            <h3>Review the quotation</h3>
+            <p>BatamRide confirms availability, service hours, exact vehicle and photo, total price and any deposit.</p>
+          </article>
+          <article class="step">
+            <h3>Continue on WhatsApp</h3>
+            <p>Payment links or instructions are provided privately only after you confirm the service.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="shell">
+        <p class="section-label">Frequently asked questions</p>
+        <h2>Before you book.</h2>
+        <div class="faq-list">
+          <details>
+            <summary>How much is a private driver in Batam?</summary>
+            <p>The published full-day rate starts at S$70 for a maximum of 12 hours. Your final quotation confirms the exact service, vehicle and any special requirements.</p>
+          </details>
+          <details>
+            <summary>Can you arrange transport for more than seven people?</summary>
+            <p>Yes. BatamRide may arrange a Hiace or larger bus after confirming the group size, luggage and availability through WhatsApp.</p>
+          </details>
+          <details>
+            <summary>Which vehicle will I receive?</summary>
+            <p>Our regular vehicles include a white Toyota Innova Zenix, a white Toyota Innova and a silver Mitsubishi Xpander. Another suitable vehicle may be arranged. The exact vehicle and photo are shared before any deposit.</p>
+          </details>
+          <details>
+            <summary>Can the driver suggest places to visit?</summary>
+            <p>Yes. Your driver can suggest attractions, shops, restaurants and massage places, and BatamRide may prepare a practical itinerary around your interests.</p>
+          </details>
+        </div>
+        <div class="related">
+          <a href="/batam-ferry-terminal-transfer/">Arriving by ferry →</a>
+          <a href="/batam-airport-transfer/">Arriving at Hang Nadim →</a>
+          <a href="/singapore-to-batam/">Planning from Singapore →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell cta-row">
+        <div>
+          <h2>Ready to plan your Batam ride?</h2>
+          <p>Complete the booking form, review your details, then choose the official Singapore or Malaysia WhatsApp contact.</p>
+        </div>
+        <div class="whatsapp">
+          <a class="button button-gold" href="/#booking">Reserve Private Driver</a>
+          <a class="button button-outline" href="/contact/">Contact Dispatch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

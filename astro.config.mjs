@@ -6,6 +6,10 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://batamride.com',
   output: 'static',
+  redirects: {
+    '/tours': '/services/',
+    '/destinations': '/services/',
+  },
   vite: {
     plugins: [tailwindcss()],
   },

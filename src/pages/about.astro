@@ -1,0 +1,242 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "name": "About BatamRide — Professional Private Chauffeur & Corporate Transport",
+      "url": "https://batamride.com/about/",
+      "description": "BatamRide is Batam's premier private transport and corporate chauffeur provider, dedicated to delivering punctual, discreet, and smoke-free travel for visitors from Singapore and Malaysia."
+    },
+    {
+      "@type": "LocalBusiness",
+      "name": "BatamRide",
+      "url": "https://batamride.com/",
+      "logo": "https://batamride.com/assets/batamride-logo.webp",
+      "telephone": ["+6580900928", "+60189028790"],
+      "priceRange": "S$70 per day for up to 12 hours",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Batam",
+        "addressRegion": "Kepulauan Riau",
+        "addressCountry": "ID"
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title="About Us | BatamRide — Professional Corporate & Private Chauffeur"
+  description="Learn about BatamRide: our strict smoke-free vehicle standards, vetted multilingual chauffeurs, and corporate ground transport solutions for Singapore & Malaysia visitors."
+  canonical="/about/"
+  jsonLd={jsonLd}
+>
+  <main id="main">
+    <!-- Corporate Hero -->
+    <section class="corp-hero">
+      <div class="shell corp-hero-grid">
+        <div class="corp-hero-content">
+          <p class="section-label">Company Profile</p>
+          <h1>Executive Transport with <span>Uncompromising Standards</span></h1>
+          <p class="lede">
+            Founded to bridge Singapore and Malaysia travelers with premium, reliable ground transportation in Batam Island. From factory audits and golf retreats to private family holidays, BatamRide delivers discretion, punctuality, and total comfort.
+          </p>
+          <div class="corp-hero-actions">
+            <a class="button button-gold" href="/#booking">Reserve Chauffeur</a>
+            <a class="button button-outline" href="/fleet/">Explore Our Fleet</a>
+          </div>
+        </div>
+
+        <aside class="corp-hero-badge-card">
+          <p class="card-heading">The BatamRide Commitment</p>
+          <p style="color: rgba(255,255,255,0.85); font-size: 14.5px; line-height: 1.6; margin: 0 0 16px;">
+            Every journey is backed by our strict vehicle hygiene protocol, confirmed real photos before any deposit, and dedicated dispatch desks in Singapore and Malaysia.
+          </p>
+          <div class="corp-stat-row">
+            <div class="corp-stat-item">
+              <strong>10,000+</strong>
+              <span>Transfers Completed</span>
+            </div>
+            <div class="corp-stat-item">
+              <strong>99.8%</strong>
+              <span>On-Time Pickup SLA</span>
+            </div>
+            <div class="corp-stat-item">
+              <strong>4.9 / 5</strong>
+              <span>Verified Client Rating</span>
+            </div>
+            <div class="corp-stat-item">
+              <strong>0 Smoke</strong>
+              <span>100% Odor-Free Guarantee</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Company Story & Heritage -->
+    <section class="corp-section bg-white">
+      <div class="shell corp-story-grid">
+        <div class="corp-story-copy">
+          <p class="section-label">Our Story</p>
+          <h2>Redefining Island Transport for Business & Leisure</h2>
+          <p>
+            For years, visitors arriving at Batam Centre, Harbour Bay, or Hang Nadim Airport faced the same recurring frustrations: uncertain street taxi bargaining, varying car cleanliness, language barriers, and unpredictable waiting times.
+          </p>
+          <p>
+            BatamRide was established with a singular focus: to provide a corporate-grade private chauffeur experience comparable to executive car services in Singapore and Kuala Lumpur, priced transparently at an accessible rate starting from <strong>S$70 per day for up to 12 hours</strong>.
+          </p>
+          <p>
+            Today, we serve multinational corporate executives, factory audit delegations in Batamindo and Kabil industrial zones, avid golfing groups, and discerning families who value punctuality, absolute vehicle cleanliness, and peace of mind.
+          </p>
+
+          <div class="corp-story-features">
+            <div class="story-feat-item">
+              <div>
+                <strong>Direct Cross-Border Desks</strong>
+                <span>Instant dispatch via SG & MY WhatsApp lines</span>
+              </div>
+            </div>
+            <div class="story-feat-item">
+              <div>
+                <strong>Corporate Invoicing</strong>
+                <span>Official receipts & corporate billing support</span>
+              </div>
+            </div>
+            <div class="story-feat-item">
+              <div>
+                <strong>Multilingual Drivers</strong>
+                <span>English, Mandarin, Teochew, Hokkien, Malay</span>
+              </div>
+            </div>
+            <div class="story-feat-item">
+              <div>
+                <strong>Guaranteed Exact Car</strong>
+                <span>Real vehicle photo confirmed before deposit</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="corp-story-media">
+          <img 
+            src="/assets/batamride-driver-uniform-gold.png" 
+            alt="BatamRide professional uniformed driver standing beside executive vehicle" 
+            loading="lazy" 
+          />
+          <div class="corp-media-tag">
+            <strong>BatamRide Chauffeur Standards</strong>
+            <span>Groomed in official light-grey uniform, non-smokers, defensive driving certified</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The 4 Core Pillars of BatamRide -->
+    <section class="corp-section bg-cream">
+      <div class="shell">
+        <div class="section-intro-center">
+          <p class="section-label">Operational Rigor</p>
+          <h2>The Four Pillars of BatamRide Service</h2>
+          <p>
+            Every dispatch adheres to a standardized operating procedure crafted to safeguard your schedule, safety, and personal comfort.
+          </p>
+        </div>
+
+        <div class="pillar-grid">
+          <article class="pillar-card">
+            <div class="pillar-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>1. Vehicle Hygiene & Safety</h3>
+            <p>
+              Zero cigarette smoke or residual tobacco odor. Each vehicle undergoes a 50-point pre-trip mechanical inspection, daily steam sanitization, and air purification.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h3>2. Elite Chauffeur Standard</h3>
+            <p>
+              Vetted drivers in company uniform. Professional etiquette, smooth defensive driving, and fluent language skills (English, Mandarin, Teochew, Hokkien, Bahasa Indonesia).
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3>3. Flight & Ferry Synchronization</h3>
+            <p>
+              We monitor ferry arrival times in real time. If your ferry from Tanah Merah, HarbourFront, or Stutong is delayed, your driver adjusts seamlessly with no penalty fees.
+            </p>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+            </div>
+            <h3>4. Transparent Accounting</h3>
+            <p>
+              All inclusive: fuel, car, driver, and ordinary parking. No surprise tolls, fuel surcharges, or forced souvenir store visits. Official invoices provided for corporate claims.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Corporate & B2B Solutions -->
+    <section class="corp-section bg-white">
+      <div class="shell corp-story-grid">
+        <div class="corp-story-media">
+          <img 
+            src="/assets/batamride-innova-zenix-hotel.webp" 
+            alt="Toyota Innova Zenix parked at luxury hotel pickup bay" 
+            loading="lazy" 
+          />
+          <div class="corp-media-tag">
+            <strong>B2B & Corporate Logistics</strong>
+            <span>Dedicated multi-vehicle fleets for corporate delegations and site inspections</span>
+          </div>
+        </div>
+
+        <div class="corp-story-copy">
+          <p class="section-label">Enterprise & VIP</p>
+          <h2>Corporate Fleet & Delegation Logistics</h2>
+          <p>
+            Whether coordinating transport for a 10-person executive delegation inspecting manufacturing plants in Panbil Industrial Estate, or shuttling regional partners between Harbour Bay VIP terminals and Montigo Resorts, BatamRide manages the entire ground logistics.
+          </p>
+          <ul class="service-checklist">
+            <li><span class="check">✓</span> <strong>Single Point of Contact:</strong> Dedicated corporate dispatch manager via Singapore or Malaysia WhatsApp.</li>
+            <li><span class="check">✓</span> <strong>Multi-Vehicle Coordination:</strong> Synchronized dispatch for large groups and conference events.</li>
+            <li><span class="check">✓</span> <strong>Itemized Corporate Invoicing:</strong> Clear tax receipts and corporate invoices issued in SGD or MYR.</li>
+            <li><span class="check">✓</span> <strong>VIP Discretion:</strong> Strict non-disclosure and privacy protocols for high-profile passengers.</li>
+          </ul>
+
+          <div style="margin-top: 28px;">
+            <a class="button button-navy" href="/contact/">Enquire Corporate Dispatch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Strip -->
+    <section class="cta">
+      <div class="shell cta-row">
+        <div>
+          <h2>Ready to experience the BatamRide standard?</h2>
+          <p>Book your executive private driver in under 2 minutes. Transparent rates starting at S$70/day.</p>
+        </div>
+        <div class="whatsapp">
+          <a class="button button-gold" href="/#booking">Reserve Online</a>
+          <a class="button button-outline" href="/contact/">Contact Our Team</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

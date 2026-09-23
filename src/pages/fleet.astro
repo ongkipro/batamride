@@ -1,197 +1,313 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import { Car, Users, Wind, ShieldCheck, CheckCircle2, Luggage, Sparkles, Check } from '@lucide/astro';
 
-const vehicleSchema = {
+const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Toyota Innova Zenix Private Chauffeured MPV",
-  "description": "Executive 6-seater Toyota Innova Zenix MPV rental with dedicated chauffeur for Singapore and Malaysia travelers in Batam.",
-  "image": "https://batamride.com/images/zenix-interior.webp",
-  "brand": {
-    "@type": "Brand",
-    "name": "Toyota"
-  },
-  "offers": {
-    "@type": "AggregateOffer",
-    "priceCurrency": "SGD",
-    "lowPrice": "30",
-    "highPrice": "110",
-    "offerCount": "4"
-  }
+  "@graph": [
+    {
+      "@type": "Product",
+      "name": "BatamRide Executive Fleet",
+      "description": "Premium Toyota Innova Zenix and Toyota Innova Reborn private transport fleet in Batam, meticulously sanitized and maintained for cross-border travelers.",
+      "brand": {
+        "@type": "Brand",
+        "name": "BatamRide"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "70",
+        "priceCurrency": "SGD",
+        "price": "70"
+      }
+    }
+  ]
 };
 ---
 
-<Layout 
-  title="Fleet & Chauffeur Standards | BatamRide Private Transport"
-  description="Learn about our guaranteed white Toyota Innova Zenix MPVs and professional uniformed chauffeurs in Batam. 6-seater comfort, dual AC, and arrival gate meet & greet."
-  image="/images/zenix-interior.webp"
+<Layout
+  title="Our Executive Fleet | Toyota Innova Zenix & Reborn | BatamRide"
+  description="Discover BatamRide's executive vehicle fleet: Toyota Innova Zenix Hybrid and Toyota Innova Reborn. Strict smoke-free cleanliness, dual AC, spacious luggage capacity, and vetted chauffeurs."
+  canonical="/fleet/"
+  jsonLd={jsonLd}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(vehicleSchema)} slot="head" />
-  <Header />
-
-  <main class="bg-slate-50 min-h-screen pb-16">
-    
-    <!-- Page Hero Banner with Background Image -->
-    <PageHeader 
-      badge="Quality Assurance"
-      title="Executive Fleet & Chauffeur Standards"
-      subtitle="We believe premium travel starts with vehicle transparency and professional drivers. Guaranteed white Toyota Innova Zenix for every guest."
-      breadcrumbItems={[
-        { label: 'Fleet & Driver Standards' }
-      ]}
-      bgImage="/images/zenix-interior.webp"
-    />
-
-    <!-- Fleet Vehicle Section -->
-    <section class="py-12 sm:py-18">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
-        
-        <!-- Part 1: Toyota Innova Zenix Showcase -->
-        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          <div class="lg:col-span-6 space-y-4">
-            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">
-              Primary Fleet Standard
-            </span>
-
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B2348] tracking-tight">
-              Toyota Innova Zenix (White Edition)
-            </h2>
-
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              The latest generation Toyota Innova Zenix redefines MPV comfort with smooth suspension, quiet cabin acoustics, and executive captain seats. Clean, odorless, and maintained in showroom condition.
-            </p>
-
-            <div class="grid grid-cols-2 gap-3 text-xs pt-2">
-              <div class="bg-white border border-slate-200/80 rounded-xl p-3.5 space-y-0.5 shadow-2xs">
-                <Users class="w-4 h-4 text-[#B88A3B]" />
-                <div class="font-bold text-slate-900">Up to 6 Adults</div>
-                <div class="text-slate-500 text-[11px]">Spacious 3-row legroom</div>
-              </div>
-
-              <div class="bg-white border border-slate-200/80 rounded-xl p-3.5 space-y-0.5 shadow-2xs">
-                <Wind class="w-4 h-4 text-[#B88A3B]" />
-                <div class="font-bold text-slate-900">Multi-Zone Cold AC</div>
-                <div class="text-slate-500 text-[11px]">Rear ceiling climate control</div>
-              </div>
-
-              <div class="bg-white border border-slate-200/80 rounded-xl p-3.5 space-y-0.5 shadow-2xs">
-                <Luggage class="w-4 h-4 text-[#B88A3B]" />
-                <div class="font-bold text-slate-900">5 Large Suitcases</div>
-                <div class="text-slate-500 text-[11px]">Deep luggage boot capacity</div>
-              </div>
-
-              <div class="bg-white border border-slate-200/80 rounded-xl p-3.5 space-y-0.5 shadow-2xs">
-                <Sparkles class="w-4 h-4 text-[#B88A3B]" />
-                <div class="font-bold text-slate-900">Fast USB Charging</div>
-                <div class="text-slate-500 text-[11px]">Power for phones & tablets</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Vehicle Image Card -->
-          <div class="lg:col-span-6">
-            <div class="rounded-2xl overflow-hidden shadow-xs border border-slate-200/80 bg-white">
-              <img 
-                src="/images/zenix-interior.webp" 
-                alt="Executive Toyota Innova Zenix Cabin Interior" 
-                width="600"
-                height="400"
-                decoding="async"
-                loading="lazy"
-                class="w-full h-72 sm:h-80 object-cover"
-              />
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Part 2: Chauffeur & Driver Standards -->
-        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-8 border-t border-slate-200">
-          
-          <!-- Driver Image Card -->
-          <div class="lg:col-span-6 order-2 lg:order-1">
-            <div class="rounded-2xl overflow-hidden shadow-xs border border-slate-200/80 bg-white">
-              <img 
-                src="/images/driver-uniform.webp" 
-                alt="Professional Uniformed Batam Chauffeur" 
-                width="600"
-                height="400"
-                decoding="async"
-                loading="lazy"
-                class="w-full h-72 sm:h-80 object-cover"
-              />
-            </div>
-          </div>
-
-          <div class="lg:col-span-6 space-y-4 order-1 lg:order-2">
-            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">
-              Driver Code of Conduct
-            </span>
-
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0B2348] tracking-tight">
-              Verified Full-Time Chauffeurs
-            </h2>
-
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              We never outsource your trip to random freelance rideshares. Every driver is a trained, full-time employee committed to hospitality, safety, and discretion.
-            </p>
-
-            <div class="space-y-2 text-xs sm:text-sm text-slate-700 pt-1">
-              <div class="flex items-start gap-2.5">
-                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span>Personalized signboard greet at the terminal arrival gate</span>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span>Zero unsolicited commercial stops or commission store diversions</span>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span>Strict smoke-free vehicle policy before and during guest trips</span>
-              </div>
-              <div class="flex items-start gap-2.5">
-                <Check class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span>Luggage loading and unloading assistance at all stops</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Part 3: What Makes BatamRide Different -->
-        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 space-y-4 shadow-xs">
-          <div class="space-y-1">
-            <span class="text-xs font-bold text-[#B88A3B] uppercase tracking-wider block">Comparison</span>
-            <h3 class="text-xl font-bold text-[#0B2348]">
-              Why Travelers Choose BatamRide Over Unverified Taxis
-            </h3>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-slate-600">
-            <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1.5">
-              <div class="font-bold text-[#0B2348] text-sm">BatamRide Executive Standard</div>
-              <p class="leading-relaxed">
-                Guaranteed white Innova Zenix, locked fixed pricing in SGD/MYR, chauffeur on standby at every stop, and zero shopping pressure.
-              </p>
-            </div>
-            <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-1.5">
-              <div class="font-bold text-slate-500 text-sm">Unverified Port Taxis / Ride-Hail</div>
-              <p class="leading-relaxed">
-                Random older vehicles, unpredictable driver availability during peak hours, and risk of aggressive sales stops at unsolicited souvenir shops.
-              </p>
-            </div>
+  <main id="main">
+    <!-- Fleet Hero Banner -->
+    <section class="corp-hero">
+      <div class="shell corp-hero-grid">
+        <div class="corp-hero-content">
+          <p class="section-label">Executive Fleet</p>
+          <h1>Immaculate Vehicles, <span>Guaranteed Before You Pay</span></h1>
+          <p class="lede">
+            We operate modern, late-model Toyota multi-purpose vehicles meticulously maintained to executive standards. Zero smoke odor, powerful dual-blower air conditioning, and generous luggage capacity for luggage and golf bags.
+          </p>
+          <div class="corp-hero-actions">
+            <a class="button button-gold" href="/#booking">Book Vehicle Now</a>
+            <a class="button button-outline" href="#fleet-zenix">Compare Models</a>
           </div>
         </div>
 
+        <aside class="corp-hero-badge-card">
+          <p class="card-heading">The Fleet Assurance Protocol</p>
+          <p style="color: rgba(255,255,255,0.85); font-size: 14.5px; line-height: 1.6; margin: 0 0 16px;">
+            Unlike standard taxi pools, BatamRide shares the <strong>exact vehicle plate and actual photos</strong> with you on WhatsApp prior to taking any deposit.
+          </p>
+          <div class="corp-stat-row">
+            <div class="corp-stat-item">
+              <strong>100%</strong>
+              <span>Verified Photo Match</span>
+            </div>
+            <div class="corp-stat-item">
+              <strong>50-Pt</strong>
+              <span>Daily Safety Inspection</span>
+            </div>
+            <div class="corp-stat-item">
+              <strong>Zero</strong>
+              <span>Cigarette Smoke Policy</span>
+            </div>
+            <div class="corp-stat-item">
+              <strong>Dual AC</strong>
+              <span>Tropical Climate Tuned</span>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
-  </main>
+    <!-- Fleet Showcase Cards -->
+    <section class="corp-section bg-white" id="fleet-zenix">
+      <div class="shell">
+        <div class="section-intro-center">
+          <p class="section-label">Vehicle Lineup</p>
+          <h2>Crafted for Business Comfort & Family Leisure</h2>
+          <p>
+            Choose between the executive sophistication of the Innova Zenix or the dependable, spacious utility of the Innova Reborn.
+          </p>
+        </div>
 
-  <Footer />
+        <!-- Vehicle 1: Toyota Innova Zenix -->
+        <article class="fleet-detail-card">
+          <div class="fleet-card-gallery">
+            <img 
+              src="/assets/batamride-innova-zenix-hotel.webp" 
+              alt="Toyota Innova Zenix executive MPV outside hotel entrance" 
+              width="1448"
+              height="1086"
+              loading="lazy" 
+            />
+            <span class="vehicle-photo-watermark">Verified Vehicle Photo</span>
+          </div>
+          <div class="fleet-card-info">
+            <div class="fleet-card-header">
+              <div class="fleet-title-wrap">
+                <span class="fleet-class-pill">Premium Executive MPV</span>
+                <h3>Toyota Innova Zenix</h3>
+              </div>
+              <div class="fleet-price-tag">
+                <strong>S$70–S$90</strong>
+                <span>per day (up to 12h)</span>
+              </div>
+            </div>
+
+            <p class="fleet-card-desc">
+              Built on Toyota’s advanced TNGA monocoque architecture. Delivers whisper-quiet cabin acoustics, refined suspension over Batam roads, plush seating, and generous legroom. Ideal for corporate delegates, couples, and premium family trips.
+            </p>
+
+            <table class="fleet-specs-table">
+              <tbody>
+                <tr>
+                  <td>Seating Capacity</td>
+                  <td>Up to 5–6 Adults comfortably</td>
+                </tr>
+                <tr>
+                  <td>Luggage Capacity</td>
+                  <td>3–4 Large Suitcases (28") or 2 Suitcases + 2 Golf Bags</td>
+                </tr>
+                <tr>
+                  <td>Climate Control</td>
+                  <td>Dual-Zone Digital AC with Rear Roof Vents</td>
+                </tr>
+                <tr>
+                  <td>Connectivity</td>
+                  <td>USB-C & USB-A Fast Charging at every row</td>
+                </tr>
+                <tr>
+                  <td>Cabin Noise</td>
+                  <td>Whisper-quiet acoustic glass damping</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="fleet-amenities-row">
+              <span class="amenity-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Chilled Mineral Water
+              </span>
+              <span class="amenity-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Ozone Sanitized
+              </span>
+              <span class="amenity-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Strict Smoke-Free
+              </span>
+              <span class="amenity-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Charging Cables Provided
+              </span>
+            </div>
+
+            <div class="fleet-card-actions">
+              <a class="button button-gold" href="/#booking">
+                Reserve Toyota Innova Zenix
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vehicle 2: Toyota Innova Reborn -->
+        <article class="fleet-detail-card" style="margin-top: 48px;">
+          <div class="fleet-card-gallery">
+            <img 
+              src="/assets/batamride-innova-white-hotel.webp" 
+              alt="Toyota Innova Reborn spacious MPV outside luxury property" 
+              width="1448"
+              height="1086"
+              loading="lazy" 
+            />
+            <span class="vehicle-photo-watermark">Verified Vehicle Photo</span>
+          </div>
+          <div class="fleet-card-info">
+            <div class="fleet-card-header">
+              <div class="fleet-title-wrap">
+                <span class="fleet-class-pill">Spacious Utility MPV</span>
+                <h3>Toyota Innova Reborn</h3>
+              </div>
+              <div class="fleet-price-tag">
+                <strong>S$70</strong>
+                <span>per day (up to 12h)</span>
+              </div>
+            </div>
+
+            <p class="fleet-card-desc">
+              The time-tested workhorse of Southeast Asian executive transport. Rugged ladder-frame chassis with high ground clearance, cavernous cargo boot, and deep interior cushioning. Perfect for golf outings with oversized equipment and group shopping excursions.
+            </p>
+
+            <table class="fleet-specs-table">
+              <tbody>
+                <tr>
+                  <td>Seating Capacity</td>
+                  <td>Up to 6–7 Passengers</td>
+                </tr>
+                <tr>
+                  <td>Luggage Capacity</td>
+                  <td>4 Large Suitcases or 4 Sets of Full Golf Bags</td>
+                </tr>
+                <tr>
+                  <td>Climate Control</td>
+                  <td>High-Output Triple-Blower AC System</td>
+                </tr>
+                <tr>
+                  <td>Suspension</td>
+                  <td>High-clearance suspension for all island terrains</td>
+                </tr>
+                <tr>
+                  <td>Cargo Clearance</td>
+                  <td>Foldable 3rd-row seats for maximum cargo flexibility</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="fleet-amenities-row">
+              <span class="amenity-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Complimentary Water
+              </span>
+              <span class="amenity-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Golf Bag Ready
+              </span>
+              <span class="amenity-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Strict Smoke-Free
+              </span>
+              <span class="amenity-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Uniformed Driver Included
+              </span>
+            </div>
+
+            <div class="fleet-card-actions">
+              <a class="button button-gold" href="/#booking">
+                Reserve Toyota Innova Reborn
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Interior Comfort & Hygiene Section -->
+    <section class="corp-section bg-cream">
+      <div class="shell corp-story-grid">
+        <div class="corp-story-copy">
+          <p class="section-label">Sanitation & Comfort</p>
+          <h2>The 5-Star Cabin Standard</h2>
+          <p>
+            When you enter a BatamRide vehicle after a ferry ride from Singapore or Malaysia, the interior environment is cool, crisp, and completely free of lingering scents or smoking remnants.
+          </p>
+          <ul class="service-checklist">
+            <li><span class="check">✓</span> <strong>Strict Zero-Tolerance Smoking Policy:</strong> Drivers and previous passengers are strictly barred from smoking inside the vehicle at all times.</li>
+            <li><span class="check">✓</span> <strong>Daily Steam & Ozone Treatment:</strong> Vehicles undergo antibacterial misting and upholstery vacuuming every morning.</li>
+            <li><span class="check">✓</span> <strong>Cold Mineral Water:</strong> Sealed, chilled bottled water provided for every passenger on arrival.</li>
+            <li><span class="check">✓</span> <strong>Pre-Cooled AC:</strong> Your chauffeur cools the cabin 15 minutes before your scheduled arrival time at the ferry terminal or airport.</li>
+          </ul>
+        </div>
+
+        <div class="corp-story-media">
+          <img 
+            src="/images/zenix-interior.webp" 
+            alt="Toyota Innova Zenix plush interior seating with ambient lighting" 
+            loading="lazy"
+            width="1448"
+            height="1086"
+          />
+          <div class="corp-media-tag">
+            <strong>Cabin Comfort Guaranteed</strong>
+            <span>Generous legroom, reclinable captain chairs, and pristine leather upholstery</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIP & Large Group Vans -->
+    <section class="corp-section bg-white">
+      <div class="shell">
+        <div class="section-intro-center">
+          <p class="section-label">Large Groups & VIP Delegations</p>
+          <h2>Toyota Alphard & Luxury HiAce by Request</h2>
+          <p>
+            Traveling with a high-level corporate board, an extended family reunion, or a delegation requiring 10–14 seats? We coordinate luxury Toyota Alphard/Vellfire and Toyota HiAce Commuter VIP vans upon advance inquiry.
+          </p>
+          <div style="margin-top: 24px;">
+            <a class="button button-navy" href="/contact/">Request VIP Delegation Quote</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Strip -->
+    <section class="cta">
+      <div class="shell cta-row">
+        <div>
+          <h2>Need a specific car model confirmed today?</h2>
+          <p>Submit your travel details online or contact our dispatch team to confirm exact vehicle photos before deposit.</p>
+        </div>
+        <div class="whatsapp">
+          <a class="button button-gold" href="/#booking">Plan My Ride</a>
+          <a class="button button-outline" href="/contact/">Contact Dispatch</a>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>

@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Batam Airport Transfer",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "BatamRide",
+        "url": "https://batamride.com/"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Batam"
+      },
+      "description": "Private pickup from Hang Nadim Airport Batam with a professional driver."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you pick up from Hang Nadim Airport?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. BatamRide can arrange private pickup from Hang Nadim Airport, subject to vehicle and driver availability."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if my flight is delayed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Send the updated flight information through official BatamRide WhatsApp as soon as possible. Changes are handled case by case and depend on availability."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I keep the driver for the day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Full-day private transport starts at S$70 for up to 12 hours, subject to final confirmation."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Batam Airport Transfer & Private Driver | BatamRide"
+  description="Private pickup from Hang Nadim Airport Batam with a dedicated driver. Travel to your hotel, business meeting or continue with private transport around Batam."
+  canonical="/batam-airport-transfer/"
+  jsonLd={jsonLd}
+>
+  <main id="main">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Hang Nadim Airport pickup</p>
+          <h1>Batam Airport Transfer — <span>Private Pickup from Hang Nadim Airport</span></h1>
+          <p class="lede">Travel privately from the airport to your hotel, business meeting, family destination or the first stop of a longer Batam itinerary.</p>
+          <div class="actions">
+            <a class="button button-gold" href="/#booking">Plan my airport pickup</a>
+            <a class="button button-outline" href="#service">See the service</a>
+          </div>
+        </div>
+        <aside class="price-card">
+          <small>Continue for the full day</small>
+          <strong>S$70/day</strong>
+          <p>Maximum 12 hours with the confirmed private vehicle, driver, fuel and ordinary parking. Transfer-only requests receive a separate quotation.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="service">
+      <div class="shell">
+        <div class="intro">
+          <div>
+            <p class="section-label">A calmer arrival</p>
+            <h2>Airport transport prepared around your plans.</h2>
+          </div>
+          <div class="copy">
+            <p>Share your flight, arrival time, group size, luggage and first destination. BatamRide checks availability and confirms the exact vehicle and photo before any deposit is requested.</p>
+            <p>For families, friends and business travellers, the same driver may continue beyond the first drop-off when a longer service is confirmed. No compulsory tourist stops are added.</p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="card">
+            <span class="check">✓</span>
+            <h3>Flight-aware planning</h3>
+            <p>Your confirmed pickup is arranged around the flight information you provide.</p>
+          </article>
+          <article class="card">
+            <span class="check">✓</span>
+            <h3>Luggage considered</h3>
+            <p>Vehicle selection considers your passengers, cabin luggage and any large bags.</p>
+          </article>
+          <article class="card">
+            <span class="check">✓</span>
+            <h3>Hotel or onward trip</h3>
+            <p>Choose a direct transfer or continue with private transport around Batam.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="shell">
+        <p class="section-label">Clear quotation</p>
+        <h2>Know what is included before you confirm.</h2>
+        <div class="two-col">
+          <article class="list-card">
+            <h3>Included in a full-day booking</h3>
+            <ul>
+              <li>Private vehicle and uniformed driver</li>
+              <li>Fuel and ordinary parking</li>
+              <li>Confirmed Hang Nadim Airport pickup</li>
+              <li>Agreed final drop-off and up to 12 hours</li>
+            </ul>
+          </article>
+          <article class="list-card excluded">
+            <h3>Not automatically included</h3>
+            <ul>
+              <li>Flight tickets and airline charges</li>
+              <li>Meals, accommodation and attraction tickets</li>
+              <li>Spa services and personal purchases</li>
+              <li>Overtime or special costs outside the quotation</li>
+            </ul>
+          </article>
+        </div>
+        <p class="notice">If your flight timing changes, contact BatamRide through the official WhatsApp number as soon as possible. Adjustments are handled case by case and depend on availability.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <p class="section-label">Before arrival</p>
+        <h2>Three details make pickup easier.</h2>
+        <div class="steps">
+          <article class="step">
+            <h3>Flight information</h3>
+            <p>Send the airline, flight number, arrival date and scheduled landing time.</p>
+          </article>
+          <article class="step">
+            <h3>Passengers and bags</h3>
+            <p>Include adults, children, cabin-size luggage and any large or oversized luggage.</p>
+          </article>
+          <article class="step">
+            <h3>Your onward plan</h3>
+            <p>Tell us the first destination and whether the driver is needed for more stops.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="shell">
+        <p class="section-label">Frequently asked questions</p>
+        <h2>Airport transfer questions.</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Do you pick up from Hang Nadim Airport?</summary>
+            <p>Yes. Private airport pickup can be arranged subject to driver and vehicle availability.</p>
+          </details>
+          <details>
+            <summary>What if my flight is delayed?</summary>
+            <p>Send the updated flight information through official BatamRide WhatsApp. We will adjust where possible; changes are handled case by case.</p>
+          </details>
+          <details>
+            <summary>Can the driver wait while I attend a meeting?</summary>
+            <p>Waiting and further stops can be included when the service hours and itinerary are agreed before confirmation.</p>
+          </details>
+          <details>
+            <summary>Can I use a larger vehicle?</summary>
+            <p>For larger groups, BatamRide may arrange a Hiace or larger bus after confirming passengers, luggage and availability.</p>
+          </details>
+        </div>
+        <div class="related">
+          <a href="/batam-private-driver/">Full-day private driver →</a>
+          <a href="/batam-ferry-terminal-transfer/">Ferry terminal pickup →</a>
+          <a href="/singapore-to-batam/">Singapore to Batam guide →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell cta-row">
+        <div>
+          <h2>Plan your Hang Nadim pickup.</h2>
+          <p>Complete the essentials and continue through the official Singapore or Malaysia WhatsApp contact you choose.</p>
+        </div>
+        <div class="whatsapp">
+          <a class="button button-gold" href="/#booking">Plan my airport pickup</a>
+          <a class="button button-outline" href="/contact/">Contact Dispatch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -1,56 +1,61 @@
-export const WHATSAPP_NUMBER = '628127003708';
-export const WHATSAPP_DISPLAY = '+62 812-7003-708';
-
-export interface WhatsAppPayload {
-  serviceType?: string;
-  travelDate?: string;
-  pickupLocation?: string;
-  destination?: string;
-  paxCount?: string;
-  originCountry?: string;
-  specialRequests?: string;
+export interface ContactInfo {
+  display: string;
+  whatsapp: string;
 }
 
-export function buildWhatsAppLink(payload: WhatsAppPayload = {}): string {
-  const {
-    serviceType = 'Private Car Charter / Tour',
-    travelDate = '',
-    pickupLocation = 'Ferry Terminal / Hotel',
-    destination = 'Batam Itinerary',
-    paxCount = '2 - 4 Pax',
-    originCountry = 'Singapore / Malaysia',
-    specialRequests = ''
-  } = payload;
+export const CONTACTS: Record<'Singapore' | 'Malaysia', ContactInfo> = {
+  Singapore: { display: '+65 8090 0928', whatsapp: '6580900928' },
+  Malaysia: { display: '+60 18-902 8790', whatsapp: '60189028790' },
+};
 
-  let message = `Hello BatamRide, I would like to book private transport in Batam:
+export interface BookingPayload {
+  service: string;
+  date: string;
+  time: string;
+  endDate: string;
+  endTime: string;
+  pickup: string;
+  destination: string;
+  finalDropoff: string;
+  passengers: string;
+  luggage: string;
+  name: string;
+  region: 'Singapore' | 'Malaysia';
+  notes?: string;
+}
 
-- Service / Package: ${serviceType}
-- Travel Date: ${travelDate || 'To be confirmed'}
-- Pickup Location: ${pickupLocation}
-- Destination: ${destination}
-- Number of Passengers: ${paxCount}
-- Country of Origin: ${originCountry}`;
+export function buildBookingMessage(booking: BookingPayload): string {
+  const lines = [
+    'Hello BatamRide, I would like to request a private ride.',
+    '',
+    `Name: ${booking.name}`,
+    `Service: ${booking.service}`,
+    `Pickup date & time: ${booking.date}, ${booking.time}`,
+    `Return / final drop-off: ${booking.endDate}, ${booking.endTime}`,
+    `Pickup: ${booking.pickup}`,
+    `First destination: ${booking.destination}`,
+    `Final drop-off location: ${booking.finalDropoff}`,
+    `Passengers: ${booking.passengers}`,
+    `Cabin-size luggage: ${booking.luggage}`,
+    ...(Number(booking.passengers) > 7
+      ? ['Large-group vehicle: Please advise on a Hiace or larger bus, subject to availability.']
+      : []),
+    'Vehicle: Please confirm the exact vehicle and photo before booking.',
+    'Driver: Professional, uniformed BatamRide driver',
+    'Fuel & parking: Included',
+    'Deposit: I understand that a small booking deposit of S$10–S$20 may be requested after the service, availability, exact vehicle and photo are confirmed.',
+  ];
 
-  if (specialRequests) {
-    message += `\n- Special Requests: ${specialRequests}`;
+  if (booking.notes && booking.notes.trim()) {
+    lines.push(`Extra details: ${booking.notes.trim()}`);
   }
 
-  message += `\n\nPlease confirm availability and total rate for Toyota Innova Zenix. Thank you!`;
-
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  lines.push('', 'Please confirm availability, the exact vehicle and photo, and the total price. Thank you.');
+  return lines.join('\n');
 }
 
-export function buildQuickPackageLink(packageName: string, rate: string): string {
-  const message = `Hello BatamRide, I would like to book the ${packageName} (${rate}). Please confirm availability for Toyota Innova Zenix with private driver. Thank you!`;
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
-
-export function buildWhatsAppTourLink(tourName: string): string {
-  const message = `Hello BatamRide, I would like to book the ${tourName} tour package. Please confirm availability for Toyota Innova Zenix with private chauffeur. Thank you!`;
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
-
-export function buildWhatsAppDestinationLink(destinationName: string): string {
-  const message = `Hello BatamRide, I would like to arrange private Innova Zenix transport to visit ${destinationName}. Please confirm availability and rates. Thank you!`;
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+export function getWhatsAppDirectUrl(region: 'Singapore' | 'Malaysia' = 'Singapore', text?: string): string {
+  const contact = CONTACTS[region];
+  const base = `https://wa.me/${contact.whatsapp}`;
+  return text ? `${base}?text=${encodeURIComponent(text)}` : base;
 }

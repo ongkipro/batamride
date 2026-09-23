@@ -1,71 +1,260 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import { faqs } from '../data/faqs';
-import { WHATSAPP_DISPLAY, buildWhatsAppLink } from '../utils/whatsapp';
-import { HelpCircle, ChevronDown, MessageSquare } from '@lucide/astro';
 
-const waLink = buildWhatsAppLink({ serviceType: 'General Travel & Booking Question' });
-
-const faqSchema = {
+const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map(item => ({
-    "@type": "Question",
-    "name": item.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.answer
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does a private driver in Batam cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "BatamRide's standard full-day private driver rate starts at S$70 for up to 12 hours. This includes the confirmed vehicle, professional driver, fuel, ordinary parking, and agreed pickup and drop-off points."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the exact vehicle guaranteed before payment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. BatamRide shares the exact car model, license plate, and real photos with you via official WhatsApp before any deposit is requested."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment methods are accepted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We accept PayNow (SGD) for Singapore travelers, Touch 'n Go eWallet (MYR) for Malaysian travelers, international Visa/Mastercard via secure payment link, or cash upon arrival."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if my ferry or flight is delayed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We monitor live ferry and flight schedules. If your ferry from Singapore or flight into Hang Nadim Airport is delayed, your chauffeur's pickup schedule adjusts automatically with zero penalty or waiting fees."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are your vehicles smoke-free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, absolutely. BatamRide enforces a strict 100% zero-tolerance smoking policy for both drivers and passengers. All vehicles undergo daily steam cleaning and ozone deodorization."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do your drivers speak English or Mandarin?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All BatamRide drivers speak Bahasa Indonesia and Mandarin, and either Teochew or Hokkien. English-speaking chauffeurs are readily available upon advance request at no extra charge."
+          }
+        }
+      ]
     }
-  }))
+  ]
 };
 ---
 
-<Layout 
-  title="Frequently Asked Questions (FAQs) | BatamRide Private Transport"
-  description="Answers to common questions about Batam private car charters: ferry delays, driver meet and greet, PayNow payments, luggage capacity, and all-inclusive pricing."
+<Layout
+  title="Frequently Asked Questions (FAQ) | BatamRide"
+  description="Got questions about booking a private driver in Batam? Read our transparent FAQ on pricing (S$70/day), ferry delay handling, payment methods, vehicle cleanliness, and languages."
+  canonical="/faq/"
+  jsonLd={jsonLd}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="head" />
+  <main id="main">
+    <!-- FAQ Hero Banner -->
+    <section class="corp-hero">
+      <div class="shell corp-hero-grid">
+        <div class="corp-hero-content">
+          <p class="section-label">Help Center</p>
+          <h1>Frequently Asked <span>Questions</span></h1>
+          <p class="lede">
+            Everything you need to know about reserving an executive private chauffeur with BatamRide. Complete transparency on pricing, vehicle standards, payment methods, and ferry delay policies.
+          </p>
+          <div class="corp-hero-actions">
+            <a class="button button-gold" href="/#booking">Book Your Ride</a>
+            <a class="button button-outline" href="/contact/">Ask via WhatsApp</a>
+          </div>
+        </div>
 
-  <Header />
+        <aside class="corp-hero-badge-card">
+          <p class="card-heading">Key Policies at a Glance</p>
+          <ul class="service-checklist" style="color: rgba(255,255,255,0.85); margin-bottom: 0;">
+            <li><span class="check" style="color: #ead8b6;">✓</span> <strong>S$70 / Day:</strong> Up to 12 hours full-day service</li>
+            <li><span class="check" style="color: #ead8b6;">✓</span> <strong>Zero Deposit Surprise:</strong> Photos confirmed first</li>
+            <li><span class="check" style="color: #ead8b6;">✓</span> <strong>No Delay Penalties:</strong> Free ferry rescheduling</li>
+            <li><span class="check" style="color: #ead8b6;">✓</span> <strong>Smoke-Free Guarantee:</strong> 100% fresh cabins</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
 
-  <main class="bg-slate-50 min-h-screen pb-16">
-    
-    <!-- Page Hero Banner with Background Image -->
-    <PageHeader 
-      badge="Travel Logistics"
-      title="Frequently Asked Questions"
-      subtitle="Everything you need to know about our private transport, arrival meet and greet, and payment procedures in Batam."
-      breadcrumbItems={[
-        { label: 'Frequently Asked Questions' }
-      ]}
-      bgImage="/images/driver-uniform.webp"
-    />
-
-    <!-- FAQ Accordion Section -->
-    <section class="py-12 sm:py-18">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+    <!-- FAQ Accordion Sections -->
+    <section class="corp-section bg-white">
+      <div class="shell" style="max-width: 860px;">
         
-        {faqs.map(item => (
-          <details class="group bg-white rounded-2xl border border-slate-200/80 p-5 sm:p-6 shadow-xs open:border-[#B88A3B]/60 transition-colors">
-            <summary class="flex items-center justify-between cursor-pointer font-bold text-sm sm:text-base text-[#0B2348] group-open:text-[#B88A3B] transition-colors select-none list-none">
-              <span class="pr-4">{item.question}</span>
-              <span class="w-6 h-6 rounded-full bg-slate-100 group-open:bg-amber-50 flex items-center justify-center shrink-0 transition-transform duration-200 group-open:rotate-180">
-                <ChevronDown class="w-3.5 h-3.5 text-slate-600 group-open:text-[#B88A3B]" />
-              </span>
-            </summary>
-            <div class="mt-3.5 pt-3.5 border-t border-slate-100 text-xs sm:text-sm text-slate-600 leading-relaxed">
-              <p>{item.answer}</p>
-            </div>
-          </details>
-        ))}
+        <!-- Category 1: Pricing & Payment -->
+        <div class="faq-category-block">
+          <h2 class="faq-category-heading">1. Pricing, Inclusions & Payment</h2>
+          <div class="faq-accordion-group">
+            <details class="faq-pro-item" open>
+              <summary class="faq-pro-summary">
+                <span>How much does a full-day private driver cost?</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="faq-pro-content">
+                <p>
+                  BatamRide's standard full-day rate starts at <strong>S$70 per day for up to 12 hours</strong>. This covers a private Toyota MPV exclusively for your group, a professional uniformed chauffeur, fuel for the agreed journey, ordinary parking fees, and agreed pickup and return locations.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-pro-item">
+              <summary class="faq-pro-summary">
+                <span>What is included, and are there hidden fuel charges?</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="faq-pro-content">
+                <p>
+                  There are no hidden fuel surcharges. Fuel, ordinary parking, toll fees (where applicable), and driver services are bundled into your agreed quotation. The only items not included are personal entry tickets to attractions, meals, and optional driver tipping at your own discretion.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-pro-item">
+              <summary class="faq-pro-summary">
+                <span>What payment methods do you accept?</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="faq-pro-content">
+                <p>
+                  We accept <strong>PayNow (SGD)</strong> for Singapore travelers, <strong>Touch 'n Go eWallet (MYR)</strong> for Malaysian travelers, international <strong>Visa and Mastercard</strong> via secure payment link, or cash in SGD, MYR, or IDR upon arrival.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-pro-item">
+              <summary class="faq-pro-summary">
+                <span>Can you provide official tax invoices for corporate expense claims?</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="faq-pro-content">
+                <p>
+                  Yes. We frequently provide itemized PDF invoices and receipts issued to company entities in Singapore, Malaysia, and Indonesia for business travel and corporate tax accounting.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- Category 2: Vehicle Standards & Cleanliness -->
+        <div class="faq-category-block">
+          <h2 class="faq-category-heading">2. Fleet Standards & Smoke-Free Guarantee</h2>
+          <div class="faq-accordion-group">
+            <details class="faq-pro-item">
+              <summary class="faq-pro-summary">
+                <span>Are your vehicles strictly non-smoking?</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="faq-pro-content">
+                <p>
+                  Yes, absolutely. Unlike many street taxis in Batam, BatamRide operates a strict 100% zero-tolerance smoking rule. Neither drivers nor previous guests are permitted to smoke inside the car. Every vehicle is thoroughly vacuumed and ozone-purified every morning.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-pro-item">
+              <summary class="faq-pro-summary">
+                <span>Will I know the exact vehicle and see photos before booking?</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="faq-pro-content">
+                <p>
+                  Yes. After you submit your trip details, our dispatch team sends the exact car model, license plate, and real photos of the vehicle via WhatsApp before requesting any small security deposit (typically S$10–S$20).
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-pro-item">
+              <summary class="faq-pro-summary">
+                <span>How much luggage and golf gear can the cars carry?</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="faq-pro-content">
+                <p>
+                  Our Toyota Innova Zenix and Reborn models feature foldaway third-row seats, accommodating up to 4 large suitcases (28") or 4 full golf bags alongside hand luggage. For larger delegations of 8–14 passengers, we deploy executive Toyota HiAce luxury vans.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- Category 3: Punctuality, Ferries & Delays -->
+        <div class="faq-category-block">
+          <h2 class="faq-category-heading">3. Ferry Transfers, Delays & Drivers</h2>
+          <div class="faq-accordion-group">
+            <details class="faq-pro-item">
+              <summary class="faq-pro-summary">
+                <span>What happens if my ferry from Singapore is delayed?</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="faq-pro-content">
+                <p>
+                  We track live ferry arrivals from HarbourFront and Tanah Merah. If your vessel is delayed due to weather, immigration queues, or technical issues, your chauffeur waits at the arrival hall at no additional charge. Your 12-hour service time begins only when you enter the vehicle.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-pro-item">
+              <summary class="faq-pro-summary">
+                <span>Where does the driver meet me at the ferry terminal?</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="faq-pro-content">
+                <p>
+                  Your chauffeur stands right outside the customs exit gate in the arrival hall holding a clear BatamRide greeting sign displaying your name. We also share the driver's direct WhatsApp contact and selfie photo 30 minutes before arrival so you can spot each other immediately.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-pro-item">
+              <summary class="faq-pro-summary">
+                <span>What languages do BatamRide chauffeurs speak?</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="faq-pro-content">
+                <p>
+                  All drivers speak fluent Bahasa Indonesia and Mandarin. Most also speak Teochew or Hokkien, making them ideal for Singaporean and Malaysian families. English-speaking chauffeurs are readily assigned upon request at the time of reservation.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
 
       </div>
     </section>
 
+    <!-- Still Have Questions CTA -->
+    <section class="corp-section bg-cream">
+      <div class="shell">
+        <div class="section-intro-center">
+          <p class="section-label">Still Have Questions?</p>
+          <h2>Speak Directly with Our Cross-Border Dispatchers</h2>
+          <p>
+            Our dedicated Singapore and Malaysia WhatsApp desks are online daily from 06:00 to 23:00 SGT. We typically reply within 10–15 minutes.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 16px; margin-top: 24px; flex-wrap: wrap;">
+            <a class="button button-gold" href="https://wa.me/6580900928" target="_blank" rel="noopener noreferrer">Singapore WhatsApp (+65 8090 0928)</a>
+            <a class="button button-outline" href="https://wa.me/60189028790" target="_blank" rel="noopener noreferrer">Malaysia WhatsApp (+60 18-902 8790)</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-
-  <Footer />
 </Layout>

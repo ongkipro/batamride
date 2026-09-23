@@ -1,0 +1,207 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Singapore to Batam Private Driver Guide",
+      "publisher": {
+        "@type": "Organization",
+        "name": "BatamRide",
+        "url": "https://batamride.com/"
+      },
+      "mainEntityOfPage": "https://batamride.com/singapore-to-batam/",
+      "description": "A practical guide to ferry arrival and private driver service in Batam."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does BatamRide sell ferry tickets from Singapore?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ferry tickets are not automatically included. Guests arrange their ferry tickets and send BatamRide the confirmed terminal and arrival information."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much is a full-day private driver?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The published rate starts at S$70 for up to 12 hours, including the confirmed private vehicle, driver, fuel and ordinary parking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I book for several days?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Send the dates, daily timing and required routes so BatamRide can confirm availability and quote the service."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Singapore to Batam Private Driver Guide | BatamRide"
+  description="Plan a Singapore to Batam day trip or stay with private ferry-terminal pickup and a Batam driver. Full-day private transport from S$70 for up to 12 hours."
+  canonical="/singapore-to-batam/"
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <main id="main">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">From Singapore to Batam</p>
+          <h1>Plan Your Batam Arrival — <span>Then Explore Privately</span></h1>
+          <p class="lede">Book your ferry, share the confirmed arrival details, and let BatamRide arrange a professional driver for your day trip, weekend stay or multi-day visit.</p>
+          <div class="actions">
+            <a class="button button-gold" href="/#booking">Plan my Batam ride</a>
+            <a class="button button-outline" href="#plan">See how it works</a>
+          </div>
+        </div>
+        <aside class="price-card">
+          <small>Full-day private transport</small>
+          <strong>S$70/day</strong>
+          <p>Maximum 12 hours. Private vehicle, driver, fuel and ordinary parking included in the confirmed full-day service.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="plan">
+      <div class="shell">
+        <div class="intro">
+          <div>
+            <p class="section-label">Before you travel</p>
+            <h2>Connect the ferry arrival with the rest of your day.</h2>
+          </div>
+          <div class="copy">
+            <p>Choose your Singapore–Batam ferry and send us the confirmed Batam terminal, arrival time and return or final drop-off time. BatamRide then checks the right driver and vehicle for your passengers and luggage.</p>
+            <p>All drivers speak Bahasa Indonesia and Mandarin, plus either Teochew or Hokkien. An English-speaking driver may be requested in advance, subject to availability.</p>
+            <p>Ferry tickets are arranged by the guest and are not automatically included in the transport price. Your quotation covers only the items clearly stated by BatamRide.</p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="card">
+            <span class="check">1</span>
+            <h3>Book your ferry</h3>
+            <p>Choose the Singapore departure and Batam arrival terminal that suit your plans.</p>
+          </article>
+          <article class="card">
+            <span class="check">2</span>
+            <h3>Send arrival details</h3>
+            <p>Share the ferry, date, time, group size, luggage and preferred itinerary.</p>
+          </article>
+          <article class="card">
+            <span class="check">3</span>
+            <h3>Confirm your ride</h3>
+            <p>Review the exact vehicle, photo, service hours, price and any deposit.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="shell">
+        <p class="section-label">A flexible Batam day</p>
+        <h2>Build the route around your priorities.</h2>
+        <div class="two-col">
+          <article class="list-card">
+            <h3>Full-day service includes</h3>
+            <ul>
+              <li>Private vehicle and professional driver</li>
+              <li>Fuel and ordinary parking</li>
+              <li>Confirmed ferry-terminal pickup</li>
+              <li>Up to 12 hours and agreed final drop-off</li>
+            </ul>
+          </article>
+          <article class="list-card excluded">
+            <h3>Plan separately</h3>
+            <ul>
+              <li>Singapore–Batam ferry tickets</li>
+              <li>Meals, attraction and activity tickets</li>
+              <li>Massage, spa and shopping purchases</li>
+              <li>Hotel charges and personal expenses</li>
+            </ul>
+          </article>
+        </div>
+        <p class="notice">Your day may include meals, shopping, sightseeing, activities or massage. BatamRide may prepare a practical itinerary, and the driver can adjust the pace when time is running short. Any material route or overtime change is discussed before proceeding.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <p class="section-label">Example flow</p>
+        <h2>Day trip, weekend or several days.</h2>
+        <div class="steps">
+          <article class="step">
+            <h3>Arrival and luggage</h3>
+            <p>Meet the confirmed driver at the terminal and, when needed, leave luggage at the hotel first.</p>
+          </article>
+          <article class="step">
+            <h3>Explore at a practical pace</h3>
+            <p>Continue with the agreed route. One or two lower-priority stops may be skipped if time becomes limited.</p>
+          </article>
+          <article class="step">
+            <h3>Return on time</h3>
+            <p>The plan works backwards from your confirmed ferry departure or final hotel drop-off.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="shell">
+        <p class="section-label">Frequently asked questions</p>
+        <h2>Planning from Singapore.</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Does BatamRide sell ferry tickets?</summary>
+            <p>Ferry tickets are not automatically included. Arrange the tickets and send us the confirmed Batam terminal and arrival information.</p>
+          </details>
+          <details>
+            <summary>Is S$70 the transfer price?</summary>
+            <p>S$70 is the published full-day private transport rate for up to 12 hours. A transfer-only request is quoted according to the confirmed route and service.</p>
+          </details>
+          <details>
+            <summary>Can you prepare the itinerary?</summary>
+            <p>Yes. Share your interests and available time, and BatamRide may prepare a practical itinerary. Recommendations for attractions, shops, restaurants and massage places may also be provided.</p>
+          </details>
+          <details>
+            <summary>Can I book transport for more than one day?</summary>
+            <p>Yes. Send the dates, daily timing and expected routes so availability and the total quotation can be confirmed.</p>
+          </details>
+          <details>
+            <summary>What if our ferry is delayed?</summary>
+            <p>Message the official BatamRide WhatsApp contact as soon as possible. Adjustments are handled case by case and depend on driver and vehicle availability.</p>
+          </details>
+        </div>
+        <div class="related">
+          <a href="/batam-private-driver/">Private driver details →</a>
+          <a href="/batam-ferry-terminal-transfer/">Ferry terminal pickup →</a>
+          <a href="/batam-airport-transfer/">Hang Nadim airport pickup →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell cta-row">
+        <div>
+          <h2>Turn your ferry arrival into a complete Batam day.</h2>
+          <p>Send the essentials through the booking form and continue with your chosen official WhatsApp contact.</p>
+        </div>
+        <div class="whatsapp">
+          <a class="button button-gold" href="/#booking">Plan my Batam ride</a>
+          <a class="button button-outline" href="/contact/">Contact Dispatch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

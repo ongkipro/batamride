@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Batam Ferry Terminal Transfer",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "BatamRide",
+        "url": "https://batamride.com/"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Batam"
+      },
+      "description": "Private pickup from Batam ferry terminals with a professional driver."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which Batam ferry terminals do you serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pickup can be arranged from Batam Centre, Harbour Bay, Sekupang and Nongsapura, subject to availability and confirmation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if my ferry is delayed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Send BatamRide the updated arrival information through official WhatsApp so the pickup can be adjusted where possible. Any material change is handled case by case."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can the transfer continue as a full-day trip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. A full-day private driver service starts at S$70 for up to 12 hours, subject to availability and final confirmation."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Batam Ferry Terminal Transfer & Private Driver | BatamRide"
+  description="Private pickup from Batam ferry terminals with a dedicated driver. Continue directly to your hotel, shopping, dining or a full-day Batam trip."
+  canonical="/batam-ferry-terminal-transfer/"
+  jsonLd={jsonLd}
+>
+  <main id="main">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Private ferry arrival</p>
+          <h1>Batam Ferry Terminal Transfer — <span>Your Driver Waiting When You Arrive</span></h1>
+          <p class="lede">Meet your professional BatamRide driver at the confirmed terminal and continue privately to your hotel, restaurant, shopping stop or a full day around Batam.</p>
+          <div class="actions">
+            <a class="button button-gold" href="/#booking">Plan my ferry pickup</a>
+            <a class="button button-outline" href="#terminals">View terminals</a>
+          </div>
+        </div>
+        <aside class="price-card">
+          <small>Continue for the full day</small>
+          <strong>S$70/day</strong>
+          <p>Up to 12 hours, including the confirmed private vehicle, driver, fuel and ordinary parking. Transfer-only requests are quoted separately.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="terminals">
+      <div class="shell">
+        <div class="intro">
+          <div>
+            <p class="section-label">Batam ferry terminals</p>
+            <h2>A clear pickup from the right arrival point.</h2>
+          </div>
+          <div class="copy">
+            <p>BatamRide can arrange pickup from Batam Centre, Harbour Bay, Sekupang or Nongsapura ferry terminal. Tell us your ferry operator, scheduled arrival time, group size and luggage so we can confirm the most suitable vehicle and meeting plan.</p>
+            <p>No compulsory tourist stops are added. Your driver follows the confirmed plan, and no unplanned stop is made without your approval.</p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="card">
+            <span class="check">✓</span>
+            <h3>Batam Centre</h3>
+            <p>Convenient for Batam Centre hotels, malls, dining and onward travel.</p>
+          </article>
+          <article class="card">
+            <span class="check">✓</span>
+            <h3>Harbour Bay</h3>
+            <p>Private pickup for Harbour Bay, Nagoya and destinations across Batam.</p>
+          </article>
+          <article class="card">
+            <span class="check">✓</span>
+            <h3>Sekupang &amp; Nongsapura</h3>
+            <p>Pickup is arranged around the confirmed ferry terminal and arrival time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="shell">
+        <p class="section-label">What to expect</p>
+        <h2>From terminal arrival to final drop-off.</h2>
+        <div class="two-col">
+          <article class="list-card">
+            <h3>Included in a full-day booking</h3>
+            <ul>
+              <li>Private vehicle and uniformed driver</li>
+              <li>Fuel and ordinary parking</li>
+              <li>Confirmed terminal pickup</li>
+              <li>Agreed final drop-off and up to 12 hours</li>
+            </ul>
+          </article>
+          <article class="list-card excluded">
+            <h3>Not automatically included</h3>
+            <ul>
+              <li>Ferry tickets and terminal charges paid personally</li>
+              <li>Meals, attraction tickets and spa treatments</li>
+              <li>Hotel charges and personal purchases</li>
+              <li>Overtime or special costs not in the quotation</li>
+            </ul>
+          </article>
+        </div>
+        <p class="notice">If your ferry timing changes, message the official BatamRide WhatsApp contact as soon as possible. Adjustments depend on driver and vehicle availability and are handled case by case.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="shell">
+        <p class="section-label">Booking steps</p>
+        <h2>Share the details that help us quote correctly.</h2>
+        <div class="steps">
+          <article class="step">
+            <h3>Ferry and arrival</h3>
+            <p>Send the terminal, ferry name, travel date and expected arrival time.</p>
+          </article>
+          <article class="step">
+            <h3>Group and luggage</h3>
+            <p>Tell us the number of adults and children, cabin luggage and any large bags.</p>
+          </article>
+          <article class="step">
+            <h3>Day plan</h3>
+            <p>Add your first destination, planned stops and return or final drop-off time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="shell">
+        <p class="section-label">Frequently asked questions</p>
+        <h2>Ferry pickup questions.</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Which terminals can I choose?</summary>
+            <p>Batam Centre, Harbour Bay, Sekupang and Nongsapura can be requested. Availability and the meeting point are confirmed before booking.</p>
+          </details>
+          <details>
+            <summary>What happens if the ferry is delayed?</summary>
+            <p>Send your updated arrival information through official BatamRide WhatsApp. We will adjust where possible; material changes are handled case by case.</p>
+          </details>
+          <details>
+            <summary>Can I go to my hotel first and continue touring?</summary>
+            <p>Yes. The driver can take you to the hotel to leave luggage and continue with the confirmed itinerary and service hours.</p>
+          </details>
+          <details>
+            <summary>Is a full-day driver available after pickup?</summary>
+            <p>Yes. The published full-day rate is S$70 for up to 12 hours, subject to availability and final confirmation.</p>
+          </details>
+        </div>
+        <div class="related">
+          <a href="/batam-private-driver/">Full-day private driver →</a>
+          <a href="/batam-airport-transfer/">Hang Nadim airport pickup →</a>
+          <a href="/singapore-to-batam/">Singapore to Batam guide →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="shell cta-row">
+        <div>
+          <h2>Send your ferry arrival details.</h2>
+          <p>Review the completed request before it opens in your chosen official BatamRide WhatsApp contact.</p>
+        </div>
+        <div class="whatsapp">
+          <a class="button button-gold" href="/#booking">Plan my ferry pickup</a>
+          <a class="button button-outline" href="/contact/">Contact Dispatch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

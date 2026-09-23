@@ -1,166 +1,169 @@
 ---
-import { WHATSAPP_DISPLAY, buildWhatsAppLink } from '../utils/whatsapp';
-import { 
-  Home, Car, Compass, MapPin, ShieldCheck, HelpCircle, CalendarCheck, 
-  MessageSquare, ChevronRight, Menu, X, Phone
-} from '@lucide/astro';
+interface Props {
+  currentPath?: string;
+}
 
-const pathname = new URL(Astro.request.url).pathname;
+const { currentPath = '/' } = Astro.props;
 
 const navLinks = [
-  { name: 'Home', href: '/', icon: Home },
-  { name: 'Services', href: '/services', icon: Car },
-  { name: 'Tours', href: '/tours', icon: Compass },
-  { name: 'Attractions', href: '/destinations', icon: MapPin },
-  { name: 'Fleet & Driver', href: '/fleet', icon: ShieldCheck },
-  { name: 'FAQ', href: '/faq', icon: HelpCircle },
-  { name: 'Contact', href: '/contact', icon: CalendarCheck },
+  { href: '/services/', label: 'Services' },
+  { href: '/fleet/', label: 'Fleet' },
+  { href: '/about/', label: 'About Us' },
+  { href: '/faq/', label: 'FAQ' },
+  { href: '/contact/', label: 'Contact' }
 ];
 
-const waQuickLink = buildWhatsAppLink();
+const isActive = (href: string) => {
+  if (href === '/' && currentPath === '/') return true;
+  if (href !== '/' && currentPath.startsWith(href)) return true;
+  return false;
+};
 ---
 
-<!-- Minimalist Clean Header: Pure Text Wordmark & Precision Mobile Navigation -->
-<header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
-  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 sm:h-18">
-    
-    <!-- Text-Only Wordmark Logo -->
-    <a href="/" class="group flex flex-col select-none py-1">
-      <span class="text-xl sm:text-2xl font-black tracking-tight text-[#0B2348] group-hover:text-[#163768] transition-colors leading-none">
-        BATAM<span class="text-[#B88A3B]">RIDE</span>
-      </span>
-      <span class="text-[9px] font-bold tracking-[0.22em] text-slate-400 uppercase mt-1">
-        Private Transport & Tours
-      </span>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell nav-container">
+    <a class="brand" href="/" aria-label="BatamRide Home — Professional Private Chauffeur & Executive Fleet">
+      <img 
+        class="brand-logo" 
+        src="/assets/batamride-logo-white.webp" 
+        alt="BatamRide — Your Trusted Batam Travel Partner" 
+        width="188" 
+        height="33"
+        fetchpriority="high"
+      />
     </a>
 
-    <!-- Clean Desktop Navigation Links -->
-    <nav class="hidden md:flex items-center gap-7 text-[13px] font-semibold text-slate-600">
-      {navLinks.map(link => {
-        const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
-        return (
-          <a 
-            href={link.href} 
-            class={`py-1.5 transition-colors hover:text-[#0B2348] ${isActive ? 'text-[#0B2348] font-extrabold border-b-2 border-[#B88A3B]' : ''}`}
-          >
-            {link.name}
-          </a>
-        );
-      })}
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {navLinks.map((link) => (
+        <a 
+          href={link.href} 
+          class:list={['nav-item', { active: isActive(link.href) }]}
+          aria-current={isActive(link.href) ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
     </nav>
 
-    <!-- Precision Mobile Menu Button (44px Minimum Touch Target) -->
-    <button 
-      id="mobile-menu-btn"
-      type="button"
-      aria-label="Toggle navigation menu"
-      class="md:hidden flex items-center justify-center w-11 h-11 rounded-xl text-slate-700 hover:text-[#0B2348] hover:bg-slate-100/80 active:bg-slate-200/80 transition-all border border-slate-200/80 cursor-pointer select-none"
-    >
-      <Menu id="menu-icon" class="w-5 h-5" />
-      <X id="close-icon" class="w-5 h-5 hidden" />
-    </button>
-
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <div class="header-dispatch-pill" title="Fast WhatsApp Dispatch for Singapore & Malaysia">
+        <span class="dispatch-dot" aria-hidden="true"></span>
+        <span class="dispatch-text"><strong>Dispatch Live</strong> 06:00–23:00</span>
+      </div>
+      <a class="button button-gold header-cta" href="/#booking">
+        <span>Book Your Ride</span>
+      </a>
+      <!-- Mobile Menu Toggle Button -->
+      <button 
+        type="button" 
+        class="mobile-menu-btn" 
+        id="mobile-menu-toggle"
+        aria-label="Toggle navigation menu" 
+        aria-expanded="false" 
+        aria-controls="mobile-nav-drawer"
+      >
+        <svg class="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
   </div>
 
-  <!-- Redesigned Luxury Mobile Slide-Down Drawer -->
-  <div 
-    id="mobile-menu" 
-    class="hidden md:hidden fixed inset-x-0 top-16 sm:top-18 bg-white/98 backdrop-blur-xl border-b border-slate-200 shadow-2xl overflow-y-auto max-h-[calc(100vh-4rem)] transition-all duration-300 z-50"
-  >
-    <div class="px-4 py-5 space-y-4 max-w-lg mx-auto">
-      
-      <!-- Navigation Links List with Icons -->
-      <div class="space-y-1">
-        <div class="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-          Navigation Menu
-        </div>
-        
-        {navLinks.map(link => {
-          const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
-          const IconComponent = link.icon;
-          return (
-            <a 
-              href={link.href} 
-              class={`flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-semibold transition-all ${
-                isActive 
-                  ? 'bg-amber-50/90 text-[#0B2348] font-bold border border-amber-200/70 shadow-2xs' 
-                  : 'text-slate-700 hover:bg-slate-50 active:bg-slate-100'
-              }`}
-            >
-              <div class="flex items-center gap-3">
-                <span class={`p-1.5 rounded-lg ${isActive ? 'bg-[#0B2348] text-[#D2AD68]' : 'bg-slate-100 text-slate-600'}`}>
-                  <IconComponent class="w-4 h-4" />
-                </span>
-                <span>{link.name}</span>
-              </div>
-              <ChevronRight class={`w-4 h-4 ${isActive ? 'text-[#B88A3B]' : 'text-slate-400'}`} />
-            </a>
-          );
-        })}
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobile-nav-drawer" aria-hidden="true">
+    <div class="mobile-drawer-inner">
+      <div class="mobile-drawer-header">
+        <span class="mobile-drawer-title">Navigation</span>
       </div>
-
-      <!-- Mobile Concierge Support Card -->
-      <div class="pt-2 border-t border-slate-100">
-        <div class="bg-gradient-to-br from-slate-50 to-amber-50/40 rounded-2xl p-4 border border-slate-200/80 space-y-3 shadow-xs">
-          <div class="flex items-center justify-between">
-            <span class="text-[11px] font-extrabold text-[#0B2348] uppercase tracking-wider">
-              Concierge Desk
-            </span>
-            <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Available Daily</span>
-            </span>
-          </div>
-
-          <p class="text-xs text-slate-600">
-            Need customized tour planning or quick arrival pickup confirmation?
-          </p>
-
+      <nav class="mobile-nav-links" aria-label="Mobile navigation">
+        <a href="/" class:list={['mobile-nav-item', { active: currentPath === '/' }]}>
+          <span>Home</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        {navLinks.map((link) => (
           <a 
-            href={waQuickLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BA56] text-slate-950 font-black py-3 px-4 rounded-xl text-xs shadow-sm transition-all"
+            href={link.href} 
+            class:list={['mobile-nav-item', { active: isActive(link.href) }]}
+            aria-current={isActive(link.href) ? 'page' : undefined}
           >
-            <MessageSquare class="w-4 h-4 fill-current" />
-            <span>Chat Concierge ({WHATSAPP_DISPLAY})</span>
+            <span>{link.label}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+        ))}
+      </nav>
+
+      <div class="mobile-drawer-footer">
+        <div class="mobile-drawer-contacts">
+          <p class="mobile-dispatch-heading">Instant WhatsApp Dispatch</p>
+          <a href="https://wa.me/6580900928" class="mobile-contact-link" target="_blank" rel="noopener noreferrer">
+            <span class="country-badge">SG</span>
+            <span>+65 8090 0928</span>
+          </a>
+          <a href="https://wa.me/60189028790" class="mobile-contact-link" target="_blank" rel="noopener noreferrer">
+            <span class="country-badge">MY</span>
+            <span>+60 18-902 8790</span>
           </a>
         </div>
+        <a class="button button-gold mobile-drawer-cta" href="/#booking">
+          Reserve Your Ride
+        </a>
       </div>
-
     </div>
   </div>
 </header>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  const menuIcon = document.getElementById('menu-icon');
-  const closeIcon = document.getElementById('close-icon');
+  // Mobile drawer logic with ESC key & backdrop close
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const drawer = document.getElementById('mobile-nav-drawer');
 
-  btn?.addEventListener('click', () => {
-    const isHidden = menu?.classList.contains('hidden');
-    if (isHidden) {
-      menu?.classList.remove('hidden');
-      menuIcon?.classList.add('hidden');
-      closeIcon?.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    } else {
-      menu?.classList.add('hidden');
-      menuIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-  });
+  if (toggleBtn && drawer) {
+    const toggleMenu = () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+      drawer.setAttribute('aria-hidden', String(isExpanded));
+      document.body.classList.toggle('nav-drawer-open', !isExpanded);
+    };
 
-  // Close menu when navigating
-  const links = menu?.querySelectorAll('a');
-  links?.forEach(link => {
-    link.addEventListener('click', () => {
-      menu?.classList.add('hidden');
-      menuIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
-      document.body.style.overflow = '';
+    toggleBtn.addEventListener('click', toggleMenu);
+
+    // Close on link click inside drawer
+    drawer.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('nav-drawer-open');
+      });
     });
-  });
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggleBtn.getAttribute('aria-expanded') === 'true') {
+        toggleMenu();
+      }
+    });
+  }
+
+  // Header scroll state
+  const header = document.querySelector('.site-header');
+  if (header) {
+    const updateHeader = () => {
+      if (window.scrollY > 20) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    };
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
+  }
 </script>

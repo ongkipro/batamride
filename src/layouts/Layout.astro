@@ -1,139 +1,88 @@
 ---
 import '../styles/global.css';
-import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
   description?: string;
-  image?: string;
+  canonical?: string;
+  ogType?: string;
+  jsonLd?: Record<string, any>;
+  themeColor?: string;
 }
 
 const {
-  title = "BatamRide | Premium Private Transport & Curated Tours in Batam",
-  description = "Private transport in Batam for travelers from Singapore and Malaysia. Guaranteed white Toyota Innova Zenix, professional uniformed drivers, transparent rates, and effortless WhatsApp booking.",
-  image = "/images/hero-zenix.webp"
+  title = "BatamRide — Private Transport in Batam",
+  description = "Private Batam transport for Singapore and Malaysia visitors with a professional, uniformed BatamRide driver. Exact vehicle confirmed before booking.",
+  canonical = Astro.url.pathname,
+  ogType = "website",
+  jsonLd,
+  themeColor = "#081d3b"
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, 'https://batamride.com');
+const canonicalURL = canonical.startsWith('http') 
+  ? canonical 
+  : `https://batamride.com${canonical.startsWith('/') ? canonical : `/${canonical}`}`;
 
-const globalBusinessSchema = {
+const defaultLocalBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": ["AutoRental", "TravelAgency", "LocalBusiness"],
-  "name": "BatamRide - Premium Private Transport & Tours",
-  "description": "Executive private car charter and tour services in Batam for Singapore and Malaysia visitors. Guaranteed white Toyota Innova Zenix MPVs with dedicated drivers.",
-  "image": "https://batamride.com/images/hero-zenix.webp",
-  "@id": "https://batamride.com/#organization",
-  "url": "https://batamride.com",
-  "telephone": "+628127003708",
-  "priceRange": "SGD 30 - 110",
-  "currenciesAccepted": "SGD, MYR, IDR",
-  "paymentAccepted": "PayNow, Touch 'n Go, Cash, Credit Card",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Batam Centre Ferry Terminal Complex",
-    "addressLocality": "Batam",
-    "addressRegion": "Kepulauan Riau",
-    "postalCode": "29432",
-    "addressCountry": "ID"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 1.1301,
-    "longitude": 104.0529
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-    "opens": "06:00",
-    "closes": "23:00"
-  },
-  "areaServed": [
-    { "@type": "AdministrativeArea", "name": "Batam" },
-    { "@type": "Country", "name": "Singapore" },
-    { "@type": "Country", "name": "Malaysia" }
-  ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Batam Private Transport Services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Full-Day Batam Private Car Charter (10-12h)",
-          "description": "Private white Toyota Innova Zenix with dedicated chauffeur, fuel, and parking included."
-        },
-        "price": "95",
-        "priceCurrency": "SGD"
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Half-Day Batam City Charter (4-6h)",
-          "description": "City shopping, spa, and dining private car transport in Batam."
-        },
-        "price": "65",
-        "priceCurrency": "SGD"
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Batam Ferry Port / Airport Transfer",
-          "description": "Direct point-to-point transfer with terminal arrival exit meet and greet."
-        },
-        "price": "30",
-        "priceCurrency": "SGD"
-      }
-    ]
-  }
+  "@type": "LocalBusiness",
+  "name": "BatamRide",
+  "url": "https://batamride.com/",
+  "logo": "https://batamride.com/assets/batamride-logo.webp",
+  "description": "Private transport in Batam for visitors from Singapore and Malaysia, with professional uniformed drivers.",
+  "areaServed": { "@type": "City", "name": "Batam" },
+  "telephone": ["+6580900928", "+60189028790"],
+  "priceRange": "S$70 per day for up to 12 hours",
+  "sameAs": ["https://wa.me/6580900928", "https://wa.me/60189028790"]
 };
+
+const activeSchema = jsonLd || defaultLocalBusinessSchema;
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-
-    <!-- Primary Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content={themeColor} />
     <title>{title}</title>
-    <meta name="title" content={title} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
+    <!-- Google Fonts Preconnect & Luxury Font Stack -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" 
+      rel="stylesheet" 
+    />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="BatamRide" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`https://batamride.com${image.startsWith('/') ? image : `/${image}`}`} />
-    <meta property="og:site_name" content="BatamRide" />
-    <meta property="og:locale" content="en_SG" />
+    <meta property="og:url" content={canonicalURL} />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={`https://batamride.com${image.startsWith('/') ? image : `/${image}`}`} />
+    <meta name="twitter:card" content="summary" />
 
-    <!-- Global JSON-LD Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify(globalBusinessSchema)} />
-    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(activeSchema)} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
     <slot name="head" />
-
-    <!-- Preload Critical LCP Hero Image in WebP -->
-    <link rel="preload" as="image" href="/images/hero-zenix.webp" type="image/webp" fetchpriority="high" />
   </head>
-  <body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-100 selection:text-amber-900 pb-16 sm:pb-0">
+  <body>
+    <Header currentPath={Astro.url.pathname} />
+    
     <slot />
 
-    <!-- Global Floating WhatsApp Concierge -->
-    <FloatingWhatsApp />
+    <Footer />
   </body>
 </html>
