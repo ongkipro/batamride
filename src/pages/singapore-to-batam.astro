@@ -1,207 +1,381 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import LandingHero from '../components/LandingHero.astro';
+import InclusionsSection from '../components/InclusionsSection.astro';
+import BookingSteps from '../components/BookingSteps.astro';
+import LandingFAQ from '../components/LandingFAQ.astro';
+import LandingCTA from '../components/LandingCTA.astro';
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Article",
-      "headline": "Singapore to Batam Private Driver Guide",
-      "publisher": {
-        "@type": "Organization",
+      "@type": "Service",
+      "name": "Singapore to Batam Transport & Chauffeur Hire",
+      "provider": {
+        "@type": "LocalBusiness",
         "name": "BatamRide",
         "url": "https://batamride.com/"
       },
-      "mainEntityOfPage": "https://batamride.com/singapore-to-batam/",
-      "description": "A practical guide to ferry arrival and private driver service in Batam."
+      "areaServed": {
+        "@type": "City",
+        "name": "Batam"
+      },
+      "description": "Private chauffeur service and custom itinerary for travelers from Singapore visiting Batam for day trips, weekends and golf retreats.",
+      "offers": {
+        "@type": "Offer",
+        "price": "70",
+        "priceCurrency": "SGD",
+        "description": "Full-day private transport for up to 12 hours from ferry arrival."
+      }
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Does BatamRide sell ferry tickets from Singapore?",
+          "name": "Does BatamRide sell ferry tickets?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Ferry tickets are not automatically included. Guests arrange their ferry tickets and send BatamRide the confirmed terminal and arrival information."
+            "text": "Ferry tickets are not automatically included. Arrange the tickets and send us the confirmed Batam terminal and arrival information."
           }
         },
         {
           "@type": "Question",
-          "name": "How much is a full-day private driver?",
+          "name": "Is S$70 the transfer price?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The published rate starts at S$70 for up to 12 hours, including the confirmed private vehicle, driver, fuel and ordinary parking."
+            "text": "S$70 is the published full-day private transport rate for up to 12 hours. A transfer-only request is quoted according to the confirmed route and service."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I book for several days?",
+          "name": "Can you prepare the itinerary?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Send the dates, daily timing and required routes so BatamRide can confirm availability and quote the service."
+            "text": "Yes. Share your interests and available time, and BatamRide may prepare a practical itinerary. Recommendations for attractions, shops, restaurants and massage places may also be provided."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I book transport for more than one day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Send the dates, daily timing and expected routes so availability and the total quotation can be confirmed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if our ferry is delayed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Message the official BatamRide WhatsApp contact as soon as possible. Adjustments are handled case by case and depend on driver and vehicle availability."
           }
         }
       ]
     }
   ]
 };
+
+const faqs = [
+  {
+    question: "Does BatamRide include Singapore-Batam ferry tickets?",
+    answer: "Ferry tickets are arranged by guests independently (via Sindo, Majestic, or Horizon Ferry). Once booked, share your ferry timing with us and your chauffeur will be waiting at your arrival terminal."
+  },
+  {
+    question: "What does the S$70/day private driver rate cover?",
+    answer: "S$70 is our full-day rate for up to 12 hours, including a private late-model MPV, professional chauffeur, fuel, tolls, and ordinary parking. No hidden costs."
+  },
+  {
+    question: "Can BatamRide help create our day trip itinerary?",
+    answer: "Yes. Share your preferences (e.g. Kopitiam breakfast, seafood lunch in Barelang, massage at Nagoya, shopping at Grand Batam Mall) and we will structure a stress-free route."
+  },
+  {
+    question: "Can we book a multi-day weekend package?",
+    answer: "Yes. Simply share your full travel dates and daily schedule on WhatsApp. We can assign the same dedicated vehicle and chauffeur for your entire stay."
+  },
+  {
+    question: "What happens if our departure ferry from Singapore is delayed?",
+    answer: "Message our WhatsApp dispatch immediately. We track terminal operations and will reschedule your chauffeur greeting without cancellation penalties."
+  }
+];
+
+const relatedLinks = [
+  { title: "Private driver details →", href: "/batam-private-driver/" },
+  { title: "Ferry terminal pickup →", href: "/batam-ferry-terminal-transfer/" },
+  { title: "Hang Nadim airport pickup →", href: "/batam-airport-transfer/" }
+];
 ---
 
 <Layout
-  title="Singapore to Batam Private Driver Guide | BatamRide"
-  description="Plan a Singapore to Batam day trip or stay with private ferry-terminal pickup and a Batam driver. Full-day private transport from S$70 for up to 12 hours."
+  title="Singapore to Batam Transport & Chauffeur Hire | BatamRide"
+  description="Private chauffeur and car hire in Batam for Singapore travelers. S$70/day for up to 12 hours. PayNow accepted, photo verified before deposit."
   canonical="/singapore-to-batam/"
-  ogType="article"
   jsonLd={jsonLd}
 >
   <main id="main">
-    <section class="hero">
-      <div class="shell hero-grid">
-        <div>
-          <p class="eyebrow">From Singapore to Batam</p>
-          <h1>Plan Your Batam Arrival — <span>Then Explore Privately</span></h1>
-          <p class="lede">Book your ferry, share the confirmed arrival details, and let BatamRide arrange a professional driver for your day trip, weekend stay or multi-day visit.</p>
-          <div class="actions">
-            <a class="button button-gold" href="/#booking">Plan my Batam ride</a>
-            <a class="button button-outline" href="#plan">See how it works</a>
-          </div>
-        </div>
-        <aside class="price-card">
-          <small>Full-day private transport</small>
-          <strong>S$70/day</strong>
-          <p>Maximum 12 hours. Private vehicle, driver, fuel and ordinary parking included in the confirmed full-day service.</p>
-        </aside>
-      </div>
-    </section>
+    <!-- Hero Section -->
+    <LandingHero
+      breadcrumbs={[
+        { name: "Home", href: "/" },
+        { name: "Services", href: "/services/" },
+        { name: "Singapore to Batam" }
+      ]}
+      eyebrow="From Singapore to Batam"
+      title="Plan Your Batam Arrival —"
+      titleHighlight="Then Explore Privately"
+      lede="Book your Singapore ferry, share your arrival terminal, and let BatamRide arrange an executive vehicle and professional chauffeur for your day trip, weekend getaway, or golf outing."
+      primaryCta={{ text: "Plan my Batam ride", href: "/#booking" }}
+      secondaryCta={{ text: "See how it works", href: "#plan" }}
+      priceBadge="Full-Day Private Transport"
+      price="S$70"
+      pricePeriod="/day"
+      priceDescription="Maximum 12 hours. Private vehicle, professional chauffeur, fuel, and ordinary parking included in confirmed quote."
+      vehicleImage="/assets/batamride-innova-zenix-hotel.webp"
+      vehicleImageAlt="BatamRide executive chauffeur for Singapore visitors"
+      vehicleName="Toyota Innova Zenix / Reborn"
+      chips={[
+        "Ferry terminal meet & greet included",
+        "Singapore PayNow QR & transfer accepted",
+        "WhatsApp dispatch active 06:00 – 23:00 SGT"
+      ]}
+    />
 
-    <section id="plan">
+    <!-- Singapore Travel Flow Highlights -->
+    <section class="sg-flow-section" id="plan">
       <div class="shell">
-        <div class="intro">
+        <div class="flow-intro">
           <div>
-            <p class="section-label">Before you travel</p>
-            <h2>Connect the ferry arrival with the rest of your day.</h2>
+            <p class="flow-eyebrow">Before You Travel</p>
+            <h2 class="flow-title">Connect your ferry arrival with the rest of your day.</h2>
           </div>
-          <div class="copy">
-            <p>Choose your Singapore–Batam ferry and send us the confirmed Batam terminal, arrival time and return or final drop-off time. BatamRide then checks the right driver and vehicle for your passengers and luggage.</p>
-            <p>All drivers speak Bahasa Indonesia and Mandarin, plus either Teochew or Hokkien. An English-speaking driver may be requested in advance, subject to availability.</p>
-            <p>Ferry tickets are arranged by the guest and are not automatically included in the transport price. Your quotation covers only the items clearly stated by BatamRide.</p>
+          <div class="intro-copy">
+            <p>Select your Singapore–Batam ferry departure (HarbourFront or Tanah Merah) and send us the arrival terminal, expected docking time, and final return ferry time. BatamRide verifies the ideal vehicle and chauffeur for your luggage and passengers.</p>
+            <p>All chauffeurs speak fluent Bahasa Indonesia and Mandarin, with many fluent in Teochew or Hokkien. English-speaking chauffeurs may also be requested in advance upon availability.</p>
           </div>
         </div>
-        <div class="feature-grid">
-          <article class="card">
-            <span class="check">1</span>
-            <h3>Book your ferry</h3>
-            <p>Choose the Singapore departure and Batam arrival terminal that suit your plans.</p>
+
+        <div class="flow-cards-grid">
+          <article class="flow-card">
+            <div class="card-step-num">01</div>
+            <h3 class="card-title">Book Your Ferry</h3>
+            <p class="card-desc">Choose Singapore departure (HarbourFront or Tanah Merah) and Batam arrival (Harbour Bay, Batam Centre, or Nongsapura).</p>
           </article>
-          <article class="card">
-            <span class="check">2</span>
-            <h3>Send arrival details</h3>
-            <p>Share the ferry, date, time, group size, luggage and preferred itinerary.</p>
+
+          <article class="flow-card">
+            <div class="card-step-num">02</div>
+            <h3 class="card-title">Send Travel Details</h3>
+            <p class="card-desc">Share arrival terminal, ferry operator name, group size, luggage volume, and your preferred sightseeing spots.</p>
           </article>
-          <article class="card">
-            <span class="check">3</span>
-            <h3>Confirm your ride</h3>
-            <p>Review the exact vehicle, photo, service hours, price and any deposit.</p>
+
+          <article class="flow-card">
+            <div class="card-step-num">03</div>
+            <h3 class="card-title">Confirm & PayNow</h3>
+            <p class="card-desc">Review assigned vehicle photo, license plate, driver details, and complete your booking with transparent pricing.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="band">
-      <div class="shell">
-        <p class="section-label">A flexible Batam day</p>
-        <h2>Build the route around your priorities.</h2>
-        <div class="two-col">
-          <article class="list-card">
-            <h3>Full-day service includes</h3>
-            <ul>
-              <li>Private vehicle and professional driver</li>
-              <li>Fuel and ordinary parking</li>
-              <li>Confirmed ferry-terminal pickup</li>
-              <li>Up to 12 hours and agreed final drop-off</li>
-            </ul>
-          </article>
-          <article class="list-card excluded">
-            <h3>Plan separately</h3>
-            <ul>
-              <li>Singapore–Batam ferry tickets</li>
-              <li>Meals, attraction and activity tickets</li>
-              <li>Massage, spa and shopping purchases</li>
-              <li>Hotel charges and personal expenses</li>
-            </ul>
-          </article>
-        </div>
-        <p class="notice">Your day may include meals, shopping, sightseeing, activities or massage. BatamRide may prepare a practical itinerary, and the driver can adjust the pace when time is running short. Any material route or overtime change is discussed before proceeding.</p>
-      </div>
-    </section>
+    <!-- Inclusions -->
+    <InclusionsSection
+      id="included"
+      label="A flexible Batam day"
+      title="Build the route around your priorities."
+      includedTitle="Full-day service includes"
+      includedItems={[
+        "Private late-model Innova Zenix / Reborn & chauffeur",
+        "Ferry terminal arrival hall meet & greet",
+        "Fuel, island tolls, and standard parking fees",
+        "Up to 12 hours of confirmed flexible service"
+      ]}
+      excludedTitle="Plan separately"
+      excludedItems={[
+        "Singapore–Batam return ferry tickets",
+        "Meals, seafood feasts, and drinks",
+        "Spa treatments, massages, and attraction entry",
+        "Personal shopping and duty-free purchases"
+      ]}
+      notice="Your day may include seafood at Barelang, shopping at Nagoya Hill / Grand Batam Mall, and spas. BatamRide plans a practical schedule and adapts to your ferry departure timing."
+    />
 
-    <section>
-      <div class="shell">
-        <p class="section-label">Example flow</p>
-        <h2>Day trip, weekend or several days.</h2>
-        <div class="steps">
-          <article class="step">
-            <h3>Arrival and luggage</h3>
-            <p>Meet the confirmed driver at the terminal and, when needed, leave luggage at the hotel first.</p>
-          </article>
-          <article class="step">
-            <h3>Explore at a practical pace</h3>
-            <p>Continue with the agreed route. One or two lower-priority stops may be skipped if time becomes limited.</p>
-          </article>
-          <article class="step">
-            <h3>Return on time</h3>
-            <p>The plan works backwards from your confirmed ferry departure or final hotel drop-off.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+    <!-- Booking Steps -->
+    <BookingSteps
+      eyebrow="Example Day Flow"
+      title="Booking steps"
+      subtitle="Share the details that help us quote correctly."
+      steps={[
+        {
+          number: "01",
+          title: "Ferry and arrival",
+          description: "Send the terminal, ferry name, travel date and expected arrival time.",
+          badge: "Ferry Schedule",
+          icon: "ferry"
+        },
+        {
+          number: "02",
+          title: "Group and luggage",
+          description: "Tell us the number of adults and children, cabin luggage and any large bags.",
+          badge: "Luggage Sizing",
+          icon: "luggage"
+        },
+        {
+          number: "03",
+          title: "Day plan",
+          description: "Add your first destination, planned stops and return or final drop-off time.",
+          badge: "Custom Route",
+          icon: "plan"
+        }
+      ]}
+      bookingLink="/#booking"
+      ctaText="Plan My Batam Ride"
+    />
 
-    <section class="faq">
-      <div class="shell">
-        <p class="section-label">Frequently asked questions</p>
-        <h2>Planning from Singapore.</h2>
-        <div class="faq-list">
-          <details>
-            <summary>Does BatamRide sell ferry tickets?</summary>
-            <p>Ferry tickets are not automatically included. Arrange the tickets and send us the confirmed Batam terminal and arrival information.</p>
-          </details>
-          <details>
-            <summary>Is S$70 the transfer price?</summary>
-            <p>S$70 is the published full-day private transport rate for up to 12 hours. A transfer-only request is quoted according to the confirmed route and service.</p>
-          </details>
-          <details>
-            <summary>Can you prepare the itinerary?</summary>
-            <p>Yes. Share your interests and available time, and BatamRide may prepare a practical itinerary. Recommendations for attractions, shops, restaurants and massage places may also be provided.</p>
-          </details>
-          <details>
-            <summary>Can I book transport for more than one day?</summary>
-            <p>Yes. Send the dates, daily timing and expected routes so availability and the total quotation can be confirmed.</p>
-          </details>
-          <details>
-            <summary>What if our ferry is delayed?</summary>
-            <p>Message the official BatamRide WhatsApp contact as soon as possible. Adjustments are handled case by case and depend on driver and vehicle availability.</p>
-          </details>
-        </div>
-        <div class="related">
-          <a href="/batam-private-driver/">Private driver details →</a>
-          <a href="/batam-ferry-terminal-transfer/">Ferry terminal pickup →</a>
-          <a href="/batam-airport-transfer/">Hang Nadim airport pickup →</a>
-        </div>
-      </div>
-    </section>
+    <!-- FAQ -->
+    <LandingFAQ
+      id="faq"
+      label="Frequently asked questions"
+      title="Planning from Singapore."
+      faqs={faqs}
+      relatedLinks={relatedLinks}
+    />
 
-    <section class="cta">
-      <div class="shell cta-row">
-        <div>
-          <h2>Turn your ferry arrival into a complete Batam day.</h2>
-          <p>Send the essentials through the booking form and continue with your chosen official WhatsApp contact.</p>
-        </div>
-        <div class="whatsapp">
-          <a class="button button-gold" href="/#booking">Plan my Batam ride</a>
-          <a class="button button-outline" href="/contact/">Contact Dispatch</a>
-        </div>
-      </div>
-    </section>
+    <!-- Bottom CTA -->
+    <LandingCTA
+      title="Turn your ferry arrival into a complete Batam day."
+      description="Send your travel essentials through our booking form and confirm with our Singapore WhatsApp dispatch."
+      primaryCtaText="Plan My Batam Ride"
+      primaryCtaHref="/#booking"
+      secondaryCtaText="Contact Dispatch Desk"
+      secondaryCtaHref="/contact/"
+    />
   </main>
 </Layout>
+
+<style>
+  .sg-flow-section {
+    padding: 84px 0 92px;
+    background: #fbfbfd;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .flow-intro {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
+    align-items: flex-end;
+    margin-bottom: 44px;
+  }
+
+  .flow-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+    color: var(--gold);
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .flow-eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1.5px;
+    background: var(--gold);
+  }
+
+  .flow-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 3.6vw, 44px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--navy-950);
+    margin: 0;
+  }
+
+  .intro-copy p {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+
+  .intro-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .flow-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .flow-card {
+    padding: 32px 28px;
+    background: #ffffff;
+    border: 1px solid rgba(8, 29, 59, 0.09);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(4, 15, 32, 0.03);
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+
+  .flow-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(4, 15, 32, 0.08);
+    border-color: rgba(197, 161, 96, 0.4);
+  }
+
+  .card-step-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy-950);
+    margin: 0 0 10px;
+    letter-spacing: -0.015em;
+  }
+
+  .card-desc {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text-soft);
+  }
+
+  @media (max-width: 980px) {
+    .flow-intro {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .flow-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .sg-flow-section {
+      padding: 60px 0 68px;
+    }
+
+    .flow-title {
+      font-size: clamp(28px, 7vw, 36px);
+    }
+
+    .flow-card {
+      padding: 24px 20px;
+    }
+  }
+</style>

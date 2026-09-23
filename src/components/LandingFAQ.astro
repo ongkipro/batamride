@@ -1,0 +1,285 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface RelatedLink {
+  title: string;
+  href: string;
+}
+
+interface Props {
+  id?: string;
+  label?: string;
+  title?: string;
+  faqs?: FAQItem[];
+  relatedLinks?: RelatedLink[];
+}
+
+const {
+  id = "faq",
+  label = "Frequently asked questions",
+  title = "Before you book.",
+  faqs = [
+    {
+      question: "How much is a private driver in Batam?",
+      answer: "The published full-day rate starts at S$70 for up to 12 hours. Your final quotation confirms the exact vehicle, service hours, and any custom requirements before booking."
+    },
+    {
+      question: "Can you arrange transport for more than seven people?",
+      answer: "Yes. BatamRide arranges Toyota Hiace Premio (10–14 seats) or luxury executive coaches for larger corporate and family groups. Inquire via WhatsApp for availability."
+    },
+    {
+      question: "Which vehicle will I receive?",
+      answer: "Our executive fleet consists of late-model white Toyota Innova Zenix and white Toyota Innova Reborn. You will receive actual photos and the plate number of your assigned car for review before any deposit."
+    },
+    {
+      question: "Can the chauffeur recommend places to visit?",
+      answer: "Yes. Your chauffeur is locally experienced and can recommend top seafood spots, spas, massage centers, shopping malls, and scenic spots, always prioritizing your preferences without forced stops."
+    }
+  ],
+  relatedLinks = [
+    { title: "Arriving by ferry →", href: "/batam-ferry-terminal-transfer/" },
+    { title: "Arriving at Hang Nadim (BTH) →", href: "/batam-airport-transfer/" },
+    { title: "Planning from Singapore →", href: "/singapore-to-batam/" }
+  ]
+} = Astro.props;
+---
+
+<section class="landing-faq-section" id={id}>
+  <div class="shell">
+    <div class="faq-header">
+      <p class="faq-label">{label}</p>
+      <h2 class="faq-title">{title}</h2>
+    </div>
+
+    <div class="faq-accordion-list">
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-trigger">
+            <span class="faq-question">{faq.question}</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="faq-body">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    {relatedLinks && relatedLinks.length > 0 && (
+      <div class="faq-related-row">
+        <span class="related-label">Explore More Options:</span>
+        <div class="related-pills">
+          {relatedLinks.map((link) => (
+            <a href={link.href} class="related-pill">
+              {link.title}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .landing-faq-section {
+    padding: 88px 0 92px;
+    background: #fbfbfd;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+
+  .faq-header {
+    max-width: 680px;
+    margin-bottom: 40px;
+  }
+
+  .faq-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+    color: var(--gold);
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .faq-label::before {
+    content: "";
+    width: 20px;
+    height: 1.5px;
+    background: var(--gold);
+  }
+
+  .faq-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 3.8vw, 44px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--navy-950);
+    margin: 0;
+  }
+
+  .faq-accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 860px;
+    margin-bottom: 44px;
+  }
+
+  .faq-item {
+    background: #ffffff;
+    border: 1px solid rgba(8, 29, 59, 0.09);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(4, 15, 32, 0.02);
+    overflow: hidden;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .faq-item[open] {
+    border-color: rgba(197, 161, 96, 0.4);
+    box-shadow: 0 8px 24px rgba(4, 15, 32, 0.05);
+  }
+
+  .faq-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 26px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background 150ms ease;
+  }
+
+  .faq-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-trigger:hover {
+    background: #f8fafc;
+  }
+
+  .faq-question {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy-950);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  .faq-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    color: var(--navy-800);
+    flex-shrink: 0;
+    transition: transform 220ms ease, background 180ms ease, color 180ms ease;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+    background: var(--navy-900);
+    color: #ffffff;
+  }
+
+  .faq-body {
+    padding: 0 26px 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .faq-body p {
+    margin: 16px 0 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+
+  /* Related Links */
+  .faq-related-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .related-label {
+    font-size: 13px;
+    font-weight: 750;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .related-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .related-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 16px;
+    background: #ffffff;
+    border: 1px solid rgba(8, 29, 59, 0.12);
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 650;
+    color: var(--navy-900);
+    transition: all 180ms ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  }
+
+  .related-pill:hover {
+    background: var(--navy-900);
+    color: #ffffff;
+    border-color: var(--navy-900);
+    transform: translateY(-1.5px);
+  }
+
+  @media (max-width: 640px) {
+    .landing-faq-section {
+      padding: 60px 0 68px;
+    }
+
+    .faq-title {
+      font-size: clamp(28px, 7vw, 36px);
+    }
+
+    .faq-trigger {
+      padding: 18px 20px;
+    }
+
+    .faq-question {
+      font-size: 15.5px;
+    }
+
+    .faq-body {
+      padding: 0 20px 20px;
+    }
+
+    .faq-related-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+</style>

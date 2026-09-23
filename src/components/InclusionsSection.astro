@@ -1,0 +1,296 @@
+---
+interface Props {
+  id?: string;
+  label?: string;
+  title?: string;
+  includedTitle?: string;
+  includedItems?: string[];
+  excludedTitle?: string;
+  excludedItems?: string[];
+  notice?: string;
+}
+
+const {
+  id = "included",
+  label = "Clear before confirmation",
+  title = "What the S$70 day service covers.",
+  includedTitle = "Included in your service",
+  includedItems = [
+    "Private vehicle and professional chauffeur",
+    "Fuel, tolls, and ordinary parking fees",
+    "Agreed terminal/hotel pickup and final drop-off",
+    "Up to 12 hours of confirmed flexible service"
+  ],
+  excludedTitle = "Not automatically included",
+  excludedItems = [
+    "Meals and accommodation",
+    "Ferry or flight tickets",
+    "Attraction, theme park, or spa entry fees",
+    "Personal shopping purchases & gratuities"
+  ],
+  notice = "Any overtime fee or special custom route will be quoted transparently before confirmation. Availability and exact vehicle photos are always verified for your travel date."
+} = Astro.props;
+---
+
+<section class="inclusions-section" id={id}>
+  <div class="shell">
+    <div class="inclusions-header">
+      <p class="inclusions-label">{label}</p>
+      <h2 class="inclusions-title">{title}</h2>
+    </div>
+
+    <div class="inclusions-grid">
+      <!-- Included Card -->
+      <article class="inclusion-card is-included">
+        <div class="card-head">
+          <span class="icon-indicator check-indicator" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </span>
+          <h3 class="card-title">{includedTitle}</h3>
+        </div>
+        <ul class="items-list" role="list">
+          {includedItems.map((item) => (
+            <li class="item-row">
+              <svg class="item-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+
+      <!-- Excluded Card -->
+      <article class="inclusion-card is-excluded">
+        <div class="card-head">
+          <span class="icon-indicator cross-indicator" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </span>
+          <h3 class="card-title">{excludedTitle}</h3>
+        </div>
+        <ul class="items-list" role="list">
+          {excludedItems.map((item) => (
+            <li class="item-row excluded-item">
+              <svg class="item-cross" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    </div>
+
+    {notice && (
+      <div class="inclusions-notice">
+        <svg class="notice-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        <p>{notice}</p>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .inclusions-section {
+    position: relative;
+    padding: 88px 0 92px;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(197, 161, 96, 0.12), transparent 45%),
+      linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 100%);
+    color: #ffffff;
+    border-top: 1px solid rgba(197, 161, 96, 0.2);
+    border-bottom: 1px solid rgba(197, 161, 96, 0.2);
+  }
+
+  .inclusions-header {
+    margin-bottom: 44px;
+    max-width: 720px;
+  }
+
+  .inclusions-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+    color: var(--gold-soft);
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .inclusions-label::before {
+    content: "";
+    width: 20px;
+    height: 1.5px;
+    background: var(--gold);
+  }
+
+  .inclusions-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 3.8vw, 44px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  /* Grid */
+  .inclusions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+
+  .inclusion-card {
+    padding: 34px 30px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    transition: transform 200ms ease, border-color 200ms ease;
+  }
+
+  .inclusion-card.is-included {
+    border-color: rgba(197, 161, 96, 0.35);
+  }
+
+  .inclusion-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(197, 161, 96, 0.55);
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .icon-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .check-indicator {
+    background: rgba(197, 161, 96, 0.2);
+    border: 1px solid rgba(197, 161, 96, 0.45);
+    color: var(--gold-soft);
+  }
+
+  .cross-indicator {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .item-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .item-check {
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .item-cross {
+    color: rgba(255, 255, 255, 0.45);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .excluded-item {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  /* Notice Bar */
+  .inclusions-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 24px;
+    background: rgba(197, 161, 96, 0.1);
+    border: 1px solid rgba(197, 161, 96, 0.28);
+    border-radius: 14px;
+    color: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .notice-icon {
+    color: var(--gold-soft);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .inclusions-notice p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 980px) {
+    .inclusions-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .inclusions-section {
+      padding: 60px 0 68px;
+    }
+
+    .inclusions-title {
+      font-size: clamp(28px, 7vw, 36px);
+    }
+
+    .inclusion-card {
+      padding: 24px 20px;
+    }
+  }
+</style>

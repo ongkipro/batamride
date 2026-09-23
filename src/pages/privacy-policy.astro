@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 ---
 
 <Layout
@@ -10,6 +11,7 @@ import Layout from '../layouts/Layout.astro';
   <main id="main">
     <section class="policy-hero">
       <div class="shell">
+        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Privacy Policy" }]} />
         <p class="eyebrow">BatamRide information</p>
         <h1>Privacy Policy</h1>
         <p class="lede">This policy explains what information BatamRide receives when you enquire about or request private transport, and how that information is used.</p>

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 ---
 
 <Layout
@@ -10,6 +11,7 @@ import Layout from '../layouts/Layout.astro';
   <main id="main">
     <section class="policy-hero">
       <div class="shell">
+        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Booking Terms" }]} />
         <p class="eyebrow">Important booking information</p>
         <h1>Booking Terms</h1>
         <p class="lede">These terms explain when a booking is confirmed and how vehicles, payment, schedule changes and service arrangements are handled.</p>

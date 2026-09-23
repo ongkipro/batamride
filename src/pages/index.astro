@@ -34,17 +34,19 @@ import Layout from '../layouts/Layout.astro';
           <p class="hero-copy">
             A comfortable private vehicle, a professional, uniformed BatamRide driver, and a trip shaped around your plans—from ferry terminal pickup to a full day across the island. Your exact vehicle and photo are confirmed before booking.
           </p>
-          <div class="hero-actions">
-            <a class="button button-gold" href="#booking">
-              Plan my ride
-              <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-            </a>
-            <a class="button button-outline" href="#included">See what’s included</a>
-          </div>
-          <div class="reassurance" aria-label="Service highlights">
-            <span><i class="check-dot" aria-hidden="true">✓</i> Fuel &amp; parking included</span>
-            <span><i class="check-dot" aria-hidden="true">✓</i> Itinerary planning available</span>
-            <span><i class="check-dot" aria-hidden="true">✓</i> No unplanned stops without your approval</span>
+          <div class="hero-cta-desktop">
+            <div class="hero-actions">
+              <a class="button button-gold" href="#booking">
+                Plan my ride
+                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+              <a class="button button-outline" href="#included">See what’s included</a>
+            </div>
+            <div class="reassurance" aria-label="Service highlights">
+              <span><i class="check-dot" aria-hidden="true">✓</i> Fuel &amp; parking included</span>
+              <span><i class="check-dot" aria-hidden="true">✓</i> Itinerary planning available</span>
+              <span><i class="check-dot" aria-hidden="true">✓</i> No unplanned stops without your approval</span>
+            </div>
           </div>
         </div>
 
@@ -101,6 +103,22 @@ import Layout from '../layouts/Layout.astro';
             <div><strong>Flexible</strong><span>Custom schedule</span></div>
           </div>
         </aside>
+
+        <!-- Mobile CTA & Reassurance (Visible <= 980px, placed right after the Vehicle Card) -->
+        <div class="hero-cta-mobile">
+          <div class="hero-actions">
+            <a class="button button-gold" href="#booking">
+              Plan my ride
+              <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+            </a>
+            <a class="button button-outline" href="#included">See what’s included</a>
+          </div>
+          <div class="reassurance" aria-label="Service highlights">
+            <span><i class="check-dot" aria-hidden="true">✓</i> Fuel &amp; parking included</span>
+            <span><i class="check-dot" aria-hidden="true">✓</i> Itinerary planning available</span>
+            <span><i class="check-dot" aria-hidden="true">✓</i> No unplanned stops without your approval</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>

@@ -1,0 +1,459 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  titleHighlight?: string;
+  lede: string;
+  breadcrumbs?: Array<{ name: string; href?: string }>;
+  primaryCta?: { text: string; href: string };
+  secondaryCta?: { text: string; href: string };
+  priceBadge?: string;
+  price?: string;
+  pricePeriod?: string;
+  priceDescription?: string;
+  vehicleImage?: string;
+  vehicleImageAlt?: string;
+  vehicleName?: string;
+  chips?: string[];
+}
+
+const {
+  eyebrow,
+  title,
+  titleHighlight,
+  lede,
+  breadcrumbs,
+  primaryCta = { text: "Book Your BatamRide", href: "/#booking" },
+  secondaryCta = { text: "See what’s included", href: "#included" },
+  priceBadge = "Full-Day Private Transport",
+  price = "S$70",
+  pricePeriod = "/day",
+  priceDescription = "Maximum 12 hours. Private vehicle, professional chauffeur, fuel, and ordinary parking included in confirmed quote.",
+  vehicleImage = "/assets/batamride-innova-zenix-hotel.webp",
+  vehicleImageAlt = "BatamRide Toyota Innova Zenix Executive Transport",
+  vehicleName = "Toyota Innova Zenix / Reborn",
+  chips = [
+    "Confirmed car photos before deposit",
+    "100% smoke-free cabin guarantee",
+    "Multilingual executive chauffeur"
+  ]
+} = Astro.props;
+---
+
+<section class="landing-hero">
+  <div class="shell landing-hero-grid">
+    <div class="landing-hero-content">
+      {breadcrumbs && breadcrumbs.length > 0 && (
+        <Breadcrumbs items={breadcrumbs} />
+      )}
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>
+        {title} {titleHighlight && <span>{titleHighlight}</span>}
+      </h1>
+      <p class="lede">{lede}</p>
+
+      <!-- Desktop CTAs & Chips (Visible > 980px) -->
+      <div class="hero-cta-desktop">
+        <div class="landing-hero-actions">
+          <a class="button button-gold" href={primaryCta.href}>{primaryCta.text}</a>
+          {secondaryCta && (
+            <a class="button button-outline" href={secondaryCta.href}>{secondaryCta.text}</a>
+          )}
+        </div>
+
+        {chips && chips.length > 0 && (
+          <div class="landing-hero-chips">
+            {chips.map((chip) => (
+              <span class="landing-chip">
+                <svg class="chip-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{chip}</span>
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Vehicle & Price Glassmorphism Card -->
+    <aside class="landing-hero-card">
+      <div class="card-glass-header">
+        <span class="card-badge">{priceBadge}</span>
+        <div class="card-price-row">
+          <strong class="card-price">{price}</strong>
+          <span class="card-period">{pricePeriod}</span>
+        </div>
+      </div>
+
+      <p class="card-desc">{priceDescription}</p>
+
+      {vehicleImage && (
+        <div class="card-vehicle-frame">
+          <img 
+            src={vehicleImage} 
+            alt={vehicleImageAlt} 
+            class="card-vehicle-img" 
+            width="560" 
+            height="315" 
+            loading="eager"
+            decoding="async"
+          />
+          <div class="card-vehicle-tag">
+            <span class="tag-dot"></span>
+            <span>{vehicleName}</span>
+          </div>
+        </div>
+      )}
+
+      <div class="card-footer-note">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Exact vehicle photo sent on WhatsApp before deposit</span>
+      </div>
+    </aside>
+
+    <!-- Mobile CTAs & Chips (Visible <= 980px, placed directly after the Vehicle Card) -->
+    <div class="hero-cta-mobile">
+      <div class="landing-hero-actions">
+        <a class="button button-gold" href={primaryCta.href}>{primaryCta.text}</a>
+        {secondaryCta && (
+          <a class="button button-outline" href={secondaryCta.href}>{secondaryCta.text}</a>
+        )}
+      </div>
+
+      {chips && chips.length > 0 && (
+        <div class="landing-hero-chips">
+          {chips.map((chip) => (
+            <span class="landing-chip">
+              <svg class="chip-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>{chip}</span>
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .landing-hero {
+    position: relative;
+    padding: 132px 0 76px;
+    color: #ffffff;
+    background:
+      radial-gradient(circle at 85% 18%, rgba(197, 161, 96, 0.16), transparent 48%),
+      radial-gradient(circle at 12% 82%, rgba(13, 49, 93, 0.40), transparent 50%),
+      linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 65%, #0d315d 100%);
+    border-bottom: 1px solid rgba(197, 161, 96, 0.2);
+    overflow: hidden;
+  }
+
+  .landing-hero-grid {
+    display: grid;
+    grid-template-columns: 1.14fr 0.86fr;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .landing-hero-content {
+    max-width: 660px;
+  }
+
+  .landing-hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(38px, 4.8vw, 56px);
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+    margin: 12px 0 20px;
+    color: #ffffff;
+  }
+
+  .landing-hero h1 span {
+    font-style: italic;
+    background: linear-gradient(135deg, #fbf8f1 0%, var(--gold-soft) 50%, #c5a160 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--gold-soft);
+  }
+
+  .landing-hero .lede {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 17.5px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+  }
+
+  .landing-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .landing-hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .landing-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .chip-check {
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* Desktop vs Mobile visibility */
+  .hero-cta-desktop {
+    display: block;
+  }
+
+  .hero-cta-mobile {
+    display: none;
+  }
+
+  /* Frosted Glass Card */
+  .landing-hero-card {
+    position: relative;
+    padding: 30px 28px;
+    border: 1px solid rgba(197, 161, 96, 0.28);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+  }
+
+  .card-glass-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .card-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    background: rgba(197, 161, 96, 0.16);
+    border: 1px solid rgba(197, 161, 96, 0.35);
+    border-radius: 999px;
+    color: var(--gold-soft);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .card-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .card-price {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(38px, 4.2vw, 48px);
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .card-period {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold-soft);
+  }
+
+  .card-desc {
+    margin: 0 0 18px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .card-vehicle-frame {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(0, 0, 0, 0.25);
+    aspect-ratio: 16 / 9;
+    margin-bottom: 16px;
+  }
+
+  .card-vehicle-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 300ms ease;
+  }
+
+  .landing-hero-card:hover .card-vehicle-img {
+    transform: scale(1.03);
+  }
+
+  .card-vehicle-tag {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 10px;
+    background: rgba(5, 17, 36, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #ffffff;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .tag-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    display: inline-block;
+  }
+
+  .card-footer-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.72);
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .card-footer-note svg {
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 980px) {
+    .landing-hero {
+      padding: 108px 0 56px;
+    }
+
+    .landing-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .landing-hero .lede {
+      margin-bottom: 0;
+    }
+
+    .hero-cta-desktop {
+      display: none;
+    }
+
+    .hero-cta-mobile {
+      display: block;
+      width: 100%;
+    }
+
+    .landing-hero-card {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .landing-hero {
+      padding: 86px 0 38px;
+    }
+
+    .landing-hero-grid {
+      gap: 20px;
+    }
+
+    .landing-hero h1 {
+      font-size: clamp(30px, 8vw, 40px);
+      margin: 8px 0 12px;
+      line-height: 1.12;
+    }
+
+    .landing-hero .eyebrow {
+      margin-bottom: 8px;
+    }
+
+    .landing-hero .lede {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .landing-hero-card {
+      padding: 18px 16px;
+      border-radius: 20px;
+    }
+
+    .card-glass-header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card-price {
+      font-size: 34px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .card-vehicle-frame {
+      margin-bottom: 12px;
+    }
+
+    .card-footer-note {
+      padding-top: 10px;
+      font-size: 11.5px;
+    }
+
+    .hero-cta-mobile {
+      margin-top: 2px;
+    }
+
+    .hero-cta-mobile .landing-hero-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .hero-cta-mobile .landing-hero-actions .button {
+      width: 100%;
+      min-height: 48px;
+    }
+
+    .hero-cta-mobile .landing-hero-chips {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding-top: 14px;
+    }
+  }
+</style>

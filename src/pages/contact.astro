@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -32,6 +33,7 @@ const jsonLd = {
     <section class="corp-hero">
       <div class="shell corp-hero-grid">
         <div class="corp-hero-content">
+          <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Contact" }]} />
           <p class="section-label">Cross-Border Operations</p>
           <h1>Direct Dispatch & <span>Customer Concierge</span></h1>
           <p class="lede">

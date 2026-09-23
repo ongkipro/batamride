@@ -1,5 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import LandingHero from '../components/LandingHero.astro';
+import InclusionsSection from '../components/InclusionsSection.astro';
+import BookingSteps from '../components/BookingSteps.astro';
+import LandingFAQ from '../components/LandingFAQ.astro';
+import LandingCTA from '../components/LandingCTA.astro';
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -16,7 +21,13 @@ const jsonLd = {
         "@type": "City",
         "name": "Batam"
       },
-      "description": "Private pickup from Hang Nadim Airport Batam with a professional driver."
+      "description": "Private airport pickup and transfer from Hang Nadim International Airport (BTH) to hotels and destinations across Batam.",
+      "offers": {
+        "@type": "Offer",
+        "price": "70",
+        "priceCurrency": "SGD",
+        "description": "Full-day private transport from Hang Nadim Airport. Up to 12 hours. Fuel and ordinary parking included."
+      }
     },
     {
       "@type": "FAQPage",
@@ -26,7 +37,7 @@ const jsonLd = {
           "name": "Do you pick up from Hang Nadim Airport?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. BatamRide can arrange private pickup from Hang Nadim Airport, subject to vehicle and driver availability."
+            "text": "Yes. Private airport pickup can be arranged subject to driver and vehicle availability."
           }
         },
         {
@@ -34,171 +45,356 @@ const jsonLd = {
           "name": "What if my flight is delayed?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Send the updated flight information through official BatamRide WhatsApp as soon as possible. Changes are handled case by case and depend on availability."
+            "text": "Send the updated flight information through official BatamRide WhatsApp. We will adjust where possible; changes are handled case by case."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I keep the driver for the day?",
+          "name": "Can the driver wait while I attend a meeting?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Full-day private transport starts at S$70 for up to 12 hours, subject to final confirmation."
+            "text": "Waiting and further stops can be included when the service hours and itinerary are agreed before confirmation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use a larger vehicle?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For larger groups, BatamRide may arrange a Hiace or larger bus after confirming passengers, luggage and availability."
           }
         }
       ]
     }
   ]
 };
+
+const faqs = [
+  {
+    question: "Do you pick up from Hang Nadim Airport (BTH)?",
+    answer: "Yes. We provide pre-arranged private airport pickups with our uniformed chauffeurs greeting you at the arrival hall with custom name signage."
+  },
+  {
+    question: "What happens if my flight is delayed?",
+    answer: "We monitor flight status using your airline and flight number. If there is a delay, please update us via WhatsApp and we will adjust your pickup time accordingly."
+  },
+  {
+    question: "Can the chauffeur wait while I attend a meeting or luncheon?",
+    answer: "Yes. For full-day bookings (up to 12 hours), your chauffeur stays dedicated to your party and waits on-site ready for your next transit."
+  },
+  {
+    question: "Can we request a larger vehicle for golf bags and luggage?",
+    answer: "Yes. For groups larger than 6 or groups with oversized golf luggage, BatamRide arranges Toyota Hiace Premio or luxury minibuses upon request."
+  }
+];
+
+const relatedLinks = [
+  { title: "Full-day private driver →", href: "/batam-private-driver/" },
+  { title: "Ferry terminal pickup →", href: "/batam-ferry-terminal-transfer/" },
+  { title: "Singapore to Batam guide →", href: "/singapore-to-batam/" }
+];
 ---
 
 <Layout
-  title="Batam Airport Transfer & Private Driver | BatamRide"
-  description="Private pickup from Hang Nadim Airport Batam with a dedicated driver. Travel to your hotel, business meeting or continue with private transport around Batam."
+  title="Batam Airport Transfer | Hang Nadim (BTH) | BatamRide"
+  description="Private transfer and full-day car hire from Hang Nadim International Airport (BTH) to hotels, industrial parks, and destinations across Batam."
   canonical="/batam-airport-transfer/"
   jsonLd={jsonLd}
 >
   <main id="main">
-    <section class="hero">
-      <div class="shell hero-grid">
-        <div>
-          <p class="eyebrow">Hang Nadim Airport pickup</p>
-          <h1>Batam Airport Transfer — <span>Private Pickup from Hang Nadim Airport</span></h1>
-          <p class="lede">Travel privately from the airport to your hotel, business meeting, family destination or the first stop of a longer Batam itinerary.</p>
-          <div class="actions">
-            <a class="button button-gold" href="/#booking">Plan my airport pickup</a>
-            <a class="button button-outline" href="#service">See the service</a>
-          </div>
-        </div>
-        <aside class="price-card">
-          <small>Continue for the full day</small>
-          <strong>S$70/day</strong>
-          <p>Maximum 12 hours with the confirmed private vehicle, driver, fuel and ordinary parking. Transfer-only requests receive a separate quotation.</p>
-        </aside>
-      </div>
-    </section>
+    <!-- Hero Section -->
+    <LandingHero
+      breadcrumbs={[
+        { name: "Home", href: "/" },
+        { name: "Services", href: "/services/" },
+        { name: "Airport Transfer" }
+      ]}
+      eyebrow="Hang Nadim Airport pickup"
+      title="Batam Airport Transfer —"
+      titleHighlight="Private Pickup from Hang Nadim (BTH)"
+      lede="Travel privately from Hang Nadim Airport to your hotel, corporate office, industrial estate, or begin a seamless full-day itinerary across Batam."
+      primaryCta={{ text: "Plan my airport pickup", href: "/#booking" }}
+      secondaryCta={{ text: "See the service", href: "#service" }}
+      priceBadge="Airport to Hotel or Full Day"
+      price="S$70"
+      pricePeriod="/day"
+      priceDescription="Maximum 12 hours with confirmed private vehicle, chauffeur, fuel and ordinary airport parking. Point-to-point transfers quoted separately."
+      vehicleImage="/assets/batamride-innova-zenix-hotel.webp"
+      vehicleImageAlt="BatamRide Toyota Innova Zenix airport transfer"
+      vehicleName="Toyota Innova Zenix / Reborn"
+      chips={[
+        "Arrival hall meet & greet with name signage",
+        "Flight delay monitoring & flexible pickup",
+        "Generous trunk space for 4+ suitcases"
+      ]}
+    />
 
-    <section id="service">
+    <!-- Airport Service Highlights -->
+    <section class="airport-service-section" id="service">
       <div class="shell">
-        <div class="intro">
+        <div class="service-intro">
           <div>
-            <p class="section-label">A calmer arrival</p>
-            <h2>Airport transport prepared around your plans.</h2>
+            <p class="service-eyebrow">A Calmer Arrival</p>
+            <h2 class="service-title">Airport transport prepared around your plans.</h2>
           </div>
-          <div class="copy">
-            <p>Share your flight, arrival time, group size, luggage and first destination. BatamRide checks availability and confirms the exact vehicle and photo before any deposit is requested.</p>
-            <p>For families, friends and business travellers, the same driver may continue beyond the first drop-off when a longer service is confirmed. No compulsory tourist stops are added.</p>
+          <div class="intro-copy">
+            <p>Share your flight number, arrival time, passenger count, luggage details, and first destination. BatamRide verifies availability and shares exact vehicle photos before any deposit.</p>
+            <p>For executive business travelers, families, and golf parties, the same chauffeur continues seamlessly past the initial drop-off for your full day. No unauthorized tourist stops are ever made.</p>
           </div>
         </div>
-        <div class="feature-grid">
-          <article class="card">
-            <span class="check">✓</span>
-            <h3>Flight-aware planning</h3>
-            <p>Your confirmed pickup is arranged around the flight information you provide.</p>
+
+        <div class="airport-cards-grid">
+          <article class="airport-card">
+            <div class="card-badge-row">
+              <span class="card-check" aria-hidden="true">✓</span>
+              <span class="card-pill">Flight Tracking</span>
+            </div>
+            <h3 class="card-title">Flight-Aware Scheduling</h3>
+            <p class="card-desc">Your pickup is coordinated against real-time flight tracking data so your chauffeur is ready when you clear baggage claim.</p>
           </article>
-          <article class="card">
-            <span class="check">✓</span>
-            <h3>Luggage considered</h3>
-            <p>Vehicle selection considers your passengers, cabin luggage and any large bags.</p>
+
+          <article class="airport-card">
+            <div class="card-badge-row">
+              <span class="card-check" aria-hidden="true">✓</span>
+              <span class="card-pill">Executive Cargo</span>
+            </div>
+            <h3 class="card-title">Luggage Capacity Verified</h3>
+            <p class="card-desc">Vehicle assignment specifically accommodates all passengers, heavy travel suitcases, and golf club bags comfortably.</p>
           </article>
-          <article class="card">
-            <span class="check">✓</span>
-            <h3>Hotel or onward trip</h3>
-            <p>Choose a direct transfer or continue with private transport around Batam.</p>
+
+          <article class="airport-card">
+            <div class="card-badge-row">
+              <span class="card-check" aria-hidden="true">✓</span>
+              <span class="card-pill">Total Flexibility</span>
+            </div>
+            <h3 class="card-title">Direct Hotel or Full Day</h3>
+            <p class="card-desc">Opt for a direct transfer to your hotel or retain the vehicle and chauffeur for an uninterrupted 12-hour island itinerary.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="band">
-      <div class="shell">
-        <p class="section-label">Clear quotation</p>
-        <h2>Know what is included before you confirm.</h2>
-        <div class="two-col">
-          <article class="list-card">
-            <h3>Included in a full-day booking</h3>
-            <ul>
-              <li>Private vehicle and uniformed driver</li>
-              <li>Fuel and ordinary parking</li>
-              <li>Confirmed Hang Nadim Airport pickup</li>
-              <li>Agreed final drop-off and up to 12 hours</li>
-            </ul>
-          </article>
-          <article class="list-card excluded">
-            <h3>Not automatically included</h3>
-            <ul>
-              <li>Flight tickets and airline charges</li>
-              <li>Meals, accommodation and attraction tickets</li>
-              <li>Spa services and personal purchases</li>
-              <li>Overtime or special costs outside the quotation</li>
-            </ul>
-          </article>
-        </div>
-        <p class="notice">If your flight timing changes, contact BatamRide through the official WhatsApp number as soon as possible. Adjustments are handled case by case and depend on availability.</p>
-      </div>
-    </section>
+    <!-- Inclusions -->
+    <InclusionsSection
+      id="included"
+      label="Clear quotation"
+      title="Know what is included before you confirm."
+      includedTitle="Included in a full-day booking"
+      includedItems={[
+        "Private vehicle and uniformed professional chauffeur",
+        "Confirmed Hang Nadim Airport arrival hall greeting",
+        "Fuel, island tolls, and airport parking fees",
+        "Agreed final drop-off and up to 12 hours of service"
+      ]}
+      excludedTitle="Not automatically included"
+      excludedItems={[
+        "Airline flight tickets and oversized baggage fees",
+        "Meals, hotel accommodation, and attraction tickets",
+        "Spa services, golf green fees, and personal shopping",
+        "Overtime or special costs outside confirmed quotation"
+      ]}
+      notice="If your flight timing changes, notify BatamRide via official WhatsApp dispatch. Adjustments are handled case-by-case to guarantee a seamless pickup."
+    />
 
-    <section>
-      <div class="shell">
-        <p class="section-label">Before arrival</p>
-        <h2>Three details make pickup easier.</h2>
-        <div class="steps">
-          <article class="step">
-            <h3>Flight information</h3>
-            <p>Send the airline, flight number, arrival date and scheduled landing time.</p>
-          </article>
-          <article class="step">
-            <h3>Passengers and bags</h3>
-            <p>Include adults, children, cabin-size luggage and any large or oversized luggage.</p>
-          </article>
-          <article class="step">
-            <h3>Your onward plan</h3>
-            <p>Tell us the first destination and whether the driver is needed for more stops.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+    <!-- Booking Steps -->
+    <BookingSteps
+      eyebrow="Before arrival"
+      title="Three details make pickup easier."
+      subtitle="Provide these essential details for an immediate, transparent quotation."
+      steps={[
+        {
+          number: "01",
+          title: "Flight information",
+          description: "Send the airline, flight number, arrival date and scheduled landing time.",
+          badge: "Flight Schedule",
+          icon: "ferry"
+        },
+        {
+          number: "02",
+          title: "Passengers and bags",
+          description: "Include adults, children, cabin-size luggage and any large or oversized luggage.",
+          badge: "Luggage Sizing",
+          icon: "luggage"
+        },
+        {
+          number: "03",
+          title: "Your onward plan",
+          description: "Tell us the first destination and whether the driver is needed for more stops.",
+          badge: "Drop-off & Itinerary",
+          icon: "plan"
+        }
+      ]}
+      bookingLink="/#booking"
+      ctaText="Plan My Airport Pickup"
+    />
 
-    <section class="faq">
-      <div class="shell">
-        <p class="section-label">Frequently asked questions</p>
-        <h2>Airport transfer questions.</h2>
-        <div class="faq-list">
-          <details>
-            <summary>Do you pick up from Hang Nadim Airport?</summary>
-            <p>Yes. Private airport pickup can be arranged subject to driver and vehicle availability.</p>
-          </details>
-          <details>
-            <summary>What if my flight is delayed?</summary>
-            <p>Send the updated flight information through official BatamRide WhatsApp. We will adjust where possible; changes are handled case by case.</p>
-          </details>
-          <details>
-            <summary>Can the driver wait while I attend a meeting?</summary>
-            <p>Waiting and further stops can be included when the service hours and itinerary are agreed before confirmation.</p>
-          </details>
-          <details>
-            <summary>Can I use a larger vehicle?</summary>
-            <p>For larger groups, BatamRide may arrange a Hiace or larger bus after confirming passengers, luggage and availability.</p>
-          </details>
-        </div>
-        <div class="related">
-          <a href="/batam-private-driver/">Full-day private driver →</a>
-          <a href="/batam-ferry-terminal-transfer/">Ferry terminal pickup →</a>
-          <a href="/singapore-to-batam/">Singapore to Batam guide →</a>
-        </div>
-      </div>
-    </section>
+    <!-- FAQ -->
+    <LandingFAQ
+      id="faq"
+      label="Frequently asked questions"
+      title="Airport transfer questions."
+      faqs={faqs}
+      relatedLinks={relatedLinks}
+    />
 
-    <section class="cta">
-      <div class="shell cta-row">
-        <div>
-          <h2>Plan your Hang Nadim pickup.</h2>
-          <p>Complete the essentials and continue through the official Singapore or Malaysia WhatsApp contact you choose.</p>
-        </div>
-        <div class="whatsapp">
-          <a class="button button-gold" href="/#booking">Plan my airport pickup</a>
-          <a class="button button-outline" href="/contact/">Contact Dispatch</a>
-        </div>
-      </div>
-    </section>
+    <!-- Bottom CTA -->
+    <LandingCTA
+      title="Plan your Hang Nadim pickup."
+      description="Submit your travel requirements and receive an immediate confirmation and car photo on official WhatsApp."
+      primaryCtaText="Plan My Airport Pickup"
+      primaryCtaHref="/#booking"
+      secondaryCtaText="Contact Dispatch Desk"
+      secondaryCtaHref="/contact/"
+    />
   </main>
 </Layout>
+
+<style>
+  .airport-service-section {
+    padding: 84px 0 92px;
+    background: #fbfbfd;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .service-intro {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
+    align-items: flex-end;
+    margin-bottom: 44px;
+  }
+
+  .service-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+    color: var(--gold);
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .service-eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1.5px;
+    background: var(--gold);
+  }
+
+  .service-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 3.6vw, 44px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--navy-950);
+    margin: 0;
+  }
+
+  .intro-copy p {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+
+  .intro-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .airport-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .airport-card {
+    padding: 32px 28px;
+    background: #ffffff;
+    border: 1px solid rgba(8, 29, 59, 0.09);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(4, 15, 32, 0.03);
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+
+  .airport-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(4, 15, 32, 0.08);
+    border-color: rgba(197, 161, 96, 0.4);
+  }
+
+  .card-badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .card-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(197, 161, 96, 0.14);
+    border: 1px solid rgba(197, 161, 96, 0.35);
+    color: var(--gold-deep);
+    font-weight: 700;
+  }
+
+  .card-pill {
+    display: inline-block;
+    padding: 3px 9px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--navy-800);
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy-950);
+    margin: 0 0 10px;
+    letter-spacing: -0.015em;
+  }
+
+  .card-desc {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text-soft);
+  }
+
+  @media (max-width: 980px) {
+    .service-intro {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .airport-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .airport-service-section {
+      padding: 60px 0 68px;
+    }
+
+    .service-title {
+      font-size: clamp(28px, 7vw, 36px);
+    }
+
+    .airport-card {
+      padding: 24px 20px;
+    }
+  }
+</style>

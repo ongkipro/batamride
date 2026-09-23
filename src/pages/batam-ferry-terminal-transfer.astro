@@ -1,5 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import LandingHero from '../components/LandingHero.astro';
+import InclusionsSection from '../components/InclusionsSection.astro';
+import BookingSteps from '../components/BookingSteps.astro';
+import LandingFAQ from '../components/LandingFAQ.astro';
+import LandingCTA from '../components/LandingCTA.astro';
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -16,189 +21,380 @@ const jsonLd = {
         "@type": "City",
         "name": "Batam"
       },
-      "description": "Private pickup from Batam ferry terminals with a professional driver."
+      "description": "Private transfer and full-day car hire from Batam ferry terminals including Batam Centre, Harbour Bay, Sekupang and Nongsapura.",
+      "offers": {
+        "@type": "Offer",
+        "price": "70",
+        "priceCurrency": "SGD",
+        "description": "Full-day private car and driver starting from ferry terminal pickup. Up to 12 hours."
+      }
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Which Batam ferry terminals do you serve?",
+          "name": "Which terminals can I choose?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Pickup can be arranged from Batam Centre, Harbour Bay, Sekupang and Nongsapura, subject to availability and confirmation."
+            "text": "Batam Centre, Harbour Bay, Sekupang and Nongsapura can be requested. Availability and the meeting point are confirmed before booking."
           }
         },
         {
           "@type": "Question",
-          "name": "What if my ferry is delayed?",
+          "name": "What happens if the ferry is delayed?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Send BatamRide the updated arrival information through official WhatsApp so the pickup can be adjusted where possible. Any material change is handled case by case."
+            "text": "Send your updated arrival information through official BatamRide WhatsApp. We will adjust where possible; material changes are handled case by case."
           }
         },
         {
           "@type": "Question",
-          "name": "Can the transfer continue as a full-day trip?",
+          "name": "Can I go to my hotel first and continue touring?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. A full-day private driver service starts at S$70 for up to 12 hours, subject to availability and final confirmation."
+            "text": "Yes. The driver can take you to the hotel to leave luggage and continue with the confirmed itinerary and service hours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a full-day driver available after pickup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The published full-day rate is S$70 for up to 12 hours, subject to availability and final confirmation."
           }
         }
       ]
     }
   ]
 };
+
+const faqs = [
+  {
+    question: "Which ferry terminals can I choose?",
+    answer: "Batam Centre, Harbour Bay, Sekupang and Nongsapura are all supported. Availability and your exact terminal meeting point are confirmed on WhatsApp before any deposit."
+  },
+  {
+    question: "What happens if my ferry is delayed?",
+    answer: "Simply send your updated ferry schedule via our official WhatsApp dispatch. We monitor schedules and adjust chauffeur pickup times seamlessly."
+  },
+  {
+    question: "Can we check in to our hotel first before touring?",
+    answer: "Yes, absolutely. Your private chauffeur will take you directly from the terminal to your hotel for check-in or luggage drop, then proceed smoothly with your custom day plan."
+  },
+  {
+    question: "Is a full-day driver available after terminal pickup?",
+    answer: "Yes. Our standard full-day rate is S$70 for up to 12 hours, covering your terminal meet-and-greet, custom stops, fuel, parking, and final drop-off."
+  }
+];
+
+const relatedLinks = [
+  { title: "Full-day private driver →", href: "/batam-private-driver/" },
+  { title: "Hang Nadim airport pickup →", href: "/batam-airport-transfer/" },
+  { title: "Singapore to Batam guide →", href: "/singapore-to-batam/" }
+];
 ---
 
 <Layout
-  title="Batam Ferry Terminal Transfer & Private Driver | BatamRide"
-  description="Private pickup from Batam ferry terminals with a dedicated driver. Continue directly to your hotel, shopping, dining or a full-day Batam trip."
+  title="Batam Ferry Terminal Transfer | BatamRide"
+  description="Pre-arranged private transfer and full-day driver from Batam Centre, Harbour Bay, Sekupang or Nongsapura ferry terminal. Confirmed car photo and uniformed driver."
   canonical="/batam-ferry-terminal-transfer/"
   jsonLd={jsonLd}
 >
   <main id="main">
-    <section class="hero">
-      <div class="shell hero-grid">
-        <div>
-          <p class="eyebrow">Private ferry arrival</p>
-          <h1>Batam Ferry Terminal Transfer — <span>Your Driver Waiting When You Arrive</span></h1>
-          <p class="lede">Meet your professional BatamRide driver at the confirmed terminal and continue privately to your hotel, restaurant, shopping stop or a full day around Batam.</p>
-          <div class="actions">
-            <a class="button button-gold" href="/#booking">Plan my ferry pickup</a>
-            <a class="button button-outline" href="#terminals">View terminals</a>
-          </div>
-        </div>
-        <aside class="price-card">
-          <small>Continue for the full day</small>
-          <strong>S$70/day</strong>
-          <p>Up to 12 hours, including the confirmed private vehicle, driver, fuel and ordinary parking. Transfer-only requests are quoted separately.</p>
-        </aside>
-      </div>
-    </section>
+    <!-- Hero Section -->
+    <LandingHero
+      breadcrumbs={[
+        { name: "Home", href: "/" },
+        { name: "Services", href: "/services/" },
+        { name: "Ferry Terminal Transfer" }
+      ]}
+      eyebrow="Private ferry arrival"
+      title="Batam Ferry Terminal Transfer —"
+      titleHighlight="Your Chauffeur Waiting When You Arrive"
+      lede="Meet your professional, uniformed BatamRide chauffeur at the terminal arrival hall and continue privately to your hotel, restaurant, spa, or a full day across Batam Island."
+      primaryCta={{ text: "Plan my ferry pickup", href: "/#booking" }}
+      secondaryCta={{ text: "View terminals", href: "#terminals" }}
+      priceBadge="Continue for the full day"
+      price="S$70"
+      pricePeriod="/day"
+      priceDescription="Up to 12 hours, including the confirmed private vehicle, chauffeur, fuel and ordinary parking. Transfer-only requests are quoted separately."
+      vehicleImage="/assets/batamride-innova-zenix-hotel.webp"
+      vehicleImageAlt="BatamRide Toyota Innova Zenix ferry terminal pickup"
+      vehicleName="Toyota Innova Zenix / Reborn"
+      chips={[
+        "Chauffeur waiting with personalized name board",
+        "Ferry schedule tracking & flexible meeting",
+        "Luggage assistance for golf & heavy bags"
+      ]}
+    />
 
-    <section id="terminals">
+    <!-- Terminals Overview -->
+    <section class="terminals-section" id="terminals">
       <div class="shell">
-        <div class="intro">
+        <div class="section-intro">
           <div>
-            <p class="section-label">Batam ferry terminals</p>
-            <h2>A clear pickup from the right arrival point.</h2>
+            <p class="section-eyebrow">Batam Ferry Terminals</p>
+            <h2 class="section-title">A clear pickup from the right arrival point.</h2>
           </div>
-          <div class="copy">
-            <p>BatamRide can arrange pickup from Batam Centre, Harbour Bay, Sekupang or Nongsapura ferry terminal. Tell us your ferry operator, scheduled arrival time, group size and luggage so we can confirm the most suitable vehicle and meeting plan.</p>
-            <p>No compulsory tourist stops are added. Your driver follows the confirmed plan, and no unplanned stop is made without your approval.</p>
+          <div class="intro-copy">
+            <p>BatamRide arranges private pickups from Batam Centre, Harbour Bay, Sekupang, and Nongsapura ferry terminals. Tell us your ferry operator, scheduled arrival time, group size, and luggage so we confirm the ideal vehicle and meeting point.</p>
+            <p>Zero compulsory shopping or tourist stops. Your chauffeur follows your confirmed schedule, and no unplanned deviation is made without your explicit approval.</p>
           </div>
         </div>
-        <div class="feature-grid">
-          <article class="card">
-            <span class="check">✓</span>
-            <h3>Batam Centre</h3>
-            <p>Convenient for Batam Centre hotels, malls, dining and onward travel.</p>
+
+        <div class="terminals-grid">
+          <article class="terminal-card">
+            <div class="terminal-card-top">
+              <span class="terminal-check" aria-hidden="true">✓</span>
+              <span class="terminal-tag">Nagoya & Central</span>
+            </div>
+            <h3 class="terminal-name">Batam Centre</h3>
+            <p class="terminal-desc">Convenient for Batam Centre hotels, government offices, Mega Mall, dining, and onward travel across the island.</p>
           </article>
-          <article class="card">
-            <span class="check">✓</span>
-            <h3>Harbour Bay</h3>
-            <p>Private pickup for Harbour Bay, Nagoya and destinations across Batam.</p>
+
+          <article class="terminal-card">
+            <div class="terminal-card-top">
+              <span class="terminal-check" aria-hidden="true">✓</span>
+              <span class="terminal-tag">Downtown & Dining</span>
+            </div>
+            <h3 class="terminal-name">Harbour Bay</h3>
+            <p class="terminal-desc">Premier terminal directly adjacent to Nagoya downtown, luxury waterfront seafood restaurants, and five-star hotels.</p>
           </article>
-          <article class="card">
-            <span class="check">✓</span>
-            <h3>Sekupang &amp; Nongsapura</h3>
-            <p>Pickup is arranged around the confirmed ferry terminal and arrival time.</p>
+
+          <article class="terminal-card">
+            <div class="terminal-card-top">
+              <span class="terminal-check" aria-hidden="true">✓</span>
+              <span class="terminal-tag">Resorts & Golf</span>
+            </div>
+            <h3 class="terminal-name">Sekupang & Nongsapura</h3>
+            <p class="terminal-desc">Direct pickups for Nongsa luxury beach resorts, world-class golf clubs, and western island transit points.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="band">
-      <div class="shell">
-        <p class="section-label">What to expect</p>
-        <h2>From terminal arrival to final drop-off.</h2>
-        <div class="two-col">
-          <article class="list-card">
-            <h3>Included in a full-day booking</h3>
-            <ul>
-              <li>Private vehicle and uniformed driver</li>
-              <li>Fuel and ordinary parking</li>
-              <li>Confirmed terminal pickup</li>
-              <li>Agreed final drop-off and up to 12 hours</li>
-            </ul>
-          </article>
-          <article class="list-card excluded">
-            <h3>Not automatically included</h3>
-            <ul>
-              <li>Ferry tickets and terminal charges paid personally</li>
-              <li>Meals, attraction tickets and spa treatments</li>
-              <li>Hotel charges and personal purchases</li>
-              <li>Overtime or special costs not in the quotation</li>
-            </ul>
-          </article>
-        </div>
-        <p class="notice">If your ferry timing changes, message the official BatamRide WhatsApp contact as soon as possible. Adjustments depend on driver and vehicle availability and are handled case by case.</p>
-      </div>
-    </section>
+    <!-- Inclusions -->
+    <InclusionsSection
+      id="included"
+      label="What to expect"
+      title="From terminal arrival to final drop-off."
+      includedTitle="Included in a full-day booking"
+      includedItems={[
+        "Private late-model vehicle and uniformed chauffeur",
+        "Terminal meet-and-greet with name signage",
+        "Fuel, island tolls, and ordinary parking fees",
+        "Agreed final drop-off and up to 12 hours of service"
+      ]}
+      excludedTitle="Not automatically included"
+      excludedItems={[
+        "Ferry tickets and terminal passenger departure fees",
+        "Meals, attraction tickets, and spa treatments",
+        "Hotel accommodations and personal shopping",
+        "Overtime or special costs outside the quotation"
+      ]}
+      notice="If your ferry timing changes, message our official WhatsApp dispatch as soon as possible. Adjustments are handled promptly and depend on chauffeur availability."
+    />
 
-    <section>
-      <div class="shell">
-        <p class="section-label">Booking steps</p>
-        <h2>Share the details that help us quote correctly.</h2>
-        <div class="steps">
-          <article class="step">
-            <h3>Ferry and arrival</h3>
-            <p>Send the terminal, ferry name, travel date and expected arrival time.</p>
-          </article>
-          <article class="step">
-            <h3>Group and luggage</h3>
-            <p>Tell us the number of adults and children, cabin luggage and any large bags.</p>
-          </article>
-          <article class="step">
-            <h3>Day plan</h3>
-            <p>Add your first destination, planned stops and return or final drop-off time.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+    <!-- Booking Steps -->
+    <BookingSteps
+      eyebrow="Booking steps"
+      title="Share the details that help us quote correctly."
+      subtitle="Simple three-step coordination for a seamless arrival."
+      steps={[
+        {
+          number: "01",
+          title: "Ferry and arrival",
+          description: "Send the terminal, ferry operator name, travel date and expected arrival time.",
+          badge: "Ferry Schedule",
+          icon: "ferry"
+        },
+        {
+          number: "02",
+          title: "Group and luggage",
+          description: "Tell us the number of adults and children, cabin luggage and any large bags.",
+          badge: "Vehicle Capacity",
+          icon: "luggage"
+        },
+        {
+          number: "03",
+          title: "Day plan",
+          description: "Add your first destination, planned stops and return or final drop-off time.",
+          badge: "Island Itinerary",
+          icon: "plan"
+        }
+      ]}
+      bookingLink="/#booking"
+      ctaText="Plan My Ferry Pickup"
+    />
 
-    <section class="faq">
-      <div class="shell">
-        <p class="section-label">Frequently asked questions</p>
-        <h2>Ferry pickup questions.</h2>
-        <div class="faq-list">
-          <details>
-            <summary>Which terminals can I choose?</summary>
-            <p>Batam Centre, Harbour Bay, Sekupang and Nongsapura can be requested. Availability and the meeting point are confirmed before booking.</p>
-          </details>
-          <details>
-            <summary>What happens if the ferry is delayed?</summary>
-            <p>Send your updated arrival information through official BatamRide WhatsApp. We will adjust where possible; material changes are handled case by case.</p>
-          </details>
-          <details>
-            <summary>Can I go to my hotel first and continue touring?</summary>
-            <p>Yes. The driver can take you to the hotel to leave luggage and continue with the confirmed itinerary and service hours.</p>
-          </details>
-          <details>
-            <summary>Is a full-day driver available after pickup?</summary>
-            <p>Yes. The published full-day rate is S$70 for up to 12 hours, subject to availability and final confirmation.</p>
-          </details>
-        </div>
-        <div class="related">
-          <a href="/batam-private-driver/">Full-day private driver →</a>
-          <a href="/batam-airport-transfer/">Hang Nadim airport pickup →</a>
-          <a href="/singapore-to-batam/">Singapore to Batam guide →</a>
-        </div>
-      </div>
-    </section>
+    <!-- FAQ -->
+    <LandingFAQ
+      id="faq"
+      label="Frequently asked questions"
+      title="Ferry pickup questions."
+      faqs={faqs}
+      relatedLinks={relatedLinks}
+    />
 
-    <section class="cta">
-      <div class="shell cta-row">
-        <div>
-          <h2>Send your ferry arrival details.</h2>
-          <p>Review the completed request before it opens in your chosen official BatamRide WhatsApp contact.</p>
-        </div>
-        <div class="whatsapp">
-          <a class="button button-gold" href="/#booking">Plan my ferry pickup</a>
-          <a class="button button-outline" href="/contact/">Contact Dispatch</a>
-        </div>
-      </div>
-    </section>
+    <!-- Bottom CTA -->
+    <LandingCTA
+      title="Send your ferry arrival details."
+      description="Review your travel details before submitting to our official Singapore or Malaysia WhatsApp dispatch desk."
+      primaryCtaText="Plan My Ferry Pickup"
+      primaryCtaHref="/#booking"
+      secondaryCtaText="Contact Dispatch Desk"
+      secondaryCtaHref="/contact/"
+    />
   </main>
 </Layout>
+
+<style>
+  .terminals-section {
+    padding: 84px 0 92px;
+    background: #fbfbfd;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .section-intro {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
+    align-items: flex-end;
+    margin-bottom: 44px;
+  }
+
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 12px;
+    color: var(--gold);
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .section-eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1.5px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(32px, 3.6vw, 44px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--navy-950);
+    margin: 0;
+  }
+
+  .intro-copy p {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+
+  .intro-copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .terminals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .terminal-card {
+    padding: 32px 28px;
+    background: #ffffff;
+    border: 1px solid rgba(8, 29, 59, 0.09);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(4, 15, 32, 0.03);
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+
+  .terminal-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(4, 15, 32, 0.08);
+    border-color: rgba(197, 161, 96, 0.4);
+  }
+
+  .terminal-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .terminal-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(197, 161, 96, 0.14);
+    border: 1px solid rgba(197, 161, 96, 0.35);
+    color: var(--gold-deep);
+    font-weight: 700;
+  }
+
+  .terminal-tag {
+    display: inline-block;
+    padding: 3px 9px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--navy-800);
+  }
+
+  .terminal-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy-950);
+    margin: 0 0 10px;
+    letter-spacing: -0.015em;
+  }
+
+  .terminal-desc {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text-soft);
+  }
+
+  @media (max-width: 980px) {
+    .section-intro {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .terminals-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .terminals-section {
+      padding: 60px 0 68px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 7vw, 36px);
+    }
+
+    .terminal-card {
+      padding: 24px 20px;
+    }
+  }
+</style>
